@@ -3,4 +3,6 @@
 2) Внизу страницы артефакт «matrixon-org-dist» (zip) — скачать.
 3) Распаковать и содержимое папки dist залить в КОРЕНЬ сайта (куда смотрит домен), не исходники из репозитория.
 
+GitHub Pages: после пуша в main workflow обновляет ветку gh-pages (только dist). В Settings → Pages укажите Branch: gh-pages, folder: / (root). Не публикуйте из main/root — там исходники.
+
 Либо подключите этот репозиторий к Netlify/Vercel — сборка выполнится сама (файлы netlify.toml / vercel.json уже в проекте).

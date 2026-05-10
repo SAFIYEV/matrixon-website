@@ -27,6 +27,7 @@
             'npm ci\nnpm run build</pre>' +
             '<p style="margin:1rem 0 0">На хостинг залейте <strong>всё из папки dist</strong> (включая <code>assets/</code>).</p>' +
             '<p style="margin:1rem 0 0">Без сборки на ПК: GitHub → Actions → последний зелёный запуск → внизу артефакт <strong>matrixon-org-dist</strong> (zip) → распаковать и залить файлы в корень сайта.</p>' +
+            '<p style="margin:1rem 0 0">Если хостинг — <strong>GitHub Pages</strong>: в репозитории <strong>Settings → Pages</strong> выберите источник <strong>Deploy from a branch</strong> → ветка <strong>gh-pages</strong>, папка <strong>/ (root)</strong>. Публикация из корня ветки <code>main</code> всегда даёт эту ошибку. Другой вариант — источник <strong>GitHub Actions</strong>.</p>' +
             '</main>'
         }
         window.addEventListener(
