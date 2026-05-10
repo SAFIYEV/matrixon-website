@@ -82,9 +82,8 @@ export type Messages = {
 
 export const messages: Record<Locale, Messages> = {
   ru: {
-    metaTitle: 'MATRIXON — продукты в EdTech и LegalTech',
-    metaDescription:
-      'MATRIXON запускает собственные продукты. Фокус: EdTech и LegalTech. Связь: info@matrixon.org',
+    metaTitle: 'MATRIXON',
+    metaDescription: 'MATRIXON',
     colearnMetaTitle: 'CoLearn — обучение с ИИ | MATRIXON',
     colearnMetaDescription:
       'CoLearn: платформа нового поколения — ИИ в каждом уроке, сообщество и признание прогресса.',
@@ -179,9 +178,8 @@ export const messages: Record<Locale, Messages> = {
     colearnBack: '← К MATRIXON',
   },
   en: {
-    metaTitle: 'MATRIXON — products in EdTech & LegalTech',
-    metaDescription:
-      'MATRIXON builds and ships its own products, focused on EdTech and LegalTech. Contact: info@matrixon.org',
+    metaTitle: 'MATRIXON',
+    metaDescription: 'MATRIXON',
     colearnMetaTitle: 'CoLearn — AI-native learning | MATRIXON',
     colearnMetaDescription:
       'CoLearn: a next-generation platform — AI in every lesson, community, and recognition for your progress.',

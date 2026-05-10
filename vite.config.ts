@@ -1,10 +1,8 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// GitHub Pages project URL: https://<user>.github.io/matrixon-website/
-const GH_PAGES_BASE = '/matrixon-website/'
-
-export default defineConfig(({ command }) => ({
+// Корень сайта (matrixon.org и т.п.). Для GitHub Pages в CI: npm run build -- --base=/matrixon-website/
+export default defineConfig({
   plugins: [vue()],
-  base: command === 'serve' ? '/' : GH_PAGES_BASE,
-}))
+  base: '/',
+})
