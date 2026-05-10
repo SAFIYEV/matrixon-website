@@ -9,12 +9,31 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
+  # Готовый dist с base=/ для matrixon.org — скачать из Actions → Artifacts → matrixon-org-dist.zip
+  dist-root:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: cp dist/index.html dist/404.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: matrixon-org-dist
+          path: dist
+          retention-days: 30
+
   build:
     runs-on: ubuntu-latest
     steps:
