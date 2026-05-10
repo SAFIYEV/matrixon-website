@@ -1,0 +1,138 @@
+:root {
+  --m-navy: #1a4a9e;
+  --m-blue: #2a8eb5;
+  --m-teal: #3cc0b4;
+  --gradient: linear-gradient(105deg, var(--m-navy) 0%, var(--m-blue) 52%, var(--m-teal) 100%);
+  --text: #0f172a;
+  --text-muted: #475569;
+  --surface: #ffffff;
+  --surface-soft: #f4f7fb;
+  --border: rgba(15, 23, 42, 0.08);
+  --shadow: 0 24px 80px rgba(26, 74, 158, 0.12);
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --max: 1180px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Shared buttons (used in RouterView pages) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 20px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--primary {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(26, 74, 158, 0.28);
+}
+
+.btn--primary:hover {
+  box-shadow: 0 16px 40px rgba(26, 74, 158, 0.35);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn--ghost:hover {
+  border-color: rgba(26, 74, 158, 0.35);
+  color: var(--m-navy);
+}
+
+.btn--outline {
+  background: #fff;
+  color: var(--m-navy);
+  border-color: rgba(26, 74, 158, 0.25);
+}
+
+.btn--outline:hover {
+  border-color: var(--m-navy);
+}
+
+.btn--lg {
+  padding: 14px 26px;
+  font-size: 16px;
+}
+
+.btn--light {
+  background: #fff;
+  color: var(--m-navy);
+  box-shadow: var(--shadow);
+}
+
+.btn--light:hover {
+  box-shadow: 0 20px 50px rgba(26, 74, 158, 0.18);
+}
+
+.btn--outline-light {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.btn--outline-light:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
