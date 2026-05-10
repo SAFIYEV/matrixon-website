@@ -14,8 +14,40 @@
     />
   </head>
   <body>
+    <!--deploy-hint-start-->
+    <script>
+      ;(function () {
+        function showDeployHint() {
+          document.body.innerHTML =
+            '<main style="font-family:system-ui,sans-serif;padding:2rem;max-width:38rem;line-height:1.55;color:#0f172a">' +
+            '<h1 style="font-size:1.2rem;margin:0 0 1rem">Нужна сборка (Vite)</h1>' +
+            '<p style="margin:0 0 0.75rem">Браузер не может подключить <code>vue</code> из npm без сборки — это не баг Vue, а то, что на сервер попали <strong>исходники</strong>, а не результат <code>npm run build</code>.</p>' +
+            '<p style="margin:0 0 0.75rem">Сделайте локально:</p>' +
+            '<pre style="background:#f1f5f9;padding:12px 14px;border-radius:10px;overflow:auto;font-size:13px">' +
+            'npm ci\nnpm run build</pre>' +
+            '<p style="margin:1rem 0 0">На хостинг залейте <strong>всё из папки dist</strong> (включая <code>assets/</code>).</p>' +
+            '</main>'
+        }
+        window.addEventListener(
+          'error',
+          function (e) {
+            var m = String((e && e.message) || '')
+            if (m.indexOf('Failed to resolve module specifier') !== -1) showDeployHint()
+          },
+          true,
+        )
+        window.addEventListener('unhandledrejection', function (e) {
+          var r = String((e.reason && e.reason.message) || e.reason || '')
+          if (r.indexOf('Failed to resolve module specifier') !== -1) {
+            e.preventDefault()
+            showDeployHint()
+          }
+        })
+      })()
+    </script>
+    <!--deploy-hint-end-->
     <div id="app"></div>
-    <!-- .js — чтобы при ошибочном деплое без сборки сервер не отдавал .ts как video/mp2t -->
+    <!-- entry: .js — серверы часто отдают .ts как video/mp2t -->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

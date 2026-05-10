@@ -1,3 +1,4 @@
+import type { Plugin } from 'vite'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
@@ -6,7 +7,21 @@ import vue from '@vitejs/plugin-vue'
 const base =
   process.env.VITE_DEPLOY_TARGET === 'github-pages' ? '/matrixon-website/' : '/'
 
+/** Убирает из prod index.html подсказку про деплой исходников (остаётся только в dev-шаблоне). */
+function stripDeployHintFromProd(): Plugin {
+  return {
+    name: 'strip-deploy-hint',
+    apply: 'build',
+    transformIndexHtml(html) {
+      return html.replace(
+        /<!--deploy-hint-start-->[\s\S]*?<!--deploy-hint-end-->\s*/g,
+        '',
+      )
+    },
+  }
+}
+
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), stripDeployHintFromProd()],
   base,
 })
