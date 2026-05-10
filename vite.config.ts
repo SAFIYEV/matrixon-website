@@ -2,10 +2,15 @@ import type { Plugin } from 'vite'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// matrixon.org и др.: локально `npm run build` → base '/'.
-// GitHub Pages (репозиторий matrixon-website): в CI выставляется VITE_DEPLOY_TARGET=github-pages
+// matrixon.org (CNAME на GitHub Pages): сайт в корне домена → base '/'.
+// Для публикации только на https://<user>.github.io/<repo>/ задайте VITE_BASE_PATH='/<repo>/'.
+const rawBase = process.env.VITE_BASE_PATH?.trim()
 const base =
-  process.env.VITE_DEPLOY_TARGET === 'github-pages' ? '/matrixon-website/' : '/'
+  rawBase && rawBase !== '/'
+    ? rawBase.endsWith('/')
+      ? rawBase
+      : `${rawBase}/`
+    : '/'
 
 /** Убирает из prod index.html подсказку про деплой исходников (остаётся только в dev-шаблоне). */
 function stripDeployHintFromProd(): Plugin {
