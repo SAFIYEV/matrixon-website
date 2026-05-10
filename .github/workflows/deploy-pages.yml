@@ -25,7 +25,10 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run build -- --base=/matrixon-website/
+      - name: Build for GitHub Pages
+        env:
+          VITE_DEPLOY_TARGET: github-pages
+        run: npm run build
       # SPA: при прямом заходе на /colearn GitHub Pages отдаёт 404 — подменяем на index
       - run: cp dist/index.html dist/404.html
 
