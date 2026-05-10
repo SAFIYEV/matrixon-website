@@ -124,52 +124,52 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
     <Transition name="page-crossfade" mode="out-in" appear>
       <div :key="`${route.path}-${locale}`" class="page-shell">
         <RouterView />
-
-        <footer class="footer">
-          <div class="footer__inner">
-            <div class="footer__brand">
-              <img class="footer__logo" src="/logo-matrixon.png" width="40" height="40" alt="MATRIXON" />
-              <span class="footer__name">MATRIXON</span>
-            </div>
-            <div class="footer__cols">
-              <div class="footer__cols-leading">
-                <div class="footer__col">
-                  <h3 class="footer__h">{{ t.footerNavH }}</h3>
-                  <RouterLink :to="{ path: '/', hash: '#vectors' }">{{ t.footerLinkVectors }}</RouterLink>
-                  <RouterLink to="/colearn">{{ t.footerLinkProducts }}</RouterLink>
-                  <RouterLink :to="{ path: '/', hash: '#founder' }">{{ t.footerLinkFounder }}</RouterLink>
-                </div>
-                <div class="footer__col">
-                  <h3 class="footer__h">{{ t.footerMediaH }}</h3>
-                  <a
-                    class="footer__matrixon-tg"
-                    :href="matrixonTelegramHref"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span class="footer__matrixon-tg-icon" aria-hidden="true">
-                      <SocialIcon network="telegram" />
-                    </span>
-                    <span class="footer__matrixon-tg-label">{{ t.footerTelegramMatrixon }}</span>
-                  </a>
-                </div>
-              </div>
-              <div class="footer__col">
-                <h3 class="footer__h">{{ t.footerCompanyH }}</h3>
-                <RouterLink :to="{ path: '/', hash: '#contact' }">{{ t.footerContact }}</RouterLink>
-                <a :href="`mailto:${mail}`">{{ mail }}</a>
-                <a :href="phoneHref">{{ phoneDisplay }}</a>
-                <a :href="whatsappHref" target="_blank" rel="noopener noreferrer">{{ t.footerWhatsApp }}</a>
-              </div>
-            </div>
-          </div>
-          <div class="footer__bottom">
-            <p class="footer__legal">{{ t.founderLegal }}</p>
-            <p class="footer__copy">© {{ new Date().getFullYear() }} MATRIXON</p>
-          </div>
-        </footer>
       </div>
     </Transition>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <img class="footer__logo" src="/logo-matrixon.png" width="40" height="40" alt="MATRIXON" />
+          <span class="footer__name">MATRIXON</span>
+        </div>
+        <div class="footer__cols">
+          <div class="footer__cols-leading">
+            <div class="footer__col">
+              <h3 class="footer__h">{{ t.footerNavH }}</h3>
+              <RouterLink :to="{ path: '/', hash: '#vectors' }">{{ t.footerLinkVectors }}</RouterLink>
+              <RouterLink to="/colearn">{{ t.footerLinkProducts }}</RouterLink>
+              <RouterLink :to="{ path: '/', hash: '#founder' }">{{ t.footerLinkFounder }}</RouterLink>
+            </div>
+            <div class="footer__col">
+              <h3 class="footer__h">{{ t.footerMediaH }}</h3>
+              <a
+                class="footer__matrixon-tg"
+                :href="matrixonTelegramHref"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="footer__matrixon-tg-icon" aria-hidden="true">
+                  <SocialIcon network="telegram" />
+                </span>
+                <span class="footer__matrixon-tg-label">{{ t.footerTelegramMatrixon }}</span>
+              </a>
+            </div>
+          </div>
+          <div class="footer__col">
+            <h3 class="footer__h">{{ t.footerCompanyH }}</h3>
+            <RouterLink :to="{ path: '/', hash: '#contact' }">{{ t.footerContact }}</RouterLink>
+            <a :href="`mailto:${mail}`">{{ mail }}</a>
+            <a :href="phoneHref">{{ phoneDisplay }}</a>
+            <a :href="whatsappHref" target="_blank" rel="noopener noreferrer">{{ t.footerWhatsApp }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__legal">{{ t.founderLegal }}</p>
+        <p class="footer__copy">© {{ new Date().getFullYear() }} MATRIXON</p>
+      </div>
+    </footer>
   </div>
 </template>
 
