@@ -16,6 +16,9 @@ watch(
     if (route.name === 'colearn') {
       document.title = m.colearnMetaTitle
       meta?.setAttribute('content', m.colearnMetaDescription)
+    } else if (route.name === 'browser') {
+      document.title = m.browserMetaTitle
+      meta?.setAttribute('content', m.browserMetaDescription)
     } else {
       document.title = m.metaTitle
       meta?.setAttribute('content', m.metaDescription)

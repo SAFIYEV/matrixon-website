@@ -9,7 +9,7 @@ const mail = 'info@matrixon.org'
 const phoneHref = 'tel:+994107365773'
 
 const linkWeb3Frens = 'https://t.me/web3frensCA'
-const linkIbragimIn = 'https://www.linkedin.com/in/ibragim-gasymov-6a9445401/'
+// const linkIbragimIn = 'https://www.linkedin.com/in/ibragim-gasymov-6a9445401/'
 
 const maratLinks = [
   { href: 'https://www.linkedin.com/in/safiyevmarat/', labelKey: 'socialLinkedIn' as const, network: 'linkedin' as const },
@@ -84,8 +84,9 @@ const maratLinks = [
             <RouterLink class="vector-card__link" to="/colearn">{{ t.edtechMore }}</RouterLink>
           </article>
           <article class="vector-card">
-            <div class="vector-card__tag vector-card__tag--legal">{{ t.legalTitle }}</div>
-            <p class="vector-card__text">{{ t.legalText }}</p>
+            <div class="vector-card__product">{{ t.browserProduct }}</div>
+            <p class="vector-card__text">{{ t.browserCardText }}</p>
+            <RouterLink class="vector-card__link" to="/browser">{{ t.browserMore }}</RouterLink>
           </article>
         </div>
       </div>
@@ -96,7 +97,7 @@ const maratLinks = [
         <h2 class="section__title">{{ t.teamSectionTitle }}</h2>
         <p class="section__lead section__lead--team">{{ t.teamSectionLead }}</p>
 
-        <div class="team-grid">
+        <div class="team-grid team-grid--single">
           <article class="person-card" aria-labelledby="person-marat">
             <div class="person-card__media">
               <div class="person-card__media-inner person-card__media-inner--photo">
@@ -140,6 +141,7 @@ const maratLinks = [
             </div>
           </article>
 
+          <!-- Ибрагим Гасымов — временно скрыто
           <article class="person-card" aria-labelledby="person-ibragim">
             <div class="person-card__media">
               <div class="person-card__media-inner person-card__media-inner--photo">
@@ -163,7 +165,7 @@ const maratLinks = [
               <div class="person-card__social">
                 <a
                   class="person-social"
-                  :href="linkIbragimIn"
+                  href="https://www.linkedin.com/in/ibragim-gasymov-6a9445401/"
                   target="_blank"
                   rel="noopener noreferrer"
                   :aria-label="t.founderIbragimLinkedInLabel"
@@ -173,6 +175,7 @@ const maratLinks = [
               </div>
             </div>
           </article>
+          -->
         </div>
       </div>
     </section>
@@ -675,8 +678,17 @@ const maratLinks = [
   margin: 0 auto;
 }
 
+.team-grid--single {
+  justify-items: center;
+}
+
+.team-grid--single .person-card {
+  width: 100%;
+  max-width: 720px;
+}
+
 @media (min-width: 900px) {
-  .team-grid {
+  .team-grid:not(.team-grid--single) {
     grid-template-columns: 1fr 1fr;
     gap: 24px;
   }
@@ -764,7 +776,7 @@ const maratLinks = [
 }
 
 .person-card__img--marat {
-  object-position: center 22%;
+  object-position: center 35%;
 }
 
 .person-card__img--ibragim {

@@ -5,6 +5,8 @@ export type Messages = {
   metaDescription: string
   colearnMetaTitle: string
   colearnMetaDescription: string
+  browserMetaTitle: string
+  browserMetaDescription: string
   navVectors: string
   navFounder: string
   navContact: string
@@ -23,8 +25,38 @@ export type Messages = {
   vectorsLead: string
   edtechText: string
   edtechMore: string
-  legalTitle: string
-  legalText: string
+  browserProduct: string
+  browserCardText: string
+  browserMore: string
+  browserBack: string
+  browserEyebrow: string
+  browserHeroTitle: string
+  browserIntro: string
+  browserCatchTitle: string
+  browserCatchText: string
+  browserFeaturesTitle: string
+  browserF1Title: string
+  browserF1Text: string
+  browserF2Title: string
+  browserF2Text: string
+  browserF3Title: string
+  browserF3Text: string
+  browserF4Title: string
+  browserF4Text: string
+  browserF5Title: string
+  browserF5Text: string
+  browserHowTitle: string
+  browserHowStep1: string
+  browserHowStep2: string
+  browserHowStep3: string
+  browserHowSummary: string
+  browserLicenseTitle: string
+  browserLicenseText: string
+  browserGithubCta: string
+  browserShotStart: string
+  browserShotChat: string
+  browserShotAgent: string
+  browserShotSettings: string
   teamSectionTitle: string
   teamSectionLead: string
   founderMaratName: string
@@ -87,6 +119,9 @@ export const messages: Record<Locale, Messages> = {
     colearnMetaTitle: 'CoLearn — обучение с ИИ | MATRIXON',
     colearnMetaDescription:
       'CoLearn: платформа нового поколения — ИИ в каждом уроке, сообщество и признание прогресса.',
+    browserMetaTitle: 'MATRIXON Agentic Browser — локальный ИИ-браузер | MATRIXON',
+    browserMetaDescription:
+      'Open-source браузер с локальным ИИ на llama.cpp: приватность, AgentPanel, чат и менеджер паролей на вашем устройстве.',
     navVectors: 'Направления',
     navFounder: 'Команда',
     navContact: 'Контакты',
@@ -103,20 +138,59 @@ export const messages: Record<Locale, Messages> = {
     vectorsTitleBefore: 'Что мы делаем',
     vectorsTitleAccent: 'сейчас',
     vectorsLead:
-      'Запускаем собственные продукты в EdTech и LegalTech — узкий фокус, чтобы быстрее проверять гипотезы и поддерживать качество.',
+      'Запускаем собственные продукты в EdTech и open-source — узкий фокус, чтобы быстрее проверять гипотезы и поддерживать качество.',
     edtechText:
       'Обучайтесь интересно, доступно и эффективно с ИИ. CoLearn — наш продукт в EdTech.',
     edtechMore: 'Подробнее о CoLearn',
-    legalTitle: 'LegalTech',
-    legalText:
-      'Документы, согласования и сроки. Инструменты в этой зоне должны быть предсказуемыми и с нормальной историей изменений.',
+    browserProduct: 'MATRIXON Agentic Browser',
+    browserCardText:
+      'Open-source браузер с полностью локальным ИИ: без облака, API-ключей и телеметрии — модель, пароли и история только на вашем устройстве.',
+    browserMore: 'Подробнее о браузере',
+    browserBack: '← К MATRIXON',
+    browserEyebrow: 'MATRIXON · Open Source',
+    browserHeroTitle: 'MATRIXON Agentic Browser — браузер нового поколения с полностью локальным ИИ',
+    browserIntro:
+      'Пока все спорят о приватности облачного ИИ, мы сделали продукт, который решает это раз и навсегда: open-source браузер, где ИИ, менеджер паролей и поиск работают целиком на вашем железе.',
+    browserCatchTitle: 'В чём суть?',
+    browserCatchText:
+      'Вы не привязаны к одному вендору. Из коробки — Llama 3 и Gemma, но можно подключить любую open-source LLM (Qwen, Mistral и др.): положите файл модели в папку — и готово.',
+    browserFeaturesTitle: 'Ключевые возможности',
+    browserF1Title: 'Абсолютная приватность',
+    browserF1Text:
+      'Без облака, API-ключей и телеметрии. Чаты, пароли и история просмотра остаются только на вашем устройстве.',
+    browserF2Title: '100% локальный ИИ',
+    browserF2Text:
+      'Модель работает на компьютере через llama.cpp — без подписок и лимитов. Интернет нужен только для самого веб-сёрфинга.',
+    browserF3Title: 'Агентный режим',
+    browserF3Text:
+      'ИИ не только отвечает на вопросы — сам ищет в сети, анализирует открытые вкладки и извлекает данные за один цикл.',
+    browserF4Title: 'Продвинутый AI Chat',
+    browserF4Text:
+      'Полноценный чат: многоходовые диалоги, вложения файлов, рендер LaTeX, экспорт и импорт истории.',
+    browserF5Title: 'Локальный менеджер паролей',
+    browserF5Text:
+      'Шифрованное хранилище с автозаполнением и мастер-паролем. Без облачной синхронизации.',
+    browserHowTitle: 'Как это работает?',
+    browserHowStep1: 'Запустите браузер.',
+    browserHowStep2: 'Автоматически поднимется локальный llama-server с выбранной моделью.',
+    browserHowStep3: 'Введите запрос в чат — получите ответ.',
+    browserHowSummary:
+      'Всё в одном: больше не нужно переключаться между браузером, платными AI-чатами и сторонними менеджерами паролей.',
+    browserLicenseTitle: 'Open Source и лицензия',
+    browserLicenseText:
+      'Проект полностью open-source — изучайте код, тестируйте и вносите вклад. Коммерческое использование без предварительного разрешения запрещено: продукт создан как независимое решение для пользователей и сообщества.',
+    browserGithubCta: 'Репозиторий на GitHub',
+    browserShotStart: 'Стартовая страница',
+    browserShotChat: 'AI Chat',
+    browserShotAgent: 'AgentPanel',
+    browserShotSettings: 'Настройки',
     teamSectionTitle: 'Команда',
     teamSectionLead:
-      'Два сооснователя на одном уровне — без «главного сверху». Роли разные, ответственность за продукт общая.',
+      'За продуктами MATRIXON стоит команда, которую возглавляет генеральный директор.',
     founderMaratName: 'Марат Сафиев',
-    founderMaratBadge: 'Сооснователь · CEO · CTO',
+    founderMaratBadge: 'Генеральный директор (CEO)',
     founderMaratP1:
-      'Сафиев Марат (Safiyev Marat) — сооснователь MATRIXON. Совмещает позиции генерального директора (CEO) и технического директора (CTO).',
+      'Сафиев Марат (Safiyev Marat) — генеральный директор (CEO) MATRIXON.',
     founderMaratWeb3Lead: 'Сооснователь медиаиздания',
     founderWeb3MediaName: 'web3 frens Central Asia',
     founderMaratActivities:
@@ -183,6 +257,9 @@ export const messages: Record<Locale, Messages> = {
     colearnMetaTitle: 'CoLearn — AI-native learning | MATRIXON',
     colearnMetaDescription:
       'CoLearn: a next-generation platform — AI in every lesson, community, and recognition for your progress.',
+    browserMetaTitle: 'MATRIXON Agentic Browser — fully local AI browser | MATRIXON',
+    browserMetaDescription:
+      'Open-source browser with on-device AI via llama.cpp: privacy, AgentPanel, chat, and a local password manager.',
     navVectors: 'Focus',
     navFounder: 'Team',
     navContact: 'Contact',
@@ -199,19 +276,59 @@ export const messages: Record<Locale, Messages> = {
     vectorsTitleBefore: 'What we ship',
     vectorsTitleAccent: 'today',
     vectorsLead:
-      'We build our own products in EdTech and LegalTech — a narrow focus so we can validate ideas faster and keep quality bar high.',
+      'We build our own products in EdTech and open source — a narrow focus so we can validate ideas faster and keep quality bar high.',
     edtechText:
       'Learn in a way that is engaging, accessible, and productive — with AI. CoLearn is our EdTech product.',
     edtechMore: 'About CoLearn',
-    legalTitle: 'LegalTech',
-    legalText: 'comming soon',
+    browserProduct: 'MATRIXON Agentic Browser',
+    browserCardText:
+      'Open-source browser with fully local AI — no cloud, no API keys, no telemetry. Your model, passwords, and history stay on your device.',
+    browserMore: 'About the browser',
+    browserBack: '← Back to MATRIXON',
+    browserEyebrow: 'MATRIXON · Open Source',
+    browserHeroTitle: 'Meet MATRIXON Agentic Browser — the next-gen fully local AI browser',
+    browserIntro:
+      'While everyone debates data privacy in cloud-based AI, we built a product that solves it once and for all: an open-source browser where AI, the password manager, and search run entirely on your own hardware.',
+    browserCatchTitle: "What's the catch?",
+    browserCatchText:
+      'You are not locked into any vendor. Works out of the box with Llama 3 and Gemma, but you can run any open-source LLM (Qwen, Mistral, etc.) — drop the model file into the folder and you are good to go.',
+    browserFeaturesTitle: 'Key features',
+    browserF1Title: 'Absolute privacy',
+    browserF1Text:
+      'No cloud, no API keys, zero telemetry. Chats, passwords, and browsing history stay strictly on your device.',
+    browserF2Title: '100% local AI',
+    browserF2Text:
+      'The model runs on your computer via llama.cpp — no subscriptions or rate limits. Internet is only required for actual web browsing.',
+    browserF3Title: 'Agentic AI mode',
+    browserF3Text:
+      'AI does not just answer questions — it can search the web, analyze open tabs, and extract data in a single execution cycle.',
+    browserF4Title: 'Advanced AI Chat',
+    browserF4Text:
+      'Full chat UI with multi-turn dialogues, file attachments, LaTeX rendering, and history export/import.',
+    browserF5Title: 'Local password manager',
+    browserF5Text:
+      'Encrypted storage with autofill, protected by your master password. No cloud sync.',
+    browserHowTitle: 'How it works',
+    browserHowStep1: 'Launch the browser.',
+    browserHowStep2: 'It automatically starts a local llama-server with your selected model.',
+    browserHowStep3: 'Type your prompt in the chat — get your answer.',
+    browserHowSummary:
+      'All-in-one: no more switching between browsers, paid AI chats, and third-party password managers.',
+    browserLicenseTitle: 'Open source & licensing',
+    browserLicenseText:
+      'The project is fully open source — explore the code, test it, and contribute. Commercial use without prior permission is prohibited; this was built as an independent solution for users and the community.',
+    browserGithubCta: 'View on GitHub',
+    browserShotStart: 'Start page',
+    browserShotChat: 'AI Chat',
+    browserShotAgent: 'AgentPanel',
+    browserShotSettings: 'Settings',
     teamSectionTitle: 'Team',
     teamSectionLead:
-      'Two co-founders side by side — no “single face” hierarchy. Different roles, shared ownership of the product.',
+      'MATRIXON is led by its CEO and the team behind our products.',
     founderMaratName: 'Marat Safiyev',
-    founderMaratBadge: 'Co-founder · CEO · CTO',
+    founderMaratBadge: 'Chief Executive Officer (CEO)',
     founderMaratP1:
-      'Marat Safiyev (Safiyev Marat) is a co-founder of MATRIXON. He serves as Chief Executive Officer (CEO) and Chief Technology Officer (CTO).',
+      'Marat Safiyev (Safiyev Marat) is the Chief Executive Officer (CEO) of MATRIXON.',
     founderMaratWeb3Lead: 'Co-founder of the media publication',
     founderWeb3MediaName: 'web3 frens Central Asia',
     founderMaratActivities:
