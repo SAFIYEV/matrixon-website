@@ -190,7 +190,7 @@ export const messages: Record<Locale, Messages> = {
     founderMaratName: 'Марат Сафиев',
     founderMaratBadge: 'Генеральный директор (CEO)',
     founderMaratP1:
-      'Сафиев Марат (Safiyev Marat) — генеральный директор (CEO) MATRIXON.',
+      'Сафиев Марат (Safiyev Marat) — 17-летний генеральный директор (CEO) MATRIXON.',
     founderMaratWeb3Lead: 'Сооснователь медиаиздания',
     founderWeb3MediaName: 'web3 frens Central Asia',
     founderMaratActivities:
@@ -232,11 +232,11 @@ export const messages: Record<Locale, Messages> = {
     footerTelegramMatrixon: 'Telegram — MATRIXON',
     footerBottomPrefix: 'Связь:',
     colearnTagline:
-      'Платформа нового поколения: ИИ в каждом уроке, живое сообщество и признание вашего прогресса.',
-    colearnVisionTitle: 'Видение продукта',
-    colearnVisionLead: 'Будущее обучения — персональный ИИ для каждого.',
+      'Загрузите PDF — получите готовый интерактивный курс с ИИ-тьютором.',
+    colearnVisionTitle: 'Как это работает',
+    colearnVisionLead: 'Превращайте учебные PDF в интерактивные курсы за секунды.',
     colearnVisionBody:
-      'CoLearn переосмысливает онлайн-обучение с помощью ИИ — чтобы каждый шаг подстраивался под вас.',
+      'CoLearn — AI-платформа для автоматической трансформации учебных PDF в интерактивные курсы: авто-структурирование, AI-тьютор по содержанию файла и мгновенная генерация тестов.',
     colearnF1Title: 'Курсы и проверки под вас',
     colearnF1Text:
       'ИИ собирает курсы и задания нужной сложности — вы растёте в своём темпе.',
@@ -328,7 +328,7 @@ export const messages: Record<Locale, Messages> = {
     founderMaratName: 'Marat Safiyev',
     founderMaratBadge: 'Chief Executive Officer (CEO)',
     founderMaratP1:
-      'Marat Safiyev (Safiyev Marat) is the Chief Executive Officer (CEO) of MATRIXON.',
+      'Marat Safiyev (Safiyev Marat) is the 17-year-old Chief Executive Officer (CEO) of MATRIXON.',
     founderMaratWeb3Lead: 'Co-founder of the media publication',
     founderWeb3MediaName: 'web3 frens Central Asia',
     founderMaratActivities:
@@ -369,11 +369,11 @@ export const messages: Record<Locale, Messages> = {
     footerMediaH: 'Media',
     footerTelegramMatrixon: 'Telegram — MATRIXON',
     colearnTagline:
-      'A next-generation platform: AI in every lesson, a live community, and recognition for your progress.',
-    colearnVisionTitle: 'Product vision',
-    colearnVisionLead: 'The future of learning is a personal AI for everyone.',
+      'Upload a PDF — get an interactive AI-powered course instantly.',
+    colearnVisionTitle: 'How it works',
+    colearnVisionLead: 'Turn your study PDFs into interactive courses in seconds.',
     colearnVisionBody:
-      'CoLearn reimagines online learning with AI — so every step fits you.',
+      'CoLearn is an AI platform that automatically transforms study PDFs into interactive courses: auto-structured content, an AI tutor that knows your material, and instant quiz generation.',
     colearnF1Title: 'Courses & quizzes that fit you',
     colearnF1Text:
       'Our AI builds courses and quizzes at any difficulty — you grow at your pace.',
