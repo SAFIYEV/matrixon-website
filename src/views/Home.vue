@@ -77,17 +77,37 @@ const maratLinks = [
         <p class="section__lead section__lead--vectors">
           {{ t.vectorsLead }}
         </p>
-        <div class="vectors">
-          <article class="vector-card">
-            <div class="vector-card__product">CoLearn</div>
-            <p class="vector-card__text">{{ t.edtechText }}</p>
-            <RouterLink class="vector-card__link" to="/colearn">{{ t.edtechMore }}</RouterLink>
-          </article>
+        <div class="vectors vectors--single">
           <article class="vector-card">
             <div class="vector-card__product">{{ t.browserProduct }}</div>
             <p class="vector-card__text">{{ t.browserCardText }}</p>
             <RouterLink class="vector-card__link" to="/browser">{{ t.browserMore }}</RouterLink>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="partners" class="section section--partners">
+      <div class="section__inner">
+        <h2 class="section__title">
+          {{ t.partnersTitleBefore }}<br />
+          <span class="gradient-text">{{ t.partnersTitleAccent }}</span>
+        </h2>
+        <p class="section__lead">{{ t.partnersLead }}</p>
+        <div class="partners-grid">
+          <a
+            class="partner-card"
+            href="https://aws.amazon.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            :aria-label="t.partnerAwsName"
+          >
+            <div class="partner-card__logo-wrap">
+              <img class="partner-card__logo" src="/partners/aws.svg" width="152" height="91" alt="" />
+            </div>
+            <h3 class="partner-card__name">{{ t.partnerAwsName }}</h3>
+            <p class="partner-card__text">{{ t.partnerAwsText }}</p>
+          </a>
         </div>
       </div>
     </section>
@@ -581,10 +601,79 @@ const maratLinks = [
   margin: 0 auto;
 }
 
+.vectors--single {
+  max-width: 560px;
+}
+
 @media (min-width: 720px) {
-  .vectors {
+  .vectors:not(.vectors--single) {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.section--partners {
+  background: #fff;
+}
+
+.partners-grid {
+  display: grid;
+  gap: 20px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.partner-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 28px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.35s cubic-bezier(0.33, 1, 0.68, 1),
+    box-shadow 0.35s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.partner-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 56px rgba(26, 74, 158, 0.1);
+  border-color: rgba(26, 74, 158, 0.14);
+  background: #fff;
+}
+
+.partner-card__logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 72px;
+  margin-bottom: 18px;
+}
+
+.partner-card__logo {
+  width: min(152px, 58vw);
+  height: auto;
+  display: block;
+}
+
+.partner-card__name {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.partner-card__text {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--text-muted);
 }
 
 .vector-card {
@@ -962,6 +1051,7 @@ const maratLinks = [
 
 @media (prefers-reduced-motion: reduce) {
   .vector-card,
+  .partner-card,
   .person-card,
   .delivery-card,
   .person-card__img {
@@ -969,6 +1059,7 @@ const maratLinks = [
   }
 
   .vector-card:hover,
+  .partner-card:hover,
   .person-card:hover,
   .delivery-card:hover,
   .person-card:hover .person-card__img {

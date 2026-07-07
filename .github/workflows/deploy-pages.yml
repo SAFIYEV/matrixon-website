@@ -47,7 +47,7 @@ jobs:
       - run: npm ci
       - name: Build for GitHub Pages
         run: npm run build
-      # SPA: при прямом заходе на /colearn GitHub Pages отдаёт 404 — подменяем на index
+      # SPA: при прямом заходе на вложенные маршруты GitHub Pages отдаёт 404 — подменяем на index
       - run: cp dist/index.html dist/404.html
 
       - uses: actions/upload-pages-artifact@v3

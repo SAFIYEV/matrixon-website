@@ -3,14 +3,12 @@ export type Locale = 'ru' | 'en'
 export type Messages = {
   metaTitle: string
   metaDescription: string
-  colearnMetaTitle: string
-  colearnMetaDescription: string
   browserMetaTitle: string
   browserMetaDescription: string
   navVectors: string
   navFounder: string
   navContact: string
-  navProducts: string
+  navPartners: string
   navWrite: string
   navCall: string
   menuAria: string
@@ -23,8 +21,6 @@ export type Messages = {
   vectorsTitleBefore: string
   vectorsTitleAccent: string
   vectorsLead: string
-  edtechText: string
-  edtechMore: string
   browserProduct: string
   browserCardText: string
   browserMore: string
@@ -92,40 +88,29 @@ export type Messages = {
   footerCompanyH: string
   footerLinkVectors: string
   footerLinkFounder: string
-  footerLinkProducts: string
+  footerLinkPartners: string
   footerContact: string
   footerWhatsApp: string
   footerMediaH: string
   footerTelegramMatrixon: string
-  colearnTagline: string
-  colearnVisionTitle: string
-  colearnVisionLead: string
-  colearnVisionBody: string
-  colearnF1Title: string
-  colearnF1Text: string
-  colearnF2Title: string
-  colearnF2Text: string
-  colearnF3Title: string
-  colearnF3Text: string
-  colearnF4Title: string
-  colearnF4Text: string
-  colearnBack: string
+  partnersTitleBefore: string
+  partnersTitleAccent: string
+  partnersLead: string
+  partnerAwsName: string
+  partnerAwsText: string
 }
 
 export const messages: Record<Locale, Messages> = {
   ru: {
     metaTitle: 'MATRIXON',
     metaDescription: 'MATRIXON',
-    colearnMetaTitle: 'CoLearn — обучение с ИИ | MATRIXON',
-    colearnMetaDescription:
-      'CoLearn: платформа нового поколения — ИИ в каждом уроке, сообщество и признание прогресса.',
     browserMetaTitle: 'MATRIXON Agentic Browser — локальный ИИ-браузер | MATRIXON',
     browserMetaDescription:
       'Open-source браузер с локальным ИИ на llama.cpp: приватность, AgentPanel, чат и менеджер паролей на вашем устройстве.',
     navVectors: 'Направления',
     navFounder: 'Команда',
     navContact: 'Контакты',
-    navProducts: 'Продукты',
+    navPartners: 'Партнёры',
     navWrite: 'Написать',
     navCall: 'Позвонить',
     menuAria: 'Меню',
@@ -138,10 +123,7 @@ export const messages: Record<Locale, Messages> = {
     vectorsTitleBefore: 'Что мы делаем',
     vectorsTitleAccent: 'сейчас',
     vectorsLead:
-      'Запускаем собственные продукты в EdTech и open-source — узкий фокус, чтобы быстрее проверять гипотезы и поддерживать качество.',
-    edtechText:
-      'Обучайтесь интересно, доступно и эффективно с ИИ. CoLearn — наш продукт в EdTech.',
-    edtechMore: 'Подробнее о CoLearn',
+      'Запускаем собственные open-source продукты — узкий фокус, чтобы быстрее проверять гипотезы и поддерживать качество.',
     browserProduct: 'MATRIXON Agentic Browser',
     browserCardText:
       'Open-source браузер с полностью локальным ИИ: без облака, API-ключей и телеметрии — модель, пароли и история только на вашем устройстве.',
@@ -225,45 +207,29 @@ export const messages: Record<Locale, Messages> = {
     footerCompanyH: 'Компания',
     footerLinkVectors: 'Направления',
     footerLinkFounder: 'Команда',
-    footerLinkProducts: 'Продукты',
+    footerLinkPartners: 'Партнёры',
     footerContact: 'Контакты',
     footerWhatsApp: 'WhatsApp',
     footerMediaH: 'Медиа',
     footerTelegramMatrixon: 'Telegram — MATRIXON',
-    footerBottomPrefix: 'Связь:',
-    colearnTagline:
-      'Загрузите PDF — получите готовый интерактивный курс с ИИ-тьютором.',
-    colearnVisionTitle: 'Как это работает',
-    colearnVisionLead: 'Превращайте учебные PDF в интерактивные курсы за секунды.',
-    colearnVisionBody:
-      'CoLearn — AI-платформа для автоматической трансформации учебных PDF в интерактивные курсы: авто-структурирование, AI-тьютор по содержанию файла и мгновенная генерация тестов.',
-    colearnF1Title: 'Курсы и проверки под вас',
-    colearnF1Text:
-      'ИИ собирает курсы и задания нужной сложности — вы растёте в своём темпе.',
-    colearnF2Title: 'ИИ-наставник в каждом уроке',
-    colearnF2Text:
-      'Персональный наставник рядом на каждом занятии: спросите, повторите, углубитесь.',
-    colearnF3Title: 'Сообщество, которое связывает',
-    colearnF3Text:
-      'Комьюнити и образовательный нетворкинг — вы не учитесь в одиночку.',
-    colearnF4Title: 'Достижения, которыми можно делиться',
-    colearnF4Text:
-      'Сертификаты и награды, которые отражают реальный прогресс.',
-    colearnBack: '← К MATRIXON',
+    partnersTitleBefore: 'Наши',
+    partnersTitleAccent: 'партнёры',
+    partnersLead:
+      'Мы работаем с лидерами индустрии, чтобы создавать надёжные и масштабируемые решения.',
+    partnerAwsName: 'Amazon Web Services',
+    partnerAwsText:
+      'Облачная инфраструктура и сервисы для разработки и масштабирования наших продуктов.',
   },
   en: {
     metaTitle: 'MATRIXON',
     metaDescription: 'MATRIXON',
-    colearnMetaTitle: 'CoLearn — AI-native learning | MATRIXON',
-    colearnMetaDescription:
-      'CoLearn: a next-generation platform — AI in every lesson, community, and recognition for your progress.',
     browserMetaTitle: 'MATRIXON Agentic Browser — fully local AI browser | MATRIXON',
     browserMetaDescription:
       'Open-source browser with on-device AI via llama.cpp: privacy, AgentPanel, chat, and a local password manager.',
     navVectors: 'Focus',
     navFounder: 'Team',
     navContact: 'Contact',
-    navProducts: 'Products',
+    navPartners: 'Partners',
     navWrite: 'Email',
     navCall: 'Call',
     menuAria: 'Menu',
@@ -276,10 +242,7 @@ export const messages: Record<Locale, Messages> = {
     vectorsTitleBefore: 'What we ship',
     vectorsTitleAccent: 'today',
     vectorsLead:
-      'We build our own products in EdTech and open source — a narrow focus so we can validate ideas faster and keep quality bar high.',
-    edtechText:
-      'Learn in a way that is engaging, accessible, and productive — with AI. CoLearn is our EdTech product.',
-    edtechMore: 'About CoLearn',
+      'We build our own open-source products — a narrow focus so we can validate ideas faster and keep quality bar high.',
     browserProduct: 'MATRIXON Agentic Browser',
     browserCardText:
       'Open-source browser with fully local AI — no cloud, no API keys, no telemetry. Your model, passwords, and history stay on your device.',
@@ -363,29 +326,17 @@ export const messages: Record<Locale, Messages> = {
     footerCompanyH: 'Company',
     footerLinkVectors: 'Focus',
     footerLinkFounder: 'Team',
-    footerLinkProducts: 'Products',
+    footerLinkPartners: 'Partners',
     footerContact: 'Contact',
     footerWhatsApp: 'WhatsApp',
     footerMediaH: 'Media',
     footerTelegramMatrixon: 'Telegram — MATRIXON',
-    colearnTagline:
-      'Upload a PDF — get an interactive AI-powered course instantly.',
-    colearnVisionTitle: 'How it works',
-    colearnVisionLead: 'Turn your study PDFs into interactive courses in seconds.',
-    colearnVisionBody:
-      'CoLearn is an AI platform that automatically transforms study PDFs into interactive courses: auto-structured content, an AI tutor that knows your material, and instant quiz generation.',
-    colearnF1Title: 'Courses & quizzes that fit you',
-    colearnF1Text:
-      'Our AI builds courses and quizzes at any difficulty — you grow at your pace.',
-    colearnF2Title: 'Your AI mentor in every lesson',
-    colearnF2Text:
-      'A personal AI mentor walks with you in every lesson — ask, repeat, go deeper.',
-    colearnF3Title: 'Community that connects',
-    colearnF3Text:
-      'Community and educational networking — you never learn alone.',
-    colearnF4Title: 'Proof you can share',
-    colearnF4Text:
-      'Beautiful certificates and achievements that celebrate real progress.',
-    colearnBack: '← Back to MATRIXON',
+    partnersTitleBefore: 'Our',
+    partnersTitleAccent: 'partners',
+    partnersLead:
+      'We work with industry leaders to build reliable, scalable solutions.',
+    partnerAwsName: 'Amazon Web Services',
+    partnerAwsText:
+      'Cloud infrastructure and services to develop and scale our products.',
   },
 }

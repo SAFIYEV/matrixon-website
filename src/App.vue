@@ -13,10 +13,7 @@ watch(
   () => {
     const m = messages[locale.value]
     const meta = document.querySelector('meta[name="description"]')
-    if (route.name === 'colearn') {
-      document.title = m.colearnMetaTitle
-      meta?.setAttribute('content', m.colearnMetaDescription)
-    } else if (route.name === 'browser') {
+    if (route.name === 'browser') {
       document.title = m.browserMetaTitle
       meta?.setAttribute('content', m.browserMetaDescription)
     } else {
@@ -86,8 +83,8 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
           <RouterLink class="nav__link" :to="{ path: '/', hash: '#vectors' }" @click="closeMenu">
             {{ t.navVectors }}
           </RouterLink>
-          <RouterLink class="nav__link" to="/colearn" @click="closeMenu">
-            {{ t.navProducts }}
+          <RouterLink class="nav__link" :to="{ path: '/', hash: '#partners' }" @click="closeMenu">
+            {{ t.navPartners }}
           </RouterLink>
           <RouterLink class="nav__link" :to="{ path: '/', hash: '#founder' }" @click="closeMenu">
             {{ t.navFounder }}
@@ -141,7 +138,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
             <div class="footer__col">
               <h3 class="footer__h">{{ t.footerNavH }}</h3>
               <RouterLink :to="{ path: '/', hash: '#vectors' }">{{ t.footerLinkVectors }}</RouterLink>
-              <RouterLink to="/colearn">{{ t.footerLinkProducts }}</RouterLink>
+              <RouterLink :to="{ path: '/', hash: '#partners' }">{{ t.footerLinkPartners }}</RouterLink>
               <RouterLink :to="{ path: '/', hash: '#founder' }">{{ t.footerLinkFounder }}</RouterLink>
             </div>
             <div class="footer__col">
