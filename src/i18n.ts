@@ -5,10 +5,11 @@ export type Messages = {
   metaDescription: string
   browserMetaTitle: string
   browserMetaDescription: string
-  navVectors: string
+  navProduct: string
+  navApproach: string
+  navPartners: string
   navFounder: string
   navContact: string
-  navPartners: string
   navWrite: string
   navCall: string
   menuAria: string
@@ -16,8 +17,18 @@ export type Messages = {
   langRu: string
   langEn: string
   heroPitch: string
+  heroEyebrow: string
+  heroWords: readonly [string, string, string]
   heroCtaContact: string
-  heroCtaAbout: string
+  heroCtaExplore: string
+  slideNavIntro: string
+  slideNavProduct: string
+  slideNavBuild: string
+  slideNavPartners: string
+  slideNavTeam: string
+  slideNavContact: string
+  slideProductLine1: string
+  slideProductLine2: string
   vectorsTitleBefore: string
   vectorsTitleAccent: string
   vectorsLead: string
@@ -86,9 +97,10 @@ export type Messages = {
   ctaPhone: string
   footerNavH: string
   footerCompanyH: string
-  footerLinkVectors: string
-  footerLinkFounder: string
+  footerLinkProduct: string
+  footerLinkApproach: string
   footerLinkPartners: string
+  footerLinkFounder: string
   footerContact: string
   footerWhatsApp: string
   footerMediaH: string
@@ -107,19 +119,30 @@ export const messages: Record<Locale, Messages> = {
     browserMetaTitle: 'MATRIXON Agentic Browser — локальный ИИ-браузер | MATRIXON',
     browserMetaDescription:
       'Open-source браузер с локальным ИИ на llama.cpp: приватность, AgentPanel, чат и менеджер паролей на вашем устройстве.',
-    navVectors: 'Направления',
+    navProduct: 'Продукт',
+    navApproach: 'Подход',
+    navPartners: 'Партнёры',
     navFounder: 'Команда',
     navContact: 'Контакты',
-    navPartners: 'Партнёры',
     navWrite: 'Написать',
     navCall: 'Позвонить',
     menuAria: 'Меню',
     langSwitcherAria: 'Язык интерфейса',
     langRu: 'RU',
     langEn: 'EN',
-    heroPitch: 'Мы не следуем трендам, мы их создаём.',
+    heroPitch: 'Мы не следуем трендам — мы их создаём.',
+    heroEyebrow: 'Open-source · Локальный ИИ',
+    heroWords: ['создаём', 'запускаем', 'масштабируем'] as const,
     heroCtaContact: 'Связаться',
-    heroCtaAbout: 'Команда',
+    heroCtaExplore: 'Смотреть продукт',
+    slideNavIntro: 'Главная',
+    slideNavProduct: 'Продукт',
+    slideNavBuild: 'Подход',
+    slideNavPartners: 'Партнёры',
+    slideNavTeam: 'Команда',
+    slideNavContact: 'Контакты',
+    slideProductLine1: 'Браузер',
+    slideProductLine2: 'с локальным ИИ',
     vectorsTitleBefore: 'Что мы делаем',
     vectorsTitleAccent: 'сейчас',
     vectorsLead:
@@ -205,9 +228,10 @@ export const messages: Record<Locale, Messages> = {
     ctaPhone: 'Позвонить',
     footerNavH: 'Разделы',
     footerCompanyH: 'Компания',
-    footerLinkVectors: 'Направления',
-    footerLinkFounder: 'Команда',
+    footerLinkProduct: 'Продукт',
+    footerLinkApproach: 'Подход',
     footerLinkPartners: 'Партнёры',
+    footerLinkFounder: 'Команда',
     footerContact: 'Контакты',
     footerWhatsApp: 'WhatsApp',
     footerMediaH: 'Медиа',
@@ -226,10 +250,11 @@ export const messages: Record<Locale, Messages> = {
     browserMetaTitle: 'MATRIXON Agentic Browser — fully local AI browser | MATRIXON',
     browserMetaDescription:
       'Open-source browser with on-device AI via llama.cpp: privacy, AgentPanel, chat, and a local password manager.',
-    navVectors: 'Focus',
+    navProduct: 'Product',
+    navApproach: 'Approach',
+    navPartners: 'Partners',
     navFounder: 'Team',
     navContact: 'Contact',
-    navPartners: 'Partners',
     navWrite: 'Email',
     navCall: 'Call',
     menuAria: 'Menu',
@@ -237,8 +262,18 @@ export const messages: Record<Locale, Messages> = {
     langRu: 'RU',
     langEn: 'EN',
     heroPitch: "We don't follow trends — we create them.",
+    heroEyebrow: 'Open-source · Local AI',
+    heroWords: ['build', 'ship', 'scale'] as const,
     heroCtaContact: 'Get in touch',
-    heroCtaAbout: 'Team',
+    heroCtaExplore: 'See the product',
+    slideNavIntro: 'Home',
+    slideNavProduct: 'Product',
+    slideNavBuild: 'Approach',
+    slideNavPartners: 'Partners',
+    slideNavTeam: 'Team',
+    slideNavContact: 'Contact',
+    slideProductLine1: 'A browser',
+    slideProductLine2: 'with local AI',
     vectorsTitleBefore: 'What we ship',
     vectorsTitleAccent: 'today',
     vectorsLead:
@@ -324,9 +359,10 @@ export const messages: Record<Locale, Messages> = {
     ctaPhone: 'Call',
     footerNavH: 'Sections',
     footerCompanyH: 'Company',
-    footerLinkVectors: 'Focus',
-    footerLinkFounder: 'Team',
+    footerLinkProduct: 'Product',
+    footerLinkApproach: 'Approach',
     footerLinkPartners: 'Partners',
+    footerLinkFounder: 'Team',
     footerContact: 'Contact',
     footerWhatsApp: 'WhatsApp',
     footerMediaH: 'Media',

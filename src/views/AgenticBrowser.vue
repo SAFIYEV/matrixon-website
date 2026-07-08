@@ -94,7 +94,7 @@ const screenshots = [
         <h2 id="license-heading" class="browser-page__h2">{{ t.browserLicenseTitle }}</h2>
         <p class="browser-page__body">{{ t.browserLicenseText }}</p>
         <a
-          class="btn btn--outline btn--lg browser-page__github-secondary"
+          class="btn btn--outline-dark btn--lg browser-page__github-secondary"
           :href="githubUrl"
           target="_blank"
           rel="noopener noreferrer"
@@ -119,10 +119,11 @@ const screenshots = [
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.5;
-  background-image:
-    radial-gradient(circle at 20% 15%, rgba(26, 74, 158, 0.12) 0%, transparent 45%),
-    radial-gradient(circle at 85% 55%, rgba(60, 192, 180, 0.1) 0%, transparent 42%);
+  opacity: 0.55;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(42, 142, 181, 0.22), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 90% 30%, rgba(60, 192, 180, 0.14), transparent 50%),
+    var(--gradient-deck);
   mask-image: radial-gradient(ellipse 70% 70% at 50% 25%, #000 0%, transparent 75%);
 }
 
@@ -138,9 +139,9 @@ const screenshots = [
   margin-bottom: 36px;
   font-size: 15px;
   font-weight: 600;
-  color: var(--m-navy);
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
-  border-bottom: 1px solid rgba(26, 74, 158, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   transition:
     color 0.22s ease,
     border-color 0.22s ease,
@@ -148,7 +149,8 @@ const screenshots = [
 }
 
 .browser-page__back:hover {
-  border-bottom-color: var(--m-navy);
+  color: #fff;
+  border-bottom-color: var(--m-teal);
   transform: translateX(-3px);
 }
 
@@ -162,16 +164,17 @@ const screenshots = [
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--m-blue);
+  color: var(--m-teal);
 }
 
 .browser-page__title {
   margin: 0 0 20px;
-  font-size: clamp(1.65rem, 4.5vw, 2.35rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4.5vw, 2.55rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.15;
-  color: var(--text);
+  line-height: 1.12;
+  color: #fff;
 }
 
 .browser-page__intro {
@@ -191,9 +194,10 @@ const screenshots = [
 .browser-page__license {
   margin-bottom: 48px;
   padding: 28px 26px;
-  background: var(--surface-soft);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-xl);
   border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
   transition:
     box-shadow 0.35s ease,
     border-color 0.3s ease;
@@ -202,15 +206,17 @@ const screenshots = [
 .browser-page__catch:hover,
 .browser-page__how:hover,
 .browser-page__license:hover {
-  box-shadow: 0 18px 44px rgba(26, 74, 158, 0.07);
-  border-color: rgba(26, 74, 158, 0.1);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-strong);
 }
 
 .browser-page__h2 {
   margin: 0 0 14px;
-  font-size: 1.35rem;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
   font-weight: 800;
   letter-spacing: -0.02em;
+  color: #fff;
 }
 
 .browser-page__h2--center {
@@ -229,7 +235,7 @@ const screenshots = [
 .browser-page__summary {
   margin-top: 16px;
   font-weight: 600;
-  color: var(--text);
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .browser-page__shots {
@@ -252,8 +258,8 @@ const screenshots = [
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--border);
-  background: #fff;
-  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: var(--shadow-sm);
   transition:
     transform 0.34s cubic-bezier(0.33, 1, 0.68, 1),
     box-shadow 0.34s ease;
@@ -261,7 +267,7 @@ const screenshots = [
 
 .browser-page__shot:hover {
   transform: translateY(-3px);
-  box-shadow: 0 22px 48px rgba(26, 74, 158, 0.1);
+  box-shadow: var(--shadow);
 }
 
 .browser-page__shot img {
@@ -277,10 +283,10 @@ const screenshots = [
   padding: 12px 16px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--m-navy);
+  color: rgba(255, 255, 255, 0.8);
   text-align: center;
   border-top: 1px solid var(--border);
-  background: var(--surface-soft);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .browser-page__features {
@@ -309,11 +315,12 @@ const screenshots = [
 }
 
 .browser-page__card {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-lg);
   padding: 24px 22px;
   border: 1px solid var(--border);
-  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.04);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
   transition:
     transform 0.34s cubic-bezier(0.33, 1, 0.68, 1),
     box-shadow 0.34s ease,
@@ -322,8 +329,8 @@ const screenshots = [
 
 .browser-page__card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 22px 48px rgba(26, 74, 158, 0.09);
-  border-color: rgba(26, 74, 158, 0.12);
+  box-shadow: var(--shadow);
+  border-color: var(--border-strong);
 }
 
 .browser-page__card-dot {
@@ -339,6 +346,7 @@ const screenshots = [
   font-size: 1.08rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  color: #fff;
 }
 
 .browser-page__card-text {

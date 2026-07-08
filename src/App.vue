@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { ref, watch, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute, RouterView, RouterLink } from 'vue-router'
 import { useSiteLocale } from './composables/useSiteLocale'
 import { messages } from './i18n'
@@ -26,6 +26,8 @@ watch(
 
 const menuOpen = ref(false)
 const scrolled = ref(false)
+
+const heroHeader = computed(() => route.name === 'home')
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
@@ -56,10 +58,17 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 </script>
 
 <template>
-  <div class="page">
-    <div class="mesh mesh--bg" aria-hidden="true" />
+  <div class="page" :class="{ 'page--deck': route.name === 'home' }">
+    <div v-if="route.name !== 'home'" class="mesh mesh--bg" aria-hidden="true" />
 
-    <header class="header" :class="{ 'header--scrolled': scrolled }">
+    <header
+      class="header"
+      :class="{
+        'header--scrolled': scrolled && route.name !== 'home',
+        'header--hero': heroHeader,
+        'header--deck': route.name === 'home',
+      }"
+    >
       <div class="header__inner">
         <RouterLink class="brand" to="/" @click="closeMenu">
           <img class="brand__logo" src="/logo-matrixon.png" width="44" height="44" alt="MATRIXON" />
@@ -80,13 +89,16 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
         </button>
 
         <nav id="site-nav" class="nav" :class="{ 'nav--open': menuOpen }">
-          <RouterLink class="nav__link" :to="{ path: '/', hash: '#vectors' }" @click="closeMenu">
-            {{ t.navVectors }}
+          <RouterLink class="nav__link" :to="{ path: '/', hash: '#product' }" @click="closeMenu">
+            {{ t.navProduct }}
+          </RouterLink>
+          <RouterLink class="nav__link" :to="{ path: '/', hash: '#build' }" @click="closeMenu">
+            {{ t.navApproach }}
           </RouterLink>
           <RouterLink class="nav__link" :to="{ path: '/', hash: '#partners' }" @click="closeMenu">
             {{ t.navPartners }}
           </RouterLink>
-          <RouterLink class="nav__link" :to="{ path: '/', hash: '#founder' }" @click="closeMenu">
+          <RouterLink class="nav__link" :to="{ path: '/', hash: '#team' }" @click="closeMenu">
             {{ t.navFounder }}
           </RouterLink>
           <RouterLink class="nav__link" :to="{ path: '/', hash: '#contact' }" @click="closeMenu">
@@ -114,7 +126,12 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
             </button>
           </div>
           <div class="nav__cta">
-            <a class="btn btn--ghost" :href="`mailto:${mail}`" @click="closeMenu">{{ t.navWrite }}</a>
+            <a
+              class="btn"
+              :class="heroHeader ? 'btn--ghost' : 'btn--ghost-dark'"
+              :href="`mailto:${mail}`"
+              @click="closeMenu"
+            >{{ t.navWrite }}</a>
             <a class="btn btn--primary" :href="phoneHref" @click="closeMenu">{{ t.navCall }}</a>
           </div>
         </nav>
@@ -127,7 +144,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
       </div>
     </Transition>
 
-    <footer class="footer">
+    <footer v-if="route.name !== 'home'" class="footer">
       <div class="footer__inner">
         <div class="footer__brand">
           <img class="footer__logo" src="/logo-matrixon.png" width="40" height="40" alt="MATRIXON" />
@@ -137,9 +154,10 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
           <div class="footer__cols-leading">
             <div class="footer__col">
               <h3 class="footer__h">{{ t.footerNavH }}</h3>
-              <RouterLink :to="{ path: '/', hash: '#vectors' }">{{ t.footerLinkVectors }}</RouterLink>
+              <RouterLink :to="{ path: '/', hash: '#product' }">{{ t.footerLinkProduct }}</RouterLink>
+              <RouterLink :to="{ path: '/', hash: '#build' }">{{ t.footerLinkApproach }}</RouterLink>
               <RouterLink :to="{ path: '/', hash: '#partners' }">{{ t.footerLinkPartners }}</RouterLink>
-              <RouterLink :to="{ path: '/', hash: '#founder' }">{{ t.footerLinkFounder }}</RouterLink>
+              <RouterLink :to="{ path: '/', hash: '#team' }">{{ t.footerLinkFounder }}</RouterLink>
             </div>
             <div class="footer__col">
               <h3 class="footer__h">{{ t.footerMediaH }}</h3>
@@ -186,10 +204,39 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   border: 0;
 }
 
+.page--deck {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.page--deck .page-shell {
+  height: 100%;
+}
+
+.header--deck {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  border-bottom-color: transparent;
+}
+
+.header--deck.header--scrolled {
+  background: transparent;
+  box-shadow: none;
+  border-bottom-color: transparent;
+}
+
 .page {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: clip;
+  background: var(--m-ink);
+  background-image: var(--gradient-deck);
+  background-attachment: fixed;
 }
 
 .page-shell {
@@ -241,31 +288,115 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 .mesh--bg {
   position: fixed;
   z-index: 0;
-  opacity: 0.35;
+  opacity: 0.22;
+}
+
+.header--deck.header--deck-light {
+  display: none;
+}
+
+.header--hero .nav-toggle {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.header--hero .nav-toggle__bar {
+  background: #fff;
+}
+
+.header--hero.header--scrolled .nav-toggle {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.header--hero.header--scrolled .nav-toggle__bar {
+  background: #fff;
 }
 
 .header {
   position: sticky;
   top: 0;
   z-index: 50;
+  height: var(--header-h);
   transition:
-    background 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
+    background 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    color 0.28s ease;
   border-bottom: 1px solid transparent;
 }
 
+.header--hero {
+  color: #fff;
+}
+
+.header--hero .brand,
+.header--hero .nav__link,
+.header--hero .lang__btn {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.header--hero .brand:hover,
+.header--hero .nav__link:hover,
+.header--hero .lang__btn:hover {
+  color: #fff;
+}
+
+.header--hero .lang {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.header--hero .lang__pill {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.header--hero .lang__btn--active {
+  color: #fff;
+}
+
 .header--scrolled {
-  background: rgba(255, 255, 255, 0.86);
-  backdrop-filter: blur(14px);
+  background: rgba(4, 10, 20, 0.82);
+  backdrop-filter: blur(16px);
   border-bottom-color: var(--border);
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  color: var(--text);
+}
+
+.header--hero.header--scrolled {
+  color: #fff;
+}
+
+.header--hero.header--scrolled .brand,
+.header--hero.header--scrolled .nav__link,
+.header--hero.header--scrolled .lang__btn {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.header--hero.header--scrolled .brand:hover,
+.header--hero.header--scrolled .nav__link:hover,
+.header--hero.header--scrolled .lang__btn:hover {
+  color: #fff;
+}
+
+.header--hero.header--scrolled .lang {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.header--hero.header--scrolled .lang__pill {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.header--hero.header--scrolled .lang__btn--active {
+  color: #fff;
 }
 
 .header__inner {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 0 24px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -294,9 +425,14 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   transform: translateY(0);
 }
 
+.brand__name {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
 .brand__logo {
   border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(26, 74, 158, 0.15);
+  box-shadow: 0 8px 24px rgba(26, 74, 158, 0.2);
   transition:
     box-shadow 0.28s ease,
     transform 0.28s ease;
@@ -316,7 +452,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   height: 44px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.06);
   cursor: pointer;
   z-index: 2;
   transition:
@@ -326,8 +462,8 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 }
 
 .nav-toggle:hover {
-  border-color: rgba(26, 74, 158, 0.25);
-  box-shadow: 0 4px 14px rgba(26, 74, 158, 0.08);
+  border-color: var(--border-strong);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
 }
 
 .nav-toggle__bar {
@@ -335,7 +471,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   height: 2px;
   width: 20px;
   margin: 0 auto;
-  background: var(--text);
+  background: #fff;
   border-radius: 2px;
   transition:
     transform 0.32s cubic-bezier(0.34, 1.3, 0.64, 1),
@@ -392,7 +528,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 }
 
 .nav__link:hover {
-  color: var(--m-navy);
+  color: #fff;
 }
 
 .nav__link:hover::after {
@@ -400,7 +536,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 }
 
 .nav__link--active {
-  color: var(--m-navy);
+  color: #fff;
   font-weight: 600;
 }
 
@@ -410,7 +546,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   align-items: stretch;
   border-radius: var(--radius-pill);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.06);
   padding: 3px;
   gap: 2px;
 }
@@ -422,8 +558,8 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   width: calc(50% - 4px);
   height: calc(100% - 6px);
   border-radius: var(--radius-pill);
-  background: var(--surface-soft);
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   pointer-events: none;
   z-index: 0;
   transition: transform 0.42s cubic-bezier(0.34, 1.25, 0.64, 1);
@@ -455,7 +591,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 }
 
 .lang__btn:hover {
-  color: var(--m-navy);
+  color: #fff;
 }
 
 .lang__btn:active {
@@ -463,7 +599,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 }
 
 .lang__btn--active {
-  color: var(--m-navy);
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -487,8 +623,9 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   position: relative;
   z-index: 1;
   border-top: 1px solid var(--border);
-  background: #fff;
-  padding: 48px 24px 24px;
+  background: var(--m-ink);
+  color: rgba(255, 255, 255, 0.88);
+  padding: 56px 24px 28px;
 }
 
 .footer__inner {
@@ -567,11 +704,11 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 
 .footer__h {
   margin: 0 0 12px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.48);
 }
 
 .footer__col {
@@ -588,7 +725,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 
 .footer__col a {
   font-size: 15px;
-  color: var(--text);
+  color: rgba(255, 255, 255, 0.86);
   text-decoration: none;
   font-weight: 500;
   transition:
@@ -597,7 +734,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 }
 
 .footer__col a:hover {
-  color: var(--m-navy);
+  color: #fff;
   transform: translateX(3px);
 }
 
@@ -624,11 +761,11 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   margin-top: 2px;
   max-width: 100%;
   border-radius: 14px;
-  border: 1px solid var(--border);
-  background: var(--surface-soft);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
   font-size: 15px;
   font-weight: 600;
-  color: var(--text);
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   transition:
     border-color 0.2s,
@@ -638,10 +775,10 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 }
 
 .footer__matrixon-tg:hover {
-  border-color: rgba(26, 74, 158, 0.28);
-  background: #fff;
-  color: var(--m-navy);
-  box-shadow: 0 8px 24px rgba(26, 74, 158, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .footer__matrixon-tg-icon {
@@ -658,7 +795,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   max-width: var(--max);
   margin: 36px auto 0;
   padding-top: 20px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -670,14 +807,14 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   margin: 0;
   font-size: 13px;
   line-height: 1.55;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.5);
   max-width: 52ch;
 }
 
 .footer__copy {
   margin: 0;
   font-size: 13px;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.42);
 }
 
 @media (max-width: 1040px) {
@@ -712,8 +849,8 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.97);
-    backdrop-filter: blur(12px);
+    background: rgba(4, 10, 20, 0.97);
+    backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
     transform: translateY(-100%);
     opacity: 0;

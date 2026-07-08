@@ -1,15 +1,20 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useSiteLocale } from '../composables/useSiteLocale'
+import { useFullPageSlides } from '../composables/useFullPageSlides'
 import SocialIcon from '../components/SocialIcon.vue'
+
+const deckRef = ref<HTMLElement | null>(null)
+const SLIDE_COUNT = 6
+const { activeSlide, scrollToSlide } = useFullPageSlides(deckRef, SLIDE_COUNT)
 
 const { t } = useSiteLocale()
 
 const mail = 'info@matrixon.org'
 const phoneHref = 'tel:+994107365773'
-
 const linkWeb3Frens = 'https://t.me/web3frensCA'
-// const linkIbragimIn = 'https://www.linkedin.com/in/ibragim-gasymov-6a9445401/'
+const matrixonTelegramHref = 'https://t.me/matrixonAI'
 
 const maratLinks = [
   { href: 'https://www.linkedin.com/in/safiyevmarat/', labelKey: 'socialLinkedIn' as const, network: 'linkedin' as const },
@@ -18,83 +23,142 @@ const maratLinks = [
   { href: 'https://www.instagram.com/maratsafiyev19/', labelKey: 'socialInstagram' as const, network: 'instagram' as const },
   { href: 'https://www.youtube.com/@SafiyevMarat', labelKey: 'socialYoutube' as const, network: 'youtube' as const },
 ]
+
+const heroWords = computed(() => t.value.heroWords)
+const buildPillars = computed(() => [
+  { num: '01', title: t.value.panelStability, text: t.value.panelStabilityVal },
+  { num: '02', title: t.value.panelDelivery, text: t.value.panelDeliveryVal },
+  { num: '03', title: t.value.panelDocs, text: t.value.panelDocsVal },
+])
+
+const slideLabels = computed(() => [
+  t.value.slideNavIntro,
+  t.value.slideNavProduct,
+  t.value.slideNavBuild,
+  t.value.slideNavPartners,
+  t.value.slideNavTeam,
+  t.value.slideNavContact,
+])
 </script>
 
 <template>
-  <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="mesh mesh--hero" aria-hidden="true" />
-      <div class="hero__orbit" aria-hidden="true">
-        <span class="hero__ring hero__ring--a" />
-        <span class="hero__ring hero__ring--b" />
-      </div>
-      <svg class="hero__net" viewBox="0 0 800 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path
-          d="M120 280 L260 140 L420 200 L560 100 L680 240 M260 140 L420 90 M420 200 L560 220 M120 280 L380 320 L680 240"
-          stroke="url(#hero-net-grad)"
-          stroke-width="1.1"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          opacity="0.55"
-        />
-        <circle cx="120" cy="280" r="5" fill="var(--m-navy)" opacity="0.35" />
-        <circle cx="260" cy="140" r="5" fill="var(--m-blue)" opacity="0.4" />
-        <circle cx="420" cy="200" r="6" fill="var(--m-teal)" opacity="0.45" />
-        <circle cx="560" cy="100" r="5" fill="var(--m-blue)" opacity="0.35" />
-        <circle cx="680" cy="240" r="5" fill="var(--m-navy)" opacity="0.35" />
-        <circle cx="380" cy="320" r="4" fill="var(--m-teal)" opacity="0.3" />
-        <defs>
-          <linearGradient id="hero-net-grad" x1="120" y1="100" x2="680" y2="300" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#1a4a9e" stop-opacity="0.35" />
-            <stop offset="0.5" stop-color="#2a8eb5" stop-opacity="0.45" />
-            <stop offset="1" stop-color="#3cc0b4" stop-opacity="0.35" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <div class="hero__inner">
-        <div class="hero__mark-block">
-          <p class="hero__mark-ghost" aria-hidden="true">MATRIXON</p>
-          <h1 id="hero-title" class="hero__mark">MATRIXON</h1>
-        </div>
-        <p class="hero__pitch">
-          {{ t.heroPitch }}
-        </p>
-        <div class="hero__actions">
-          <a class="btn btn--primary btn--lg" :href="`mailto:${mail}`">{{ t.heroCtaContact }}</a>
-          <RouterLink class="btn btn--outline btn--lg" :to="{ path: '/', hash: '#founder' }">{{
-            t.heroCtaAbout
-          }}</RouterLink>
-        </div>
-      </div>
-    </section>
+  <div class="deck-wrap">
+    <nav class="deck-nav" aria-label="Slides">
+      <button
+        v-for="(_, i) in SLIDE_COUNT"
+        :key="i"
+        type="button"
+        class="deck-nav__dot"
+        :class="{ 'deck-nav__dot--active': activeSlide === i }"
+        :aria-label="slideLabels[i]"
+        :aria-current="activeSlide === i ? 'step' : undefined"
+        @click="scrollToSlide(i)"
+      >
+        <span class="deck-nav__num">{{ String(i + 1).padStart(2, '0') }}</span>
+        <span class="deck-nav__bar" />
+      </button>
+    </nav>
 
-    <section id="vectors" class="section section--soft">
-      <div class="section__inner">
-        <h2 class="section__title">
-          {{ t.vectorsTitleBefore }}<br />
-          <span class="gradient-text">{{ t.vectorsTitleAccent }}</span>
-        </h2>
-        <p class="section__lead section__lead--vectors">
-          {{ t.vectorsLead }}
-        </p>
-        <div class="vectors vectors--single">
-          <article class="vector-card">
-            <div class="vector-card__product">{{ t.browserProduct }}</div>
-            <p class="vector-card__text">{{ t.browserCardText }}</p>
-            <RouterLink class="vector-card__link" to="/browser">{{ t.browserMore }}</RouterLink>
-          </article>
+    <main ref="deckRef" class="deck">
+      <!-- Slide 0: Hero -->
+      <section id="intro" class="slide slide--hero" data-slide="0" aria-label="MATRIXON">
+        <div class="slide__bg slide__bg--deck" aria-hidden="true">
+          <div class="slide__glow slide__glow--a" />
+          <div class="slide__glow slide__glow--b" />
+          <div class="slide__lines" />
         </div>
-      </div>
-    </section>
+        <div class="slide__content slide__content--hero">
+          <p class="slide__eyebrow">{{ t.heroEyebrow }}</p>
+          <h1 class="hero-title">
+            <span class="hero-title__brand">MATRIXON</span>
+            <span class="hero-title__rotator" aria-live="polite">
+              <span
+                v-for="(word, i) in heroWords"
+                :key="word"
+                class="hero-title__word"
+                :style="{ '--i': i, '--total': heroWords.length }"
+              >{{ word }}</span>
+            </span>
+          </h1>
+          <p class="hero-pitch">{{ t.heroPitch }}</p>
+          <div class="hero-actions">
+            <button type="button" class="btn btn--primary btn--lg" @click="scrollToSlide(1)">
+              {{ t.heroCtaExplore }}
+            </button>
+            <a class="btn btn--outline btn--lg" :href="`mailto:${mail}`">{{ t.heroCtaContact }}</a>
+          </div>
+        </div>
+        <button type="button" class="slide-scroll-hint" aria-label="Next" @click="scrollToSlide(1)">
+          <span class="slide-scroll-hint__line" />
+        </button>
+      </section>
 
-    <section id="partners" class="section section--partners">
-      <div class="section__inner">
-        <h2 class="section__title">
-          {{ t.partnersTitleBefore }}<br />
-          <span class="gradient-text">{{ t.partnersTitleAccent }}</span>
-        </h2>
-        <p class="section__lead">{{ t.partnersLead }}</p>
-        <div class="partners-grid">
+      <!-- Slide 1: Product -->
+      <section id="product" class="slide slide--on-dark" data-slide="1" aria-labelledby="product-title">
+        <div class="slide__bg slide__bg--deck slide__bg--deck-alt" aria-hidden="true">
+          <div class="slide__glow slide__glow--b" />
+          <div class="slide__lines" />
+        </div>
+        <div class="slide__content slide__content--split slide__content--light">
+          <div class="slide__copy">
+            <p class="slide__index slide__index--light">01</p>
+            <h2 id="product-title" class="slide__title slide__title--light">
+              {{ t.slideProductLine1 }}<br />
+              <span class="gradient-text gradient-text--bright">{{ t.slideProductLine2 }}</span>
+            </h2>
+            <p class="slide__lead slide__lead--light">{{ t.browserCardText }}</p>
+            <RouterLink class="btn btn--primary" to="/browser">
+              {{ t.browserMore }}
+              <span aria-hidden="true">→</span>
+            </RouterLink>
+          </div>
+          <div class="product-showcase" aria-hidden="true">
+            <div class="product-showcase__frame">
+              <img src="/matrixon-browser/screen-chat.png" width="640" height="400" alt="" loading="lazy" />
+            </div>
+            <div class="product-showcase__frame product-showcase__frame--offset">
+              <img src="/matrixon-browser/screen-agent.png" width="640" height="400" alt="" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: Build philosophy -->
+      <section id="build" class="slide slide--on-dark" data-slide="2" aria-labelledby="build-title">
+        <div class="slide__bg slide__bg--deck" aria-hidden="true">
+          <div class="slide__mesh" />
+          <div class="slide__glow slide__glow--a" />
+        </div>
+        <div class="slide__content slide__content--center">
+          <p class="slide__index slide__index--light">02</p>
+          <h2 id="build-title" class="slide__title slide__title--light slide__title--huge">
+            {{ t.qualityTitleBefore }}<br />
+            <span class="gradient-text gradient-text--bright">{{ t.qualityTitleAccent }}</span>
+          </h2>
+          <p class="slide__lead slide__lead--light">{{ t.qualityLead }}</p>
+          <div class="pillar-grid">
+            <article v-for="item in buildPillars" :key="item.num" class="pillar-card">
+              <span class="pillar-card__num">{{ item.num }}</span>
+              <h3 class="pillar-card__title">{{ item.title }}</h3>
+              <p class="pillar-card__text">{{ item.text }}</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Partners -->
+      <section id="partners" class="slide slide--on-dark" data-slide="3" aria-labelledby="partners-title">
+        <div class="slide__bg slide__bg--deck slide__bg--deck-alt" aria-hidden="true">
+          <div class="slide__glow slide__glow--a" />
+          <div class="slide__lines" />
+        </div>
+        <div class="slide__content slide__content--center slide__content--light">
+          <p class="slide__index slide__index--light">03</p>
+          <h2 id="partners-title" class="slide__title slide__title--light">
+            {{ t.partnersTitleBefore }}<br />
+            <span class="gradient-text gradient-text--bright">{{ t.partnersTitleAccent }}</span>
+          </h2>
+          <p class="slide__lead slide__lead--light">{{ t.partnersLead }}</p>
           <a
             class="partner-card"
             href="https://aws.amazon.com/"
@@ -102,54 +166,52 @@ const maratLinks = [
             rel="noopener noreferrer"
             :aria-label="t.partnerAwsName"
           >
-            <div class="partner-card__logo-wrap">
+            <div class="partner-card__inner">
               <img class="partner-card__logo" src="/partners/aws.svg" width="152" height="91" alt="" />
+              <h3 class="partner-card__name">{{ t.partnerAwsName }}</h3>
+              <p class="partner-card__text">{{ t.partnerAwsText }}</p>
             </div>
-            <h3 class="partner-card__name">{{ t.partnerAwsName }}</h3>
-            <p class="partner-card__text">{{ t.partnerAwsText }}</p>
           </a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="founder" class="section section--team section--soft">
-      <div class="section__inner">
-        <h2 class="section__title">{{ t.teamSectionTitle }}</h2>
-        <p class="section__lead section__lead--team">{{ t.teamSectionLead }}</p>
-
-        <div class="team-grid team-grid--single">
-          <article class="person-card" aria-labelledby="person-marat">
-            <div class="person-card__media">
-              <div class="person-card__media-inner person-card__media-inner--photo">
-                <img
-                  class="person-card__img person-card__img--marat"
-                  src="/founders/marat.png"
-                  width="640"
-                  height="640"
-                  loading="lazy"
-                  decoding="async"
-                  :alt="t.founderMaratName"
-                />
-              </div>
+      <!-- Slide 4: Team -->
+      <section id="team" class="slide slide--on-dark" data-slide="4" aria-labelledby="team-title">
+        <div class="slide__bg slide__bg--deck" aria-hidden="true">
+          <div class="slide__glow slide__glow--b" />
+          <div class="slide__lines" />
+        </div>
+        <div class="slide__content slide__content--team slide__content--light">
+          <div class="slide__head">
+            <p class="slide__index slide__index--light">04</p>
+            <h2 id="team-title" class="slide__title slide__title--light">{{ t.teamSectionTitle }}</h2>
+            <p class="slide__lead slide__lead--light">{{ t.teamSectionLead }}</p>
+          </div>
+          <article class="team-card" aria-labelledby="person-marat">
+            <div class="team-card__photo">
+              <img
+                src="/founders/marat.png"
+                width="480"
+                height="480"
+                loading="lazy"
+                decoding="async"
+                :alt="t.founderMaratName"
+              />
             </div>
-            <div class="person-card__body">
-              <p class="person-card__badge">{{ t.founderMaratBadge }}</p>
-              <h3 id="person-marat" class="person-card__name">{{ t.founderMaratName }}</h3>
-              <div class="person-card__main">
-                <p class="person-card__text">{{ t.founderMaratP1 }}</p>
-                <p class="person-card__text">
-                  {{ t.founderMaratWeb3Lead }}
-                  <a class="person-card__link" :href="linkWeb3Frens" target="_blank" rel="noopener noreferrer">{{
-                    t.founderWeb3MediaName
-                  }}</a>.
-                </p>
-                <p class="person-card__text">{{ t.founderMaratActivities }}</p>
-              </div>
-              <div class="person-card__social">
+            <div class="team-card__body">
+              <p class="team-card__role">{{ t.founderMaratBadge }}</p>
+              <h3 id="person-marat" class="team-card__name">{{ t.founderMaratName }}</h3>
+              <p class="team-card__bio">{{ t.founderMaratP1 }}</p>
+              <p class="team-card__bio">
+                {{ t.founderMaratWeb3Lead }}
+                <a :href="linkWeb3Frens" target="_blank" rel="noopener noreferrer">{{ t.founderWeb3MediaName }}</a>.
+              </p>
+              <p class="team-card__bio">{{ t.founderMaratActivities }}</p>
+              <div class="team-card__social">
                 <a
                   v-for="item in maratLinks"
                   :key="item.labelKey"
-                  class="person-social"
+                  class="team-social"
                   :href="item.href"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -160,222 +222,347 @@ const maratLinks = [
               </div>
             </div>
           </article>
+        </div>
+      </section>
 
-          <!-- Ибрагим Гасымов — временно скрыто
-          <article class="person-card" aria-labelledby="person-ibragim">
-            <div class="person-card__media">
-              <div class="person-card__media-inner person-card__media-inner--photo">
-                <img
-                  class="person-card__img person-card__img--ibragim"
-                  src="/founders/ibragim.png"
-                  width="640"
-                  height="640"
-                  loading="lazy"
-                  decoding="async"
-                  :alt="t.founderIbragimName"
-                />
-              </div>
+      <!-- Slide 5: Contact -->
+      <section id="contact" class="slide slide--on-dark" data-slide="5" aria-labelledby="contact-title">
+        <div class="slide__bg slide__bg--deck" aria-hidden="true">
+          <div class="slide__mesh slide__mesh--bright" />
+          <div class="slide__glow slide__glow--a" />
+        </div>
+        <div class="slide__content slide__content--contact slide__content--light">
+          <p class="slide__index slide__index--light">05</p>
+          <h2 id="contact-title" class="slide__title slide__title--light">{{ t.ctaTitle }}</h2>
+          <p class="slide__lead slide__lead--light">{{ t.ctaText }}</p>
+          <div class="contact-actions">
+            <a class="btn btn--light btn--lg" :href="`mailto:${mail}`">{{ t.ctaEmail }}</a>
+            <a class="btn btn--outline-light btn--lg" :href="phoneHref">{{ t.ctaPhone }}</a>
+          </div>
+          <footer class="deck-footer">
+            <p class="deck-footer__legal">{{ t.founderLegal }}</p>
+            <div class="deck-footer__links">
+              <a :href="matrixonTelegramHref" target="_blank" rel="noopener noreferrer">
+                <SocialIcon network="telegram" />
+                {{ t.footerTelegramMatrixon }}
+              </a>
+              <a :href="`mailto:${mail}`">{{ mail }}</a>
             </div>
-            <div class="person-card__body">
-              <p class="person-card__badge">{{ t.founderIbragimBadge }}</p>
-              <h3 id="person-ibragim" class="person-card__name">{{ t.founderIbragimName }}</h3>
-              <div class="person-card__main">
-                <p class="person-card__text">{{ t.founderIbragimBio }}</p>
-              </div>
-              <div class="person-card__social">
-                <a
-                  class="person-social"
-                  href="https://www.linkedin.com/in/ibragim-gasymov-6a9445401/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  :aria-label="t.founderIbragimLinkedInLabel"
-                >
-                  <SocialIcon network="linkedin" />
-                </a>
-              </div>
-            </div>
-          </article>
-          -->
+            <p class="deck-footer__copy">© {{ new Date().getFullYear() }} MATRIXON</p>
+          </footer>
         </div>
-      </div>
-    </section>
-
-    <section class="section section--delivery">
-      <div class="section__inner">
-        <h2 class="section__title">
-          {{ t.qualityTitleBefore }}<br />
-          <span class="gradient-text">{{ t.qualityTitleAccent }}</span>
-        </h2>
-        <p class="section__lead">{{ t.qualityLead }}</p>
-        <div class="delivery-grid">
-          <article class="delivery-card">
-            <h3 class="delivery-card__title">{{ t.panelStability }}</h3>
-            <p class="delivery-card__text">{{ t.panelStabilityVal }}</p>
-          </article>
-          <article class="delivery-card">
-            <h3 class="delivery-card__title">{{ t.panelDelivery }}</h3>
-            <p class="delivery-card__text">{{ t.panelDeliveryVal }}</p>
-          </article>
-          <article class="delivery-card">
-            <h3 class="delivery-card__title">{{ t.panelDocs }}</h3>
-            <p class="delivery-card__text">{{ t.panelDocsVal }}</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-band" id="contact">
-      <div class="cta-band__inner">
-        <h2 class="cta-band__title">{{ t.ctaTitle }}</h2>
-        <p class="cta-band__text">
-          {{ t.ctaText }}
-        </p>
-        <div class="cta-band__actions">
-          <a class="btn btn--light btn--lg" :href="`mailto:${mail}`">{{ t.ctaEmail }}</a>
-          <a class="btn btn--outline-light btn--lg" :href="phoneHref">{{ t.ctaPhone }}</a>
-        </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
+  </div>
 </template>
 
 <style scoped>
-.mesh--hero {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 0.42;
-  background-image:
-    radial-gradient(circle at 50% 42%, rgba(26, 74, 158, 0.09) 0%, transparent 52%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cg fill='none' stroke='%231a4a9e' stroke-opacity='.14' stroke-width='1'%3E%3Cpath d='M40 120h520M80 280h440M120 440h360'/%3E%3Cpath d='M120 80v440M300 60v480M480 100v400'/%3E%3C/g%3E%3Cg fill='%232a8eb5' fill-opacity='.28'%3E%3Ccircle cx='120' cy='120' r='4'/%3E%3Ccircle cx='300' cy='200' r='4'/%3E%3Ccircle cx='480' cy='160' r='4'/%3E%3Ccircle cx='200' cy='320' r='4'/%3E%3Ccircle cx='400' cy='360' r='4'/%3E%3Ccircle cx='320' cy='480' r='4'/%3E%3C/g%3E%3C/svg%3E");
-  background-size:
-    100% 100%,
-    min(680px, 95vw);
-  background-position:
-    center,
-    50% 38%;
-  background-repeat: no-repeat;
-  mask-image: radial-gradient(ellipse 72% 62% at 50% 40%, #000 0%, transparent 75%);
-}
-
-.hero {
+.deck-wrap {
   position: relative;
-  z-index: 1;
-  min-height: min(88vh, 900px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px 72px;
-  text-align: center;
+  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
-.hero__orbit {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.deck {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.deck::-webkit-scrollbar {
+  display: none;
+}
+
+/* —— Slide nav —— */
+.deck-nav {
+  position: fixed;
+  right: clamp(16px, 3vw, 40px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 10px;
+  border-radius: 20px;
+  background: rgba(4, 10, 20, 0.45);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.deck-nav__dot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.35);
+  transition: color 0.3s ease;
+}
+
+.deck-nav__dot--active {
+  color: #fff;
+}
+
+.deck-nav__num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: translateX(6px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.deck-nav__dot--active .deck-nav__num,
+.deck-nav__dot:hover .deck-nav__num {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.deck-nav__bar {
+  display: block;
+  width: 3px;
+  height: 28px;
+  border-radius: 3px;
+  background: currentColor;
+  opacity: 0.35;
+  transition:
+    height 0.35s cubic-bezier(0.34, 1.3, 0.64, 1),
+    opacity 0.3s ease,
+    background 0.3s ease;
+}
+
+.deck-nav__dot--active .deck-nav__bar {
+  height: 48px;
+  opacity: 1;
+  background: var(--gradient);
+}
+
+/* —— Slides —— */
+.slide {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: calc(var(--header-h) + 32px) clamp(20px, 5vw, 64px) 48px;
+  overflow: hidden;
+}
+
+.slide__bg {
+  position: absolute;
+  inset: 0;
   pointer-events: none;
 }
 
-.hero__ring {
+.slide__bg--deck,
+.slide__bg--hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(42, 142, 181, 0.28), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 90% 30%, rgba(60, 192, 180, 0.18), transparent 50%),
+    linear-gradient(160deg, #040a14 0%, #0a1830 50%, #0d2240 100%);
+}
+
+.slide__bg--deck-alt {
+  background:
+    radial-gradient(ellipse 70% 55% at 85% 15%, rgba(42, 142, 181, 0.26), transparent 52%),
+    radial-gradient(ellipse 55% 45% at 10% 70%, rgba(60, 192, 180, 0.16), transparent 48%),
+    linear-gradient(165deg, #040a14 0%, #0a1830 48%, #0d2240 100%);
+}
+
+.slide__content--light {
+  color: #fff;
+}
+
+.slide__content--light .slide__lead {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.slide__glow {
   position: absolute;
   border-radius: 50%;
-  border: 1px solid rgba(26, 74, 158, 0.11);
-  aspect-ratio: 1;
-  animation: hero-ring 12s ease-in-out infinite;
+  filter: blur(80px);
+  animation: glow-drift 20s ease-in-out infinite alternate;
 }
 
-.hero__ring--a {
-  width: min(92vw, 620px);
+.slide__glow--a {
+  width: 50vw;
+  height: 50vw;
+  max-width: 600px;
+  max-height: 600px;
+  top: -10%;
+  right: 5%;
+  background: rgba(42, 142, 181, 0.35);
 }
 
-.hero__ring--b {
-  width: min(74vw, 480px);
-  border-color: rgba(60, 192, 180, 0.14);
-  animation-direction: alternate-reverse;
-  animation-duration: 14s;
+.slide__glow--b {
+  width: 40vw;
+  height: 40vw;
+  max-width: 480px;
+  max-height: 480px;
+  bottom: 0;
+  left: -8%;
+  background: rgba(60, 192, 180, 0.22);
+  animation-delay: -8s;
 }
 
-@keyframes hero-ring {
-  0%,
-  100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.04) rotate(3deg);
-    opacity: 0.82;
-  }
-}
-
-.hero__net {
+.slide__lines {
   position: absolute;
-  left: 50%;
-  top: 40%;
-  transform: translate(-50%, -50%);
-  width: min(1040px, 125vw);
-  height: auto;
-  z-index: 0;
-  opacity: 0.9;
-  pointer-events: none;
+  inset: 0;
+  opacity: 0.2;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 15%, transparent 70%);
 }
 
-.hero__inner {
+.slide__mesh {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.slide__mesh--bright {
+  opacity: 0.15;
+}
+
+@keyframes glow-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(30px, -20px) scale(1.1);
+  }
+}
+
+.slide__content {
   position: relative;
-  z-index: 2;
-  max-width: 680px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max);
+}
+
+.slide__content--hero {
+  text-align: left;
+  color: #fff;
+}
+
+.slide__content--split {
+  display: grid;
+  gap: 48px;
   align-items: center;
 }
 
-.hero__mark-block {
-  position: relative;
-  margin: 0 0 4px;
-  line-height: 0.9;
+@media (min-width: 960px) {
+  .slide__content--split {
+    grid-template-columns: 1fr 1.1fr;
+    gap: 56px;
+  }
 }
 
-.hero__mark-ghost {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  font-size: clamp(2.85rem, 13.5vw, 8.5rem);
-  font-weight: 800;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  -webkit-text-stroke: 1px rgba(26, 74, 158, 0.16);
-  color: transparent;
-  user-select: none;
-  z-index: 0;
-  pointer-events: none;
+.slide__content--center {
+  text-align: center;
 }
 
-.hero__mark {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  font-size: clamp(2.85rem, 13.5vw, 8.5rem);
-  font-weight: 800;
-  letter-spacing: -0.05em;
+.slide__content--team {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.slide__content--contact {
+  text-align: center;
+  color: #fff;
+}
+
+.slide__eyebrow {
+  margin: 0 0 20px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  line-height: 0.9;
-  background: linear-gradient(102deg, var(--m-navy) 0%, var(--m-blue) 40%, var(--m-teal) 92%);
-  background-size: 165% 165%;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.slide__index {
+  margin: 0 0 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--m-teal);
+}
+
+.slide__index--light {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* —— Hero title —— */
+.hero-title {
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  line-height: 0.92;
+}
+
+.hero-title__brand {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 14vw, 9rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  background: linear-gradient(120deg, #fff 0%, #b8ddf0 40%, #7ee8dc 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: hero-grad 16s ease-in-out infinite alternate;
-  filter: drop-shadow(0 20px 48px rgba(26, 74, 158, 0.14));
+  animation: brand-shine 12s ease-in-out infinite alternate;
 }
 
-@keyframes hero-grad {
+.hero-title__rotator {
+  position: relative;
+  display: block;
+  height: clamp(2.8rem, 10vw, 6.5rem);
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.hero-title__word {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 8vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+  color: rgba(255, 255, 255, 0.92);
+  opacity: 0;
+  transform: translateY(100%);
+  animation: word-cycle calc(var(--total) * 2.8s) ease-in-out infinite;
+  animation-delay: calc(var(--i) * 2.8s);
+}
+
+@keyframes brand-shine {
   0% {
     background-position: 0% 50%;
   }
@@ -384,686 +571,518 @@ const maratLinks = [
   }
 }
 
-.hero__pitch {
-  margin: 26px 0 30px;
-  font-size: clamp(1rem, 2.15vw, 1.2rem);
-  line-height: 1.55;
-  color: var(--text-muted);
-  max-width: 540px;
+@keyframes word-cycle {
+  0%,
+  5% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  8%,
+  28% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  33%,
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
 }
 
-.hero__actions {
+.hero-pitch {
+  margin: 0 0 36px;
+  max-width: 520px;
+  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  line-height: 1.5;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  justify-content: center;
 }
 
-@media (max-width: 1024px) {
-  .hero {
-    min-height: min(82vh, 760px);
-    padding: 30px 20px 58px;
-  }
-
-  .hero__net {
-    width: min(900px, 132vw);
-    top: 43%;
-  }
+/* —— Scroll hint —— */
+.slide-scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 56px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero__mark {
-    animation: none;
-    background-position: 40% 50%;
-  }
-
-  .hero__ring {
-    animation: none;
-  }
-}
-
-.section {
-  position: relative;
-  z-index: 1;
-  padding: 88px 24px;
-  scroll-margin-top: 88px;
-}
-
-@media (max-width: 768px) {
-  .hero {
-    min-height: min(78vh, 660px);
-    padding: 20px 16px 44px;
-  }
-
-  .hero__net {
-    width: min(760px, 160vw);
-    top: 44%;
-    opacity: 0.72;
-  }
-
-  .hero__pitch {
-    margin: 20px 0 24px;
-    font-size: 1rem;
-  }
-
-  .hero__actions {
-    width: 100%;
-    gap: 10px;
-  }
-
-  .hero__actions .btn {
-    width: 100%;
-    max-width: 340px;
-  }
-
-  .section {
-    padding: 64px 16px;
-    scroll-margin-top: 74px;
-  }
-
-  .section__lead {
-    margin-bottom: 30px;
-    font-size: 1rem;
-  }
-
-  .vector-card,
-  .delivery-card {
-    padding: 20px 18px;
-  }
-
-  .person-card__body {
-    padding: 18px 16px 18px;
-  }
-
-  .person-card__name {
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-  }
-
-  .person-card__text {
-    font-size: 0.95rem;
-    line-height: 1.52;
-  }
-
-  .person-card__social {
-    margin-top: 12px;
-    padding-top: 12px;
-  }
-
-  .cta-band {
-    padding: 52px 16px;
-    scroll-margin-top: 74px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero__mark,
-  .hero__mark-ghost {
-    font-size: clamp(2.35rem, 15vw, 3.5rem);
-  }
-
-  .hero__pitch {
-    max-width: 100%;
-  }
-
-  .vectors,
-  .team-grid,
-  .delivery-grid {
-    gap: 14px;
-  }
-
-  .person-card__media {
-    width: min(190px, 64vw);
-  }
-
-  .person-social {
-    width: 40px;
-    height: 40px;
-  }
-
-  .cta-band__title {
-    font-size: clamp(1.45rem, 8.2vw, 1.85rem);
-  }
-
-  .cta-band__text {
-    font-size: 0.98rem;
-    margin-bottom: 20px;
-  }
-}
-
-.section--soft {
-  background: var(--surface-soft);
-}
-
-.section__inner {
-  max-width: var(--max);
+.slide-scroll-hint__line {
+  display: block;
+  width: 2px;
+  height: 48px;
   margin: 0 auto;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
 }
 
-.section__inner--narrow {
-  text-align: center;
-}
-
-.section__inner--split {
-  display: grid;
-  gap: 40px;
-  align-items: center;
-}
-
-@media (min-width: 900px) {
-  .section__inner--split {
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
+@keyframes scroll-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scaleY(0.7);
+    transform-origin: top;
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top;
   }
 }
 
-.section__title {
-  margin: 0 0 18px;
-  font-size: clamp(1.85rem, 3.2vw, 2.65rem);
-  line-height: 1.12;
-  letter-spacing: -0.025em;
+/* —— Typography —— */
+.slide__title {
+  margin: 0 0 20px;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
   font-weight: 800;
-  text-align: center;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #fff;
 }
 
-.section__title--left {
-  text-align: left;
+.slide__title--light {
+  color: #fff;
 }
 
-.gradient-text {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.slide__title--huge {
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
 }
 
-.section__lead {
-  margin: 0 auto 48px;
-  max-width: 640px;
-  text-align: center;
-  font-size: 1.1rem;
-  color: var(--text-muted);
-}
-
-.section__lead--vectors {
-  margin-bottom: 40px;
-}
-
-.section__lead--left {
-  margin: 0 0 0;
-  text-align: left;
-}
-
-.vectors {
-  display: grid;
-  gap: 20px;
-  max-width: 920px;
-  margin: 0 auto;
-}
-
-.vectors--single {
+.slide__lead {
+  margin: 0 0 28px;
   max-width: 560px;
+  font-size: 1.1rem;
+  line-height: 1.58;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.slide__content--center .slide__lead {
+  margin-inline: auto;
+}
+
+.slide__lead--light {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.slide__content--contact .slide__lead {
+  margin-inline: auto;
+}
+
+/* —— Product showcase —— */
+.product-showcase {
+  position: relative;
+  min-height: 320px;
+}
+
+.product-showcase__frame {
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: var(--shadow-dark);
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.product-showcase__frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.product-showcase__frame--offset {
+  position: absolute;
+  bottom: -12%;
+  right: -4%;
+  width: 72%;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45);
+  animation: float-card 8s ease-in-out infinite;
+}
+
+.product-showcase__frame:first-child {
+  animation: float-card 7s ease-in-out infinite reverse;
+}
+
+@keyframes float-card {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* —— Pillars —— */
+.pillar-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 40px;
+  text-align: left;
 }
 
 @media (min-width: 720px) {
-  .vectors:not(.vectors--single) {
-    grid-template-columns: 1fr 1fr;
+  .pillar-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 }
 
-.section--partners {
-  background: #fff;
-}
-
-.partners-grid {
-  display: grid;
-  gap: 20px;
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-.partner-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 32px 28px;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
-  background: var(--surface-soft);
-  text-decoration: none;
-  color: inherit;
+.pillar-card {
+  padding: 28px 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
   transition:
-    transform 0.35s cubic-bezier(0.33, 1, 0.68, 1),
-    box-shadow 0.35s ease,
+    transform 0.35s ease,
     border-color 0.3s ease,
     background 0.3s ease;
 }
 
-.partner-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 26px 56px rgba(26, 74, 158, 0.1);
-  border-color: rgba(26, 74, 158, 0.14);
-  background: #fff;
+.pillar-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.07);
 }
 
-.partner-card__logo-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 72px;
-  margin-bottom: 18px;
+.pillar-card__num {
+  display: block;
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--m-teal);
+}
+
+.pillar-card__title {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.pillar-card__text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* —— Partners —— */
+.partner-card {
+  display: block;
+  max-width: 420px;
+  margin: 8px auto 0;
+  text-decoration: none;
+  color: inherit;
+  border-radius: calc(var(--radius-xl) + 2px);
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(26, 74, 158, 0.55), rgba(60, 192, 180, 0.45));
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.partner-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+}
+
+.partner-card__inner {
+  padding: 36px 30px;
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
 }
 
 .partner-card__logo {
   width: min(152px, 58vw);
   height: auto;
-  display: block;
+  margin: 0 auto 18px;
 }
 
 .partner-card__name {
   margin: 0 0 10px;
-  font-size: 1.1rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--text);
+  color: #fff;
 }
 
 .partner-card__text {
   margin: 0;
   font-size: 0.98rem;
   line-height: 1.55;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.65);
 }
 
-.vector-card {
-  background: #fff;
-  border-radius: var(--radius-xl);
-  padding: 28px 26px;
-  border: 1px solid var(--border);
-  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  transition:
-    transform 0.35s cubic-bezier(0.33, 1, 0.68, 1),
-    box-shadow 0.35s ease,
-    border-color 0.3s ease;
+/* —— Team —— */
+.slide__head {
+  max-width: 560px;
 }
 
-.vector-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 26px 56px rgba(26, 74, 158, 0.1);
-  border-color: rgba(26, 74, 158, 0.14);
-}
-
-.vector-card__product {
-  font-size: clamp(1.35rem, 3vw, 1.75rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--m-navy);
-  margin-bottom: 12px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid rgba(42, 142, 181, 0.4);
-  width: 100%;
-}
-
-.vector-card__tag {
-  display: inline-block;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--m-navy);
-  margin-bottom: 14px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid rgba(42, 142, 181, 0.35);
-}
-
-.vector-card__tag--legal {
-  color: var(--m-blue);
-  border-bottom-color: rgba(60, 192, 180, 0.45);
-}
-
-.vector-card__text {
-  margin: 0 0 16px;
-  font-size: 1.05rem;
-  line-height: 1.55;
-  color: var(--text-muted);
-  flex: 1;
-}
-
-.vector-card__link {
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--m-navy);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(26, 74, 158, 0.35);
-  align-self: flex-start;
-  transition:
-    border-color 0.25s ease,
-    color 0.25s ease,
-    gap 0.25s ease;
-}
-
-.vector-card__link:hover {
-  border-bottom-color: var(--m-navy);
-  color: var(--m-blue);
-}
-
-.section--team {
-  padding-bottom: 96px;
-}
-
-.section__lead--team {
-  margin-bottom: 36px;
-}
-
-.team-grid {
+.team-card {
   display: grid;
-  gap: 20px;
-  align-items: stretch;
-  max-width: 1080px;
-  margin: 0 auto;
+  gap: 28px;
+  align-items: center;
+  padding: 28px;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
 }
 
-.team-grid--single {
-  justify-items: center;
-}
-
-.team-grid--single .person-card {
-  width: 100%;
-  max-width: 720px;
-}
-
-@media (min-width: 900px) {
-  .team-grid:not(.team-grid--single) {
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+@media (min-width: 720px) {
+  .team-card {
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    padding: 32px 36px;
   }
 }
 
-.person-card {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
-  min-height: 0;
-  height: 100%;
-  align-items: stretch;
-  background: #fff;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.9) inset,
-    0 20px 48px rgba(15, 23, 42, 0.07);
-  overflow: hidden;
-  transition:
-    transform 0.38s cubic-bezier(0.33, 1, 0.68, 1),
-    box-shadow 0.38s ease,
-    border-color 0.3s ease;
-}
-
-.person-card:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.9) inset,
-    0 28px 64px rgba(26, 74, 158, 0.12);
-  border-color: rgba(26, 74, 158, 0.12);
-}
-
-@media (min-width: 640px) {
-  .person-card {
-    grid-template-columns: auto minmax(0, 1fr);
-    grid-template-rows: 1fr;
-  }
-}
-
-.person-card__media {
-  position: relative;
+.team-card__photo {
   aspect-ratio: 1;
-  width: min(240px, 78vw);
-  max-width: 100%;
-  margin-inline: auto;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--surface-soft);
+  background: linear-gradient(160deg, rgba(26, 74, 158, 0.12), rgba(60, 192, 180, 0.1));
 }
 
-@media (min-width: 640px) {
-  .person-card__media {
-    width: min(200px, 30vw);
-    max-width: 220px;
-    margin-inline: 0;
-    align-self: start;
-    border-radius: var(--radius-lg);
-  }
-}
-
-.person-card__media-inner {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.person-card__media-inner--photo {
-  padding: 0;
-  overflow: hidden;
-}
-
-.person-card__img {
+.team-card__photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  transition: transform 0.55s cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-.person-card:hover .person-card__img {
-  transform: scale(1.05);
-}
-
-.person-card__img--marat {
   object-position: center 35%;
 }
 
-.person-card__img--ibragim {
-  object-position: center 18%;
-}
-
-.person-card__body {
-  padding: 22px 22px 24px;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  min-width: 0;
-  min-height: 0;
-  height: 100%;
-}
-
-.person-card__badge {
-  margin: 0 0 8px;
+.team-card__role {
+  margin: 0 0 6px;
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--m-blue);
+  color: var(--m-teal);
 }
 
-.person-card__name {
+.team-card__name {
   margin: 0 0 14px;
-  font-size: clamp(1.28rem, 2.4vw, 1.55rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.2;
-  color: var(--text);
+  color: #fff;
 }
 
-.person-card__main {
-  flex: 1 1 auto;
-  min-height: 0;
-}
-
-.person-card__text {
-  margin: 0 0 12px;
+.team-card__bio {
+  margin: 0 0 10px;
   font-size: 0.97rem;
   line-height: 1.58;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.68);
 }
 
-.person-card__main .person-card__text:last-child {
-  margin-bottom: 0;
-}
-
-.person-card__link {
-  color: var(--m-navy);
+.team-card__bio a {
+  color: #b8ddf0;
   font-weight: 600;
   text-decoration: underline;
-  text-decoration-color: rgba(26, 74, 158, 0.35);
   text-underline-offset: 3px;
 }
 
-.person-card__link:hover {
-  text-decoration-color: var(--m-navy);
-}
-
-.person-card__social {
+.team-card__social {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.person-social {
+.team-social {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 11px;
-  color: var(--m-navy);
-  background: var(--surface-soft);
-  border: 1px solid var(--border);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   text-decoration: none;
   transition:
     background 0.2s,
     border-color 0.2s,
-    color 0.2s,
-    transform 0.15s,
-    box-shadow 0.2s;
+    transform 0.15s;
 }
 
-.person-social:hover {
-  border-color: rgba(26, 74, 158, 0.35);
-  background: #fff;
-  color: var(--m-blue);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(26, 74, 158, 0.1);
+.team-social:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
 }
 
-.section--delivery {
-  background: #fff;
-}
-
-.delivery-grid {
-  display: grid;
-  gap: 16px;
-  margin-top: 8px;
-}
-
-@media (min-width: 720px) {
-  .delivery-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-}
-
-.delivery-card {
-  padding: 22px 20px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  background: var(--surface-soft);
-  transition:
-    transform 0.32s cubic-bezier(0.33, 1, 0.68, 1),
-    box-shadow 0.32s ease,
-    border-color 0.28s ease,
-    background 0.28s ease;
-}
-
-.delivery-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 36px rgba(26, 74, 158, 0.08);
-  border-color: rgba(26, 74, 158, 0.12);
-  background: #fff;
-}
-
-.delivery-card__title {
-  margin: 0 0 8px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.delivery-card__text {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--text-muted);
-}
-
-.cta-band {
-  position: relative;
-  z-index: 1;
-  padding: 72px 24px;
-  background: var(--gradient);
-  color: #fff;
-  text-align: center;
-  scroll-margin-top: 88px;
-}
-
-.cta-band__inner {
-  max-width: 640px;
-  margin: 0 auto;
-}
-
-.cta-band__title {
-  margin: 0 0 12px;
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-.cta-band__text {
-  margin: 0 0 26px;
-  font-size: 1.05rem;
-  opacity: 0.95;
-}
-
-.cta-band__actions {
+/* —— Contact —— */
+.contact-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
   justify-content: center;
+  margin-bottom: 48px;
+}
+
+.deck-footer {
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.deck-footer__legal {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 48ch;
+  margin-inline: auto;
+}
+
+.deck-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.deck-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.deck-footer__links a:hover {
+  color: #fff;
+}
+
+.deck-footer__copy {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.gradient-text--bright {
+  background: linear-gradient(120deg, #fff 0%, #7ee8dc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* —— Responsive —— */
+@media (max-width: 768px) {
+  .deck-nav {
+    right: 12px;
+    gap: 10px;
+  }
+
+  .deck-nav__num {
+    display: none;
+  }
+
+  .deck-nav__bar {
+    height: 20px;
+  }
+
+  .deck-nav__dot--active .deck-nav__bar {
+    height: 32px;
+  }
+
+  .slide {
+    padding: calc(var(--header-h) + 20px) 20px 40px;
+  }
+
+  .slide__content--hero {
+    text-align: center;
+  }
+
+  .hero-pitch {
+    margin-inline: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .product-showcase__frame--offset {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    width: 100%;
+    margin-top: -40px;
+  }
+
+  .contact-actions .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .slide-scroll-hint {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vector-card,
-  .partner-card,
-  .person-card,
-  .delivery-card,
-  .person-card__img {
-    transition-duration: 0.01ms;
+  .hero-title__brand,
+  .hero-title__word,
+  .slide__glow,
+  .product-showcase__frame,
+  .slide-scroll-hint__line {
+    animation: none;
   }
 
-  .vector-card:hover,
-  .partner-card:hover,
-  .person-card:hover,
-  .delivery-card:hover,
-  .person-card:hover .person-card__img {
+  .hero-title__word {
+    position: static;
+    opacity: 1;
     transform: none;
+  }
+
+  .hero-title__rotator {
+    height: auto;
+  }
+
+  .hero-title__word:not(:first-child) {
+    display: none;
+  }
+
+  .pillar-card:hover,
+  .team-social:hover,
+  .partner-card:hover {
+    transform: none;
+  }
+
+  .deck {
+    scroll-behavior: auto;
   }
 }
 </style>
