@@ -57,7 +57,7 @@ const products = computed(() => [
     cta: t.value.productWeb3FrenCta,
     to: '/web3-fren',
     external: false,
-    cover: '/web3-fren/cover.png',
+    cover: null as string | null,
   },
 ])
 
