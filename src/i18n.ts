@@ -5,6 +5,8 @@ export type Messages = {
   metaDescription: string
   browserMetaTitle: string
   browserMetaDescription: string
+  mixaMetaTitle: string
+  mixaMetaDescription: string
   navProduct: string
   navApproach: string
   navPartners: string
@@ -27,14 +29,67 @@ export type Messages = {
   slideNavPartners: string
   slideNavTeam: string
   slideNavContact: string
-  slideProductLine1: string
-  slideProductLine2: string
-  vectorsTitleBefore: string
-  vectorsTitleAccent: string
-  vectorsLead: string
-  browserProduct: string
-  browserCardText: string
-  browserMore: string
+  productsTitle: string
+  productsLead: string
+  productBrowserName: string
+  productBrowserText: string
+  productBrowserCta: string
+  productMixaName: string
+  productMixaText: string
+  productMixaCta: string
+  productWeb3FrenName: string
+  productWeb3FrenText: string
+  productWeb3FrenCta: string
+  mixaBack: string
+  mixaEyebrow: string
+  mixaHeroTitle: string
+  mixaHeroTagline: string
+  mixaIntro: string
+  mixaCtaStudio: string
+  mixaCtaTry: string
+  mixaAboutTitle: string
+  mixaAboutText: string
+  mixaAboutAudience: string
+  mixaServicesTitle: string
+  mixaS1Title: string
+  mixaS1Text: string
+  mixaS2Title: string
+  mixaS2Text: string
+  mixaS3Title: string
+  mixaS3Text: string
+  mixaS4Title: string
+  mixaS4Text: string
+  mixaFeaturesTitle: string
+  mixaF1: string
+  mixaF2: string
+  mixaF3: string
+  mixaF4: string
+  mixaF5: string
+  mixaF6: string
+  mixaF7: string
+  mixaHowTitle: string
+  mixaHowStep1: string
+  mixaHowStep2: string
+  mixaHowStep3: string
+  mixaPricingTitle: string
+  mixaPricingLead: string
+  mixaPricingNote: string
+  mixaPlanStart: string
+  mixaPlanStartPrice: string
+  mixaPlanStartCredits: string
+  mixaPlanStartHint: string
+  mixaPlanStandard: string
+  mixaPlanStandardPrice: string
+  mixaPlanStandardCredits: string
+  mixaPlanStandardHint: string
+  mixaPlanPro: string
+  mixaPlanProPrice: string
+  mixaPlanProCredits: string
+  mixaPlanProHint: string
+  mixaPlanPriority: string
+  mixaPositioning: string
+  mixaFinalTitle: string
+  mixaFinalText: string
   browserBack: string
   browserEyebrow: string
   browserHeroTitle: string
@@ -77,13 +132,10 @@ export type Messages = {
   socialX: string
   socialInstagram: string
   socialYoutube: string
-  founderIbragimName: string
-  founderIbragimBadge: string
-  founderIbragimBio: string
-  founderIbragimLinkedInLabel: string
+  founderAygunName: string
+  founderAygunBadge: string
   founderLegal: string
-  qualityTitleBefore: string
-  qualityTitleAccent: string
+  qualityTitle: string
   qualityLead: string
   panelStability: string
   panelStabilityVal: string
@@ -105,8 +157,7 @@ export type Messages = {
   footerWhatsApp: string
   footerMediaH: string
   footerTelegramMatrixon: string
-  partnersTitleBefore: string
-  partnersTitleAccent: string
+  partnersTitle: string
   partnersLead: string
   partnerAwsName: string
   partnerAwsText: string
@@ -115,11 +166,14 @@ export type Messages = {
 export const messages: Record<Locale, Messages> = {
   ru: {
     metaTitle: 'MATRIXON',
-    metaDescription: 'MATRIXON',
-    browserMetaTitle: 'MATRIXON Agentic Browser — локальный ИИ-браузер | MATRIXON',
+    metaDescription: 'MATRIXON — продукты на основе локального ИИ и автоматизации.',
+    browserMetaTitle: 'Agentic Browser — локальный ИИ-браузер | MATRIXON',
     browserMetaDescription:
-      'Open-source браузер с локальным ИИ на llama.cpp: приватность, AgentPanel, чат и менеджер паролей на вашем устройстве.',
-    navProduct: 'Продукт',
+      'Open-source браузер с локальным ИИ на llama.cpp: приватность, агентный режим, чат и менеджер паролей на устройстве.',
+    mixaMetaTitle: 'MIXA AI — AI-студия идентичности: аватары, образы и видео | MATRIXON',
+    mixaMetaDescription:
+      'Превращай фото в новые образы с сохранением лица. Машина времени, AI-аватары, beauty-стилист и короткие видео в одной студии.',
+    navProduct: 'Продукты',
     navApproach: 'Подход',
     navPartners: 'Партнёры',
     navFounder: 'Команда',
@@ -130,105 +184,152 @@ export const messages: Record<Locale, Messages> = {
     langSwitcherAria: 'Язык интерфейса',
     langRu: 'RU',
     langEn: 'EN',
-    heroPitch: 'Мы не следуем трендам — мы их создаём.',
-    heroEyebrow: 'Open-source · Локальный ИИ',
-    heroWords: ['создаём', 'запускаем', 'масштабируем'] as const,
+    heroPitch: 'Строим инструменты, которые работают у вас — без лишнего шума.',
+    heroEyebrow: 'Open-source · AI products',
+    heroWords: ['строим', 'выпускаем', 'масштабируем'] as const,
     heroCtaContact: 'Связаться',
-    heroCtaExplore: 'Смотреть продукт',
+    heroCtaExplore: 'Продукты',
     slideNavIntro: 'Главная',
-    slideNavProduct: 'Продукт',
+    slideNavProduct: 'Продукты',
     slideNavBuild: 'Подход',
     slideNavPartners: 'Партнёры',
     slideNavTeam: 'Команда',
     slideNavContact: 'Контакты',
-    slideProductLine1: 'Браузер',
-    slideProductLine2: 'с локальным ИИ',
-    vectorsTitleBefore: 'Что мы делаем',
-    vectorsTitleAccent: 'сейчас',
-    vectorsLead:
-      'Запускаем собственные open-source продукты — узкий фокус, чтобы быстрее проверять гипотезы и поддерживать качество.',
-    browserProduct: 'MATRIXON Agentic Browser',
-    browserCardText:
-      'Open-source браузер с полностью локальным ИИ: без облака, API-ключей и телеметрии — модель, пароли и история только на вашем устройстве.',
-    browserMore: 'Подробнее о браузере',
+    productsTitle: 'Продукты',
+    productsLead: 'То, что уже в работе. Список будет расти.',
+    productBrowserName: 'Agentic Browser',
+    productBrowserText:
+      'Open-source браузер с локальным ИИ: модель, чат, агентный режим и пароли остаются на устройстве.',
+    productBrowserCta: 'Подробнее',
+    productMixaName: 'MIXA AI',
+    productMixaText:
+      'AI-студия идентичности: аватары, образы и короткие видео с сохранением лица.',
+    productMixaCta: 'Подробнее',
+    productWeb3FrenName: 'web3 fren',
+    productWeb3FrenText:
+      'ИИ-агент для автоматической публикации новостей: сбор, подготовка и выход материалов по расписанию.',
+    productWeb3FrenCta: 'Обсудить',
+    mixaBack: '← К MATRIXON',
+    mixaEyebrow: 'MATRIXON · MIXA AI Studio',
+    mixaHeroTitle: 'MIXA AI',
+    mixaHeroTagline: 'AI-студия идентичности',
+    mixaIntro:
+      'Превращай своё фото в новые образы — будущее и прошлое, аватары для соцсетей, beauty-стилистику и короткие AI-видео. Лицо остаётся узнаваемым, меняется сцена, стиль и роль.',
+    mixaCtaStudio: 'Открыть студию',
+    mixaCtaTry: 'Попробовать бесплатно',
+    mixaAboutTitle: 'О продукте',
+    mixaAboutText:
+      'MIXA AI — онлайн-студия визуальной идентичности. Загружаешь портрет, выбираешь сервис и стиль — получаешь фотореалистичный результат с сохранением лица.',
+    mixaAboutAudience:
+      'Подходит для личного бренда, контента в соцсетях, креативных экспериментов и примерки образов без фотосессии.',
+    mixaServicesTitle: 'Сервисы',
+    mixaS1Title: 'Машина времени',
+    mixaS1Text:
+      'Трансформации личности: через 10 или 20 лет, в прошлом, в спортивной форме, в исторической эпохе или в кастомном образе по запросу.',
+    mixaS2Title: 'AI-аватары',
+    mixaS2Text:
+      'Аватары для профиля, LinkedIn, презентаций и личного бренда. Лицо узнаваемо, стиль — от делового до кинематографичного.',
+    mixaS3Title: 'Fashion & Beauty',
+    mixaS3Text:
+      'Виртуальная beauty-студия: макияж, причёска, цветовые палитры и fashion-образ под лицо и настроение.',
+    mixaS4Title: 'Video Studio',
+    mixaS4Text:
+      'Короткие ролики через Amazon Nova Reel: текст → видео или анимация фото. 6 секунд, 1280×720. Без шаблонов — ваш сценарий.',
+    mixaFeaturesTitle: 'Возможности',
+    mixaF1: 'Сохранение лица при трансформации',
+    mixaF2: 'Готовые шаблоны и свободный промпт',
+    mixaF3: 'Сравнение «до / после»',
+    mixaF4: 'Галерея и история генераций в облаке',
+    mixaF5: 'Приватное хранение медиа',
+    mixaF6: 'Интерфейс на русском и английском',
+    mixaF7: 'Разовые пакеты кредитов — кредиты не сгорают',
+    mixaHowTitle: 'Как это работает',
+    mixaHowStep1: 'Загрузи портрет',
+    mixaHowStep2: 'Выбери сервис и стиль — или опиши образ своими словами',
+    mixaHowStep3: 'Скачай результат или используй его как основу для следующей генерации',
+    mixaPricingTitle: 'Тарифы',
+    mixaPricingLead:
+      'Разовая покупка. 1 генерация изображения = 10 кредитов. Видео — отдельно (дороже по кредитам).',
+    mixaPricingNote: 'Во всех пакетах: все режимы генерации и история в облаке.',
+    mixaPlanStart: 'Старт',
+    mixaPlanStartPrice: '$9',
+    mixaPlanStartCredits: '350 кредитов',
+    mixaPlanStartHint: '~35 генераций',
+    mixaPlanStandard: 'Стандарт',
+    mixaPlanStandardPrice: '$19',
+    mixaPlanStandardCredits: '1 000 кредитов',
+    mixaPlanStandardHint: '~100 генераций',
+    mixaPlanPro: 'Про',
+    mixaPlanProPrice: '$49',
+    mixaPlanProCredits: '3 000 кредитов',
+    mixaPlanProHint: '~300 генераций · лучшая цена за кредит',
+    mixaPlanPriority: 'Приоритетная обработка',
+    mixaPositioning: 'Студия, где твоё лицо остаётся твоим, а образ может быть любым.',
+    mixaFinalTitle: 'Твоя студия уже ждёт',
+    mixaFinalText: 'Зарегистрируйся, сохрани историю генераций и начни с первого образа.',
     browserBack: '← К MATRIXON',
     browserEyebrow: 'MATRIXON · Open Source',
-    browserHeroTitle: 'MATRIXON Agentic Browser — браузер нового поколения с полностью локальным ИИ',
+    browserHeroTitle: 'Agentic Browser',
     browserIntro:
-      'Пока все спорят о приватности облачного ИИ, мы сделали продукт, который решает это раз и навсегда: open-source браузер, где ИИ, менеджер паролей и поиск работают целиком на вашем железе.',
-    browserCatchTitle: 'В чём суть?',
+      'Браузер с полностью локальным ИИ: без облака, API-ключей и телеметрии. Модель, пароли и история — только на вашем устройстве.',
+    browserCatchTitle: 'Модели',
     browserCatchText:
-      'Вы не привязаны к одному вендору. Из коробки — Llama 3 и Gemma, но можно подключить любую open-source LLM (Qwen, Mistral и др.): положите файл модели в папку — и готово.',
-    browserFeaturesTitle: 'Ключевые возможности',
-    browserF1Title: 'Абсолютная приватность',
-    browserF1Text:
-      'Без облака, API-ключей и телеметрии. Чаты, пароли и история просмотра остаются только на вашем устройстве.',
-    browserF2Title: '100% локальный ИИ',
-    browserF2Text:
-      'Модель работает на компьютере через llama.cpp — без подписок и лимитов. Интернет нужен только для самого веб-сёрфинга.',
+      'Из коробки — Llama 3 и Gemma. Можно подключить любую open-source LLM (Qwen, Mistral и др.): положите файл модели в папку.',
+    browserFeaturesTitle: 'Возможности',
+    browserF1Title: 'Приватность',
+    browserF1Text: 'Без облака, API-ключей и телеметрии. Данные остаются на устройстве.',
+    browserF2Title: 'Локальный ИИ',
+    browserF2Text: 'Модель через llama.cpp — без подписок и лимитов. Сеть нужна только для веб-сёрфинга.',
     browserF3Title: 'Агентный режим',
-    browserF3Text:
-      'ИИ не только отвечает на вопросы — сам ищет в сети, анализирует открытые вкладки и извлекает данные за один цикл.',
-    browserF4Title: 'Продвинутый AI Chat',
-    browserF4Text:
-      'Полноценный чат: многоходовые диалоги, вложения файлов, рендер LaTeX, экспорт и импорт истории.',
-    browserF5Title: 'Локальный менеджер паролей',
-    browserF5Text:
-      'Шифрованное хранилище с автозаполнением и мастер-паролем. Без облачной синхронизации.',
-    browserHowTitle: 'Как это работает?',
+    browserF3Text: 'Поиск в сети, анализ вкладок и извлечение данных за один цикл.',
+    browserF4Title: 'AI Chat',
+    browserF4Text: 'Многоходовые диалоги, вложения, LaTeX, экспорт и импорт истории.',
+    browserF5Title: 'Менеджер паролей',
+    browserF5Text: 'Шифрованное хранилище с автозаполнением и мастер-паролем.',
+    browserHowTitle: 'Как работает',
     browserHowStep1: 'Запустите браузер.',
-    browserHowStep2: 'Автоматически поднимется локальный llama-server с выбранной моделью.',
+    browserHowStep2: 'Подняется локальный llama-server с выбранной моделью.',
     browserHowStep3: 'Введите запрос в чат — получите ответ.',
-    browserHowSummary:
-      'Всё в одном: больше не нужно переключаться между браузером, платными AI-чатами и сторонними менеджерами паролей.',
-    browserLicenseTitle: 'Open Source и лицензия',
+    browserHowSummary: 'Браузер, ИИ и пароли — в одном приложении.',
+    browserLicenseTitle: 'Лицензия',
     browserLicenseText:
-      'Проект полностью open-source — изучайте код, тестируйте и вносите вклад. Коммерческое использование без предварительного разрешения запрещено: продукт создан как независимое решение для пользователей и сообщества.',
-    browserGithubCta: 'Репозиторий на GitHub',
-    browserShotStart: 'Стартовая страница',
+      'Проект open-source: изучайте код и вносите вклад. Коммерческое использование без разрешения запрещено.',
+    browserGithubCta: 'GitHub',
+    browserShotStart: 'Старт',
     browserShotChat: 'AI Chat',
     browserShotAgent: 'AgentPanel',
     browserShotSettings: 'Настройки',
     teamSectionTitle: 'Команда',
-    teamSectionLead:
-      'За продуктами MATRIXON стоит команда, которую возглавляет генеральный директор.',
+    teamSectionLead: 'За продуктами MATRIXON стоит команда под руководством CEO.',
     founderMaratName: 'Марат Сафиев',
-    founderMaratBadge: 'Генеральный директор (CEO)',
-    founderMaratP1:
-      'Сафиев Марат (Safiyev Marat) — 17-летний генеральный директор (CEO) MATRIXON.',
+    founderMaratBadge: 'CEO',
+    founderMaratP1: 'Сафиев Марат — генеральный директор MATRIXON.',
     founderMaratWeb3Lead: 'Сооснователь медиаиздания',
     founderWeb3MediaName: 'web3 frens Central Asia',
-    founderMaratActivities:
-      'Принимает участие в хакатонах, проводит мероприятия.',
+    founderMaratActivities: 'Участвует в хакатонах, проводит мероприятия.',
     socialLinkedIn: 'LinkedIn',
     socialTelegram: 'Telegram',
     socialX: 'X',
     socialInstagram: 'Instagram',
     socialYoutube: 'YouTube',
-    founderIbragimName: 'Ибрагим Гасымов',
-    founderIbragimBadge: 'Сооснователь · CEO · CTO',
-    founderIbragimBio:
-      'Сооснователь MATRIXON (Ibragim Gasymov). Совмещает позиции генерального директора (CEO) и технического директора (CTO). Принимает участие в хакатонах.',
-    founderIbragimLinkedInLabel: 'LinkedIn',
-    founderLegal:
-      'Компания инкорпорирована в Азербайджане как MMC MATRIXON.',
-    qualityTitleBefore: 'Релизы',
-    qualityTitleAccent: 'без громких обещаний',
-    qualityLead:
-      'Для нас важнее стабильность: наблюдаемость, поэтапные выкладки и понятные инструкции для тех, кто сопровождает продукт.',
+    founderAygunName: 'Айгюн Сафиева',
+    founderAygunBadge: 'Основатель · Финансовый директор',
+    founderLegal: 'Компания инкорпорирована в Азербайджане как MMC MATRIXON.',
+    qualityTitle: 'Как мы выпускаем',
+    qualityLead: 'Стабильность важнее громких формулировок: мониторинг, поэтапные выкладки, понятные инструкции.',
     panelStability: 'Надёжность',
     panelStabilityVal: 'Мониторинг и алерты',
     panelDelivery: 'Выкладка',
     panelDeliveryVal: 'По шагам, с откатом',
     panelDocs: 'Операции',
     panelDocsVal: 'Актуальные runbook’и',
-    ctaTitle: 'Вопросы или идея для совместной работы?',
-    ctaText: 'Напишите на почту или позвоните — ответим по существу.',
+    ctaTitle: 'Связаться',
+    ctaText: 'Напишите на почту или позвоните.',
     ctaEmail: 'Написать',
     ctaPhone: 'Позвонить',
     footerNavH: 'Разделы',
     footerCompanyH: 'Компания',
-    footerLinkProduct: 'Продукт',
+    footerLinkProduct: 'Продукты',
     footerLinkApproach: 'Подход',
     footerLinkPartners: 'Партнёры',
     footerLinkFounder: 'Команда',
@@ -236,21 +337,21 @@ export const messages: Record<Locale, Messages> = {
     footerWhatsApp: 'WhatsApp',
     footerMediaH: 'Медиа',
     footerTelegramMatrixon: 'Telegram — MATRIXON',
-    partnersTitleBefore: 'Наши',
-    partnersTitleAccent: 'партнёры',
-    partnersLead:
-      'Мы работаем с лидерами индустрии, чтобы создавать надёжные и масштабируемые решения.',
+    partnersTitle: 'Партнёры',
+    partnersLead: 'Инфраструктура, на которой опираемся при разработке и масштабировании.',
     partnerAwsName: 'Amazon Web Services',
-    partnerAwsText:
-      'Облачная инфраструктура и сервисы для разработки и масштабирования наших продуктов.',
+    partnerAwsText: 'Облачная инфраструктура для разработки и масштабирования продуктов.',
   },
   en: {
     metaTitle: 'MATRIXON',
-    metaDescription: 'MATRIXON',
-    browserMetaTitle: 'MATRIXON Agentic Browser — fully local AI browser | MATRIXON',
+    metaDescription: 'MATRIXON — products built around local AI and automation.',
+    browserMetaTitle: 'Agentic Browser — fully local AI browser | MATRIXON',
     browserMetaDescription:
-      'Open-source browser with on-device AI via llama.cpp: privacy, AgentPanel, chat, and a local password manager.',
-    navProduct: 'Product',
+      'Open-source browser with on-device AI via llama.cpp: privacy, agent mode, chat, and a local password manager.',
+    mixaMetaTitle: 'MIXA AI — identity studio: avatars, looks & video | MATRIXON',
+    mixaMetaDescription:
+      'Turn a photo into new looks while keeping your face. Time machine, AI avatars, beauty stylist, and short videos in one studio.',
+    navProduct: 'Products',
     navApproach: 'Approach',
     navPartners: 'Partners',
     navFounder: 'Team',
@@ -261,105 +362,152 @@ export const messages: Record<Locale, Messages> = {
     langSwitcherAria: 'Interface language',
     langRu: 'RU',
     langEn: 'EN',
-    heroPitch: "We don't follow trends — we create them.",
-    heroEyebrow: 'Open-source · Local AI',
+    heroPitch: 'We build tools that run where you are — without the noise.',
+    heroEyebrow: 'Open-source · AI products',
     heroWords: ['build', 'ship', 'scale'] as const,
     heroCtaContact: 'Get in touch',
-    heroCtaExplore: 'See the product',
+    heroCtaExplore: 'Products',
     slideNavIntro: 'Home',
-    slideNavProduct: 'Product',
+    slideNavProduct: 'Products',
     slideNavBuild: 'Approach',
     slideNavPartners: 'Partners',
     slideNavTeam: 'Team',
     slideNavContact: 'Contact',
-    slideProductLine1: 'A browser',
-    slideProductLine2: 'with local AI',
-    vectorsTitleBefore: 'What we ship',
-    vectorsTitleAccent: 'today',
-    vectorsLead:
-      'We build our own open-source products — a narrow focus so we can validate ideas faster and keep quality bar high.',
-    browserProduct: 'MATRIXON Agentic Browser',
-    browserCardText:
-      'Open-source browser with fully local AI — no cloud, no API keys, no telemetry. Your model, passwords, and history stay on your device.',
-    browserMore: 'About the browser',
+    productsTitle: 'Products',
+    productsLead: 'What we are shipping now. More will follow.',
+    productBrowserName: 'Agentic Browser',
+    productBrowserText:
+      'Open-source browser with local AI — model, chat, agent mode, and passwords stay on your device.',
+    productBrowserCta: 'Learn more',
+    productMixaName: 'MIXA AI',
+    productMixaText:
+      'An AI identity studio: avatars, looks, and short videos that keep your face recognizable.',
+    productMixaCta: 'Learn more',
+    productWeb3FrenName: 'web3 fren',
+    productWeb3FrenText:
+      'An AI agent for automatic news publishing: gather, prepare, and ship stories on a schedule.',
+    productWeb3FrenCta: 'Talk to us',
+    mixaBack: '← Back to MATRIXON',
+    mixaEyebrow: 'MATRIXON · MIXA AI Studio',
+    mixaHeroTitle: 'MIXA AI',
+    mixaHeroTagline: 'AI identity studio',
+    mixaIntro:
+      'Turn your photo into new looks — future and past, social avatars, beauty styling, and short AI videos. Your face stays recognizable; the scene, style, and role change.',
+    mixaCtaStudio: 'Open studio',
+    mixaCtaTry: 'Try for free',
+    mixaAboutTitle: 'About',
+    mixaAboutText:
+      'MIXA AI is an online visual identity studio. Upload a portrait, pick a service and style — get a photoreal result that keeps your face.',
+    mixaAboutAudience:
+      'Built for personal brands, social content, creative experiments, and trying looks without a photoshoot.',
+    mixaServicesTitle: 'Services',
+    mixaS1Title: 'Time machine',
+    mixaS1Text:
+      'Identity transforms: 10 or 20 years ahead, the past, athletic form, a historical era, or any custom look you describe.',
+    mixaS2Title: 'AI avatars',
+    mixaS2Text:
+      'Avatars for profiles, LinkedIn, decks, and personal branding. Face stays recognizable; style ranges from corporate to cinematic.',
+    mixaS3Title: 'Fashion & Beauty',
+    mixaS3Text:
+      'A virtual beauty studio: makeup, hair, color palettes, and fashion looks matched to your face and mood.',
+    mixaS4Title: 'Video Studio',
+    mixaS4Text:
+      'Short clips via Amazon Nova Reel: text → video or photo animation. 6 seconds, 1280×720. No templates — your script.',
+    mixaFeaturesTitle: 'Features',
+    mixaF1: 'Face preserved through transforms',
+    mixaF2: 'Ready templates and free-form prompts',
+    mixaF3: 'Before / after comparison',
+    mixaF4: 'Gallery and generation history in the cloud',
+    mixaF5: 'Private media storage',
+    mixaF6: 'Interface in Russian and English',
+    mixaF7: 'One-time credit packs — credits do not expire',
+    mixaHowTitle: 'How it works',
+    mixaHowStep1: 'Upload a portrait',
+    mixaHowStep2: 'Pick a service and style — or describe the look in your own words',
+    mixaHowStep3: 'Download the result or use it as a base for the next generation',
+    mixaPricingTitle: 'Pricing',
+    mixaPricingLead:
+      'One-time purchase. 1 image generation = 10 credits. Video is separate (more credits).',
+    mixaPricingNote: 'Every pack includes all generation modes and cloud history.',
+    mixaPlanStart: 'Start',
+    mixaPlanStartPrice: '$9',
+    mixaPlanStartCredits: '350 credits',
+    mixaPlanStartHint: '~35 generations',
+    mixaPlanStandard: 'Standard',
+    mixaPlanStandardPrice: '$19',
+    mixaPlanStandardCredits: '1,000 credits',
+    mixaPlanStandardHint: '~100 generations',
+    mixaPlanPro: 'Pro',
+    mixaPlanProPrice: '$49',
+    mixaPlanProCredits: '3,000 credits',
+    mixaPlanProHint: '~300 generations · best price per credit',
+    mixaPlanPriority: 'Priority processing',
+    mixaPositioning: 'A studio where your face stays yours — and the look can be anything.',
+    mixaFinalTitle: 'Your studio is ready',
+    mixaFinalText: 'Sign up, keep your generation history, and start with the first look.',
     browserBack: '← Back to MATRIXON',
     browserEyebrow: 'MATRIXON · Open Source',
-    browserHeroTitle: 'Meet MATRIXON Agentic Browser — the next-gen fully local AI browser',
+    browserHeroTitle: 'Agentic Browser',
     browserIntro:
-      'While everyone debates data privacy in cloud-based AI, we built a product that solves it once and for all: an open-source browser where AI, the password manager, and search run entirely on your own hardware.',
-    browserCatchTitle: "What's the catch?",
+      'A browser with fully local AI — no cloud, no API keys, no telemetry. Your model, passwords, and history stay on device.',
+    browserCatchTitle: 'Models',
     browserCatchText:
-      'You are not locked into any vendor. Works out of the box with Llama 3 and Gemma, but you can run any open-source LLM (Qwen, Mistral, etc.) — drop the model file into the folder and you are good to go.',
-    browserFeaturesTitle: 'Key features',
-    browserF1Title: 'Absolute privacy',
-    browserF1Text:
-      'No cloud, no API keys, zero telemetry. Chats, passwords, and browsing history stay strictly on your device.',
-    browserF2Title: '100% local AI',
-    browserF2Text:
-      'The model runs on your computer via llama.cpp — no subscriptions or rate limits. Internet is only required for actual web browsing.',
-    browserF3Title: 'Agentic AI mode',
-    browserF3Text:
-      'AI does not just answer questions — it can search the web, analyze open tabs, and extract data in a single execution cycle.',
-    browserF4Title: 'Advanced AI Chat',
-    browserF4Text:
-      'Full chat UI with multi-turn dialogues, file attachments, LaTeX rendering, and history export/import.',
-    browserF5Title: 'Local password manager',
-    browserF5Text:
-      'Encrypted storage with autofill, protected by your master password. No cloud sync.',
+      'Works with Llama 3 and Gemma out of the box. Drop in any open-source LLM (Qwen, Mistral, etc.).',
+    browserFeaturesTitle: 'Features',
+    browserF1Title: 'Privacy',
+    browserF1Text: 'No cloud, no API keys, no telemetry. Data stays on your device.',
+    browserF2Title: 'Local AI',
+    browserF2Text: 'Runs via llama.cpp — no subscriptions or rate limits. Internet is only for browsing.',
+    browserF3Title: 'Agent mode',
+    browserF3Text: 'Search the web, analyze tabs, and extract data in one cycle.',
+    browserF4Title: 'AI Chat',
+    browserF4Text: 'Multi-turn chat, attachments, LaTeX, history export and import.',
+    browserF5Title: 'Password manager',
+    browserF5Text: 'Encrypted storage with autofill and a master password.',
     browserHowTitle: 'How it works',
     browserHowStep1: 'Launch the browser.',
-    browserHowStep2: 'It automatically starts a local llama-server with your selected model.',
-    browserHowStep3: 'Type your prompt in the chat — get your answer.',
-    browserHowSummary:
-      'All-in-one: no more switching between browsers, paid AI chats, and third-party password managers.',
-    browserLicenseTitle: 'Open source & licensing',
+    browserHowStep2: 'A local llama-server starts with your selected model.',
+    browserHowStep3: 'Type a prompt — get an answer.',
+    browserHowSummary: 'Browser, AI, and passwords in one app.',
+    browserLicenseTitle: 'License',
     browserLicenseText:
-      'The project is fully open source — explore the code, test it, and contribute. Commercial use without prior permission is prohibited; this was built as an independent solution for users and the community.',
-    browserGithubCta: 'View on GitHub',
+      'Fully open source — explore and contribute. Commercial use without prior permission is prohibited.',
+    browserGithubCta: 'GitHub',
     browserShotStart: 'Start page',
     browserShotChat: 'AI Chat',
     browserShotAgent: 'AgentPanel',
     browserShotSettings: 'Settings',
     teamSectionTitle: 'Team',
-    teamSectionLead:
-      'MATRIXON is led by its CEO and the team behind our products.',
+    teamSectionLead: 'MATRIXON is led by its CEO and the team behind the products.',
     founderMaratName: 'Marat Safiyev',
-    founderMaratBadge: 'Chief Executive Officer (CEO)',
-    founderMaratP1:
-      'Marat Safiyev (Safiyev Marat) is the 17-year-old Chief Executive Officer (CEO) of MATRIXON.',
+    founderMaratBadge: 'CEO',
+    founderMaratP1: 'Marat Safiyev is the Chief Executive Officer of MATRIXON.',
     founderMaratWeb3Lead: 'Co-founder of the media publication',
     founderWeb3MediaName: 'web3 frens Central Asia',
-    founderMaratActivities:
-      'He takes part in hackathons and organizes events.',
+    founderMaratActivities: 'Takes part in hackathons and organizes events.',
     socialLinkedIn: 'LinkedIn',
     socialTelegram: 'Telegram',
     socialX: 'X',
     socialInstagram: 'Instagram',
     socialYoutube: 'YouTube',
-    founderIbragimName: 'Ibragim Gasymov',
-    founderIbragimBadge: 'Co-founder · CEO · CTO',
-    founderIbragimBio:
-      'Co-founder of MATRIXON (Ibragim Gasymov). He serves as Chief Executive Officer (CEO) and Chief Technology Officer (CTO). He takes part in hackathons.',
-    founderIbragimLinkedInLabel: 'LinkedIn',
-    founderLegal:
-      'The company is incorporated in Azerbaijan as MMC MATRIXON.',
-    qualityTitleBefore: 'Shipping',
-    qualityTitleAccent: 'without the hype',
-    qualityLead:
-      'Stability matters more than slogans: observability, staged rollouts, and up-to-date runbooks for the team running the product.',
+    founderAygunName: 'Aygun Safiyeva',
+    founderAygunBadge: 'Founder · Financial Director',
+    founderLegal: 'The company is incorporated in Azerbaijan as MMC MATRIXON.',
+    qualityTitle: 'How we ship',
+    qualityLead: 'Stability over slogans: observability, staged rollouts, and clear runbooks.',
     panelStability: 'Reliability',
     panelStabilityVal: 'Monitoring & alerts',
     panelDelivery: 'Rollouts',
     panelDeliveryVal: 'Staged, with rollback',
     panelDocs: 'Operations',
     panelDocsVal: 'Current runbooks',
-    ctaTitle: 'Questions or a collaboration idea?',
-    ctaText: 'Email or call — we will respond directly.',
+    ctaTitle: 'Contact',
+    ctaText: 'Email or call — we respond directly.',
     ctaEmail: 'Email',
     ctaPhone: 'Call',
     footerNavH: 'Sections',
     footerCompanyH: 'Company',
-    footerLinkProduct: 'Product',
+    footerLinkProduct: 'Products',
     footerLinkApproach: 'Approach',
     footerLinkPartners: 'Partners',
     footerLinkFounder: 'Team',
@@ -367,12 +515,9 @@ export const messages: Record<Locale, Messages> = {
     footerWhatsApp: 'WhatsApp',
     footerMediaH: 'Media',
     footerTelegramMatrixon: 'Telegram — MATRIXON',
-    partnersTitleBefore: 'Our',
-    partnersTitleAccent: 'partners',
-    partnersLead:
-      'We work with industry leaders to build reliable, scalable solutions.',
+    partnersTitle: 'Partners',
+    partnersLead: 'Infrastructure we rely on to build and scale.',
     partnerAwsName: 'Amazon Web Services',
-    partnerAwsText:
-      'Cloud infrastructure and services to develop and scale our products.',
+    partnerAwsText: 'Cloud infrastructure for developing and scaling our products.',
   },
 }

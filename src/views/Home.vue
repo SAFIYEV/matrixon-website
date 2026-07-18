@@ -31,6 +31,33 @@ const buildPillars = computed(() => [
   { num: '03', title: t.value.panelDocs, text: t.value.panelDocsVal },
 ])
 
+const products = computed(() => [
+  {
+    num: '01',
+    name: t.value.productBrowserName,
+    text: t.value.productBrowserText,
+    cta: t.value.productBrowserCta,
+    to: '/browser',
+    external: false,
+  },
+  {
+    num: '02',
+    name: t.value.productMixaName,
+    text: t.value.productMixaText,
+    cta: t.value.productMixaCta,
+    to: '/mixa',
+    external: false,
+  },
+  {
+    num: '03',
+    name: t.value.productWeb3FrenName,
+    text: t.value.productWeb3FrenText,
+    cta: t.value.productWeb3FrenCta,
+    href: `mailto:${mail}?subject=web3%20fren`,
+    external: true,
+  },
+])
+
 const slideLabels = computed(() => [
   t.value.slideNavIntro,
   t.value.slideNavProduct,
@@ -60,13 +87,8 @@ const slideLabels = computed(() => [
     </nav>
 
     <main ref="deckRef" class="deck">
-      <!-- Slide 0: Hero -->
       <section id="intro" class="slide slide--hero" data-slide="0" aria-label="MATRIXON">
-        <div class="slide__bg slide__bg--deck" aria-hidden="true">
-          <div class="slide__glow slide__glow--a" />
-          <div class="slide__glow slide__glow--b" />
-          <div class="slide__lines" />
-        </div>
+        <div class="slide__atmosphere" aria-hidden="true" />
         <div class="slide__content slide__content--hero">
           <p class="slide__eyebrow">{{ t.heroEyebrow }}</p>
           <h1 class="hero-title">
@@ -93,102 +115,86 @@ const slideLabels = computed(() => [
         </button>
       </section>
 
-      <!-- Slide 1: Product -->
-      <section id="product" class="slide slide--on-dark" data-slide="1" aria-labelledby="product-title">
-        <div class="slide__bg slide__bg--deck slide__bg--deck-alt" aria-hidden="true">
-          <div class="slide__glow slide__glow--b" />
-          <div class="slide__lines" />
-        </div>
-        <div class="slide__content slide__content--split slide__content--light">
-          <div class="slide__copy">
-            <p class="slide__index slide__index--light">01</p>
-            <h2 id="product-title" class="slide__title slide__title--light">
-              {{ t.slideProductLine1 }}<br />
-              <span class="gradient-text gradient-text--bright">{{ t.slideProductLine2 }}</span>
-            </h2>
-            <p class="slide__lead slide__lead--light">{{ t.browserCardText }}</p>
-            <RouterLink class="btn btn--primary" to="/browser">
-              {{ t.browserMore }}
-              <span aria-hidden="true">→</span>
-            </RouterLink>
-          </div>
-          <div class="product-showcase" aria-hidden="true">
-            <div class="product-showcase__frame">
-              <img src="/matrixon-browser/screen-chat.png" width="640" height="400" alt="" loading="lazy" />
-            </div>
-            <div class="product-showcase__frame product-showcase__frame--offset">
-              <img src="/matrixon-browser/screen-agent.png" width="640" height="400" alt="" loading="lazy" />
-            </div>
-          </div>
+      <section id="product" class="slide" data-slide="1" aria-labelledby="product-title">
+        <div class="slide__content">
+          <header class="slide__head">
+            <p class="slide__index">01</p>
+            <h2 id="product-title" class="slide__title">{{ t.productsTitle }}</h2>
+            <p class="slide__lead">{{ t.productsLead }}</p>
+          </header>
+          <ul class="product-list">
+            <li v-for="item in products" :key="item.num" class="product-row">
+              <span class="product-row__num">{{ item.num }}</span>
+              <div class="product-row__body">
+                <h3 class="product-row__name">{{ item.name }}</h3>
+                <p class="product-row__text">{{ item.text }}</p>
+              </div>
+              <RouterLink
+                v-if="!item.external && item.to"
+                class="product-row__cta"
+                :to="item.to"
+              >
+                {{ item.cta }}
+                <span aria-hidden="true">→</span>
+              </RouterLink>
+              <a
+                v-else
+                class="product-row__cta"
+                :href="item.href"
+                :target="item.href?.startsWith('http') ? '_blank' : undefined"
+                :rel="item.href?.startsWith('http') ? 'noopener noreferrer' : undefined"
+              >
+                {{ item.cta }}
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
-      <!-- Slide 2: Build philosophy -->
-      <section id="build" class="slide slide--on-dark" data-slide="2" aria-labelledby="build-title">
-        <div class="slide__bg slide__bg--deck" aria-hidden="true">
-          <div class="slide__mesh" />
-          <div class="slide__glow slide__glow--a" />
-        </div>
+      <section id="build" class="slide" data-slide="2" aria-labelledby="build-title">
         <div class="slide__content slide__content--center">
-          <p class="slide__index slide__index--light">02</p>
-          <h2 id="build-title" class="slide__title slide__title--light slide__title--huge">
-            {{ t.qualityTitleBefore }}<br />
-            <span class="gradient-text gradient-text--bright">{{ t.qualityTitleAccent }}</span>
-          </h2>
-          <p class="slide__lead slide__lead--light">{{ t.qualityLead }}</p>
+          <p class="slide__index">02</p>
+          <h2 id="build-title" class="slide__title">{{ t.qualityTitle }}</h2>
+          <p class="slide__lead">{{ t.qualityLead }}</p>
           <div class="pillar-grid">
-            <article v-for="item in buildPillars" :key="item.num" class="pillar-card">
-              <span class="pillar-card__num">{{ item.num }}</span>
-              <h3 class="pillar-card__title">{{ item.title }}</h3>
-              <p class="pillar-card__text">{{ item.text }}</p>
+            <article v-for="item in buildPillars" :key="item.num" class="pillar">
+              <span class="pillar__num">{{ item.num }}</span>
+              <h3 class="pillar__title">{{ item.title }}</h3>
+              <p class="pillar__text">{{ item.text }}</p>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- Slide 3: Partners -->
-      <section id="partners" class="slide slide--on-dark" data-slide="3" aria-labelledby="partners-title">
-        <div class="slide__bg slide__bg--deck slide__bg--deck-alt" aria-hidden="true">
-          <div class="slide__glow slide__glow--a" />
-          <div class="slide__lines" />
-        </div>
-        <div class="slide__content slide__content--center slide__content--light">
-          <p class="slide__index slide__index--light">03</p>
-          <h2 id="partners-title" class="slide__title slide__title--light">
-            {{ t.partnersTitleBefore }}<br />
-            <span class="gradient-text gradient-text--bright">{{ t.partnersTitleAccent }}</span>
-          </h2>
-          <p class="slide__lead slide__lead--light">{{ t.partnersLead }}</p>
+      <section id="partners" class="slide" data-slide="3" aria-labelledby="partners-title">
+        <div class="slide__content slide__content--center">
+          <p class="slide__index">03</p>
+          <h2 id="partners-title" class="slide__title">{{ t.partnersTitle }}</h2>
+          <p class="slide__lead">{{ t.partnersLead }}</p>
           <a
-            class="partner-card"
+            class="partner"
             href="https://aws.amazon.com/"
             target="_blank"
             rel="noopener noreferrer"
             :aria-label="t.partnerAwsName"
           >
-            <div class="partner-card__inner">
-              <img class="partner-card__logo" src="/partners/aws.svg" width="152" height="91" alt="" />
-              <h3 class="partner-card__name">{{ t.partnerAwsName }}</h3>
-              <p class="partner-card__text">{{ t.partnerAwsText }}</p>
-            </div>
+            <img class="partner__logo" src="/partners/aws.svg" width="140" height="84" alt="" />
+            <h3 class="partner__name">{{ t.partnerAwsName }}</h3>
+            <p class="partner__text">{{ t.partnerAwsText }}</p>
           </a>
         </div>
       </section>
 
-      <!-- Slide 4: Team -->
-      <section id="team" class="slide slide--on-dark" data-slide="4" aria-labelledby="team-title">
-        <div class="slide__bg slide__bg--deck" aria-hidden="true">
-          <div class="slide__glow slide__glow--b" />
-          <div class="slide__lines" />
-        </div>
-        <div class="slide__content slide__content--team slide__content--light">
+      <section id="team" class="slide" data-slide="4" aria-labelledby="team-title">
+        <div class="slide__content slide__content--team">
           <div class="slide__head">
-            <p class="slide__index slide__index--light">04</p>
-            <h2 id="team-title" class="slide__title slide__title--light">{{ t.teamSectionTitle }}</h2>
-            <p class="slide__lead slide__lead--light">{{ t.teamSectionLead }}</p>
+            <p class="slide__index">04</p>
+            <h2 id="team-title" class="slide__title">{{ t.teamSectionTitle }}</h2>
+            <p class="slide__lead">{{ t.teamSectionLead }}</p>
           </div>
-          <article class="team-card" aria-labelledby="person-marat">
-            <div class="team-card__photo">
+          <article class="team-person" aria-labelledby="person-marat">
+            <div class="team-person__photo">
               <img
                 src="/founders/marat.png"
                 width="480"
@@ -198,16 +204,16 @@ const slideLabels = computed(() => [
                 :alt="t.founderMaratName"
               />
             </div>
-            <div class="team-card__body">
-              <p class="team-card__role">{{ t.founderMaratBadge }}</p>
-              <h3 id="person-marat" class="team-card__name">{{ t.founderMaratName }}</h3>
-              <p class="team-card__bio">{{ t.founderMaratP1 }}</p>
-              <p class="team-card__bio">
+            <div class="team-person__body">
+              <p class="team-person__role">{{ t.founderMaratBadge }}</p>
+              <h3 id="person-marat" class="team-person__name">{{ t.founderMaratName }}</h3>
+              <p class="team-person__bio">{{ t.founderMaratP1 }}</p>
+              <p class="team-person__bio">
                 {{ t.founderMaratWeb3Lead }}
                 <a :href="linkWeb3Frens" target="_blank" rel="noopener noreferrer">{{ t.founderWeb3MediaName }}</a>.
               </p>
-              <p class="team-card__bio">{{ t.founderMaratActivities }}</p>
-              <div class="team-card__social">
+              <p class="team-person__bio">{{ t.founderMaratActivities }}</p>
+              <div class="team-person__social">
                 <a
                   v-for="item in maratLinks"
                   :key="item.labelKey"
@@ -222,22 +228,23 @@ const slideLabels = computed(() => [
               </div>
             </div>
           </article>
+          <article class="team-person team-person--compact" aria-labelledby="person-aygun">
+            <div class="team-person__body">
+              <p class="team-person__role">{{ t.founderAygunBadge }}</p>
+              <h3 id="person-aygun" class="team-person__name">{{ t.founderAygunName }}</h3>
+            </div>
+          </article>
         </div>
       </section>
 
-      <!-- Slide 5: Contact -->
-      <section id="contact" class="slide slide--on-dark" data-slide="5" aria-labelledby="contact-title">
-        <div class="slide__bg slide__bg--deck" aria-hidden="true">
-          <div class="slide__mesh slide__mesh--bright" />
-          <div class="slide__glow slide__glow--a" />
-        </div>
-        <div class="slide__content slide__content--contact slide__content--light">
-          <p class="slide__index slide__index--light">05</p>
-          <h2 id="contact-title" class="slide__title slide__title--light">{{ t.ctaTitle }}</h2>
-          <p class="slide__lead slide__lead--light">{{ t.ctaText }}</p>
+      <section id="contact" class="slide" data-slide="5" aria-labelledby="contact-title">
+        <div class="slide__content slide__content--contact">
+          <p class="slide__index">05</p>
+          <h2 id="contact-title" class="slide__title">{{ t.ctaTitle }}</h2>
+          <p class="slide__lead">{{ t.ctaText }}</p>
           <div class="contact-actions">
-            <a class="btn btn--light btn--lg" :href="`mailto:${mail}`">{{ t.ctaEmail }}</a>
-            <a class="btn btn--outline-light btn--lg" :href="phoneHref">{{ t.ctaPhone }}</a>
+            <a class="btn btn--primary btn--lg" :href="`mailto:${mail}`">{{ t.ctaEmail }}</a>
+            <a class="btn btn--outline btn--lg" :href="phoneHref">{{ t.ctaPhone }}</a>
           </div>
           <footer class="deck-footer">
             <p class="deck-footer__legal">{{ t.founderLegal }}</p>
@@ -277,21 +284,16 @@ const slideLabels = computed(() => [
   display: none;
 }
 
-/* —— Slide nav —— */
 .deck-nav {
   position: fixed;
-  right: clamp(16px, 3vw, 40px);
+  right: clamp(16px, 3vw, 36px);
   top: 50%;
   transform: translateY(-50%);
   z-index: 40;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 14px 10px;
-  border-radius: 20px;
-  background: rgba(4, 10, 20, 0.45);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 12px;
+  padding: 12px 8px;
 }
 
 .deck-nav__dot {
@@ -302,24 +304,24 @@ const slideLabels = computed(() => [
   border: none;
   background: none;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.35);
-  transition: color 0.3s ease;
+  color: var(--ink-faint);
+  transition: color 0.25s ease;
 }
 
 .deck-nav__dot--active {
-  color: #fff;
+  color: var(--ink);
 }
 
 .deck-nav__num {
   font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   opacity: 0;
   transform: translateX(6px);
   transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 .deck-nav__dot--active .deck-nav__num,
@@ -330,24 +332,22 @@ const slideLabels = computed(() => [
 
 .deck-nav__bar {
   display: block;
-  width: 3px;
-  height: 28px;
-  border-radius: 3px;
+  width: 2px;
+  height: 22px;
+  border-radius: 2px;
   background: currentColor;
   opacity: 0.35;
   transition:
-    height 0.35s cubic-bezier(0.34, 1.3, 0.64, 1),
-    opacity 0.3s ease,
-    background 0.3s ease;
+    height 0.3s var(--ease),
+    opacity 0.25s ease;
 }
 
 .deck-nav__dot--active .deck-nav__bar {
-  height: 48px;
+  height: 40px;
   opacity: 1;
-  background: var(--gradient);
+  background: var(--ink);
 }
 
-/* —— Slides —— */
 .slide {
   position: relative;
   min-height: 100vh;
@@ -357,99 +357,17 @@ const slideLabels = computed(() => [
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: calc(var(--header-h) + 32px) clamp(20px, 5vw, 64px) 48px;
+  padding: calc(var(--header-h) + 28px) clamp(20px, 5vw, 64px) 48px;
   overflow: hidden;
 }
 
-.slide__bg {
+.slide__atmosphere {
   position: absolute;
   inset: 0;
   pointer-events: none;
-}
-
-.slide__bg--deck,
-.slide__bg--hero {
   background:
-    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(42, 142, 181, 0.28), transparent 55%),
-    radial-gradient(ellipse 60% 50% at 90% 30%, rgba(60, 192, 180, 0.18), transparent 50%),
-    linear-gradient(160deg, #040a14 0%, #0a1830 50%, #0d2240 100%);
-}
-
-.slide__bg--deck-alt {
-  background:
-    radial-gradient(ellipse 70% 55% at 85% 15%, rgba(42, 142, 181, 0.26), transparent 52%),
-    radial-gradient(ellipse 55% 45% at 10% 70%, rgba(60, 192, 180, 0.16), transparent 48%),
-    linear-gradient(165deg, #040a14 0%, #0a1830 48%, #0d2240 100%);
-}
-
-.slide__content--light {
-  color: #fff;
-}
-
-.slide__content--light .slide__lead {
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.slide__glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  animation: glow-drift 20s ease-in-out infinite alternate;
-}
-
-.slide__glow--a {
-  width: 50vw;
-  height: 50vw;
-  max-width: 600px;
-  max-height: 600px;
-  top: -10%;
-  right: 5%;
-  background: rgba(42, 142, 181, 0.35);
-}
-
-.slide__glow--b {
-  width: 40vw;
-  height: 40vw;
-  max-width: 480px;
-  max-height: 480px;
-  bottom: 0;
-  left: -8%;
-  background: rgba(60, 192, 180, 0.22);
-  animation-delay: -8s;
-}
-
-.slide__lines {
-  position: absolute;
-  inset: 0;
-  opacity: 0.2;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 15%, transparent 70%);
-}
-
-.slide__mesh {
-  position: absolute;
-  inset: 0;
-  opacity: 0.2;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-.slide__mesh--bright {
-  opacity: 0.15;
-}
-
-@keyframes glow-drift {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    transform: translate(30px, -20px) scale(1.1);
-  }
+    radial-gradient(ellipse 70% 50% at 15% 20%, rgba(26, 61, 122, 0.09), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 70%, rgba(20, 20, 19, 0.04), transparent 55%);
 }
 
 .slide__content {
@@ -461,20 +379,6 @@ const slideLabels = computed(() => [
 
 .slide__content--hero {
   text-align: left;
-  color: #fff;
-}
-
-.slide__content--split {
-  display: grid;
-  gap: 48px;
-  align-items: center;
-}
-
-@media (min-width: 960px) {
-  .slide__content--split {
-    grid-template-columns: 1fr 1.1fr;
-    gap: 56px;
-  }
 }
 
 .slide__content--center {
@@ -484,66 +388,65 @@ const slideLabels = computed(() => [
 .slide__content--team {
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 28px;
 }
 
 .slide__content--contact {
   text-align: center;
-  color: #fff;
 }
 
 .slide__eyebrow {
-  margin: 0 0 20px;
+  margin: 0 0 18px;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--ink-muted);
 }
 
 .slide__index {
-  margin: 0 0 16px;
+  margin: 0 0 14px;
   font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  color: var(--m-teal);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
 }
 
-.slide__index--light {
-  color: rgba(255, 255, 255, 0.5);
+.slide__head {
+  max-width: 540px;
+  margin-bottom: 36px;
 }
 
-/* —— Hero title —— */
+.slide__content--center .slide__head {
+  margin-inline: auto;
+}
+
 .hero-title {
-  margin: 0 0 24px;
+  margin: 0 0 22px;
   display: flex;
   flex-direction: column;
   gap: 0;
-  line-height: 0.92;
+  line-height: 0.95;
 }
 
 .hero-title__brand {
   font-family: var(--font-display);
-  font-size: clamp(3.5rem, 14vw, 9rem);
+  font-size: clamp(3.4rem, 13vw, 8.5rem);
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.045em;
   text-transform: uppercase;
-  background: linear-gradient(120deg, #fff 0%, #b8ddf0 40%, #7ee8dc 100%);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: brand-shine 12s ease-in-out infinite alternate;
+  color: var(--ink);
+  animation: brand-in 0.9s var(--ease) both;
 }
 
 .hero-title__rotator {
   position: relative;
   display: block;
-  height: clamp(2.8rem, 10vw, 6.5rem);
+  height: clamp(2.6rem, 9vw, 5.8rem);
   overflow: hidden;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .hero-title__word {
@@ -551,23 +454,25 @@ const slideLabels = computed(() => [
   left: 0;
   top: 0;
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 8vw, 5.5rem);
-  font-weight: 800;
+  font-size: clamp(2rem, 7.5vw, 4.8rem);
+  font-weight: 700;
   letter-spacing: -0.03em;
   text-transform: lowercase;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--ink-muted);
   opacity: 0;
   transform: translateY(100%);
   animation: word-cycle calc(var(--total) * 2.8s) ease-in-out infinite;
   animation-delay: calc(var(--i) * 2.8s);
 }
 
-@keyframes brand-shine {
-  0% {
-    background-position: 0% 50%;
+@keyframes brand-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
   }
-  100% {
-    background-position: 100% 50%;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -590,28 +495,29 @@ const slideLabels = computed(() => [
 }
 
 .hero-pitch {
-  margin: 0 0 36px;
-  max-width: 520px;
-  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  margin: 0 0 32px;
+  max-width: 480px;
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
   line-height: 1.5;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  color: var(--ink-muted);
+  animation: brand-in 0.9s var(--ease) 0.12s both;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 12px;
+  animation: brand-in 0.9s var(--ease) 0.2s both;
 }
 
-/* —— Scroll hint —— */
 .slide-scroll-hint {
   position: absolute;
-  bottom: 32px;
+  bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
-  width: 32px;
-  height: 56px;
+  width: 28px;
+  height: 48px;
   border: none;
   background: none;
   cursor: pointer;
@@ -621,340 +527,312 @@ const slideLabels = computed(() => [
 
 .slide-scroll-hint__line {
   display: block;
-  width: 2px;
-  height: 48px;
+  width: 1px;
+  height: 40px;
   margin: 0 auto;
-  border-radius: 2px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent);
-  animation: scroll-pulse 2s ease-in-out infinite;
+  background: linear-gradient(to bottom, var(--ink-muted), transparent);
+  animation: scroll-pulse 2.2s ease-in-out infinite;
 }
 
 @keyframes scroll-pulse {
   0%,
   100% {
-    opacity: 0.4;
-    transform: scaleY(0.7);
+    opacity: 0.35;
+    transform: scaleY(0.65);
     transform-origin: top;
   }
   50% {
-    opacity: 1;
+    opacity: 0.9;
     transform: scaleY(1);
     transform-origin: top;
   }
 }
 
-/* —— Typography —— */
 .slide__title {
-  margin: 0 0 20px;
+  margin: 0 0 16px;
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  color: #fff;
-}
-
-.slide__title--light {
-  color: #fff;
-}
-
-.slide__title--huge {
-  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-size: clamp(2.1rem, 4.8vw, 3.4rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  color: var(--ink);
 }
 
 .slide__lead {
-  margin: 0 0 28px;
-  max-width: 560px;
-  font-size: 1.1rem;
-  line-height: 1.58;
-  color: rgba(255, 255, 255, 0.68);
+  margin: 0 0 8px;
+  max-width: 520px;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
 }
 
 .slide__content--center .slide__lead {
   margin-inline: auto;
 }
 
-.slide__lead--light {
-  color: rgba(255, 255, 255, 0.78);
-}
-
 .slide__content--contact .slide__lead {
   margin-inline: auto;
+  margin-bottom: 28px;
 }
 
-/* —— Product showcase —— */
-.product-showcase {
-  position: relative;
-  min-height: 320px;
+/* Products — editorial list, not cards */
+.product-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
 }
 
-.product-showcase__frame {
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: var(--shadow-dark);
-  overflow: hidden;
-  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+.product-row {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 16px 20px;
+  align-items: center;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.25s ease;
 }
 
-.product-showcase__frame img {
-  width: 100%;
-  height: auto;
-  display: block;
+.product-row:hover {
+  background: rgba(20, 20, 19, 0.02);
 }
 
-.product-showcase__frame--offset {
-  position: absolute;
-  bottom: -12%;
-  right: -4%;
-  width: 72%;
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45);
-  animation: float-card 8s ease-in-out infinite;
+.product-row__num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
 }
 
-.product-showcase__frame:first-child {
-  animation: float-card 7s ease-in-out infinite reverse;
+.product-row__name {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
-@keyframes float-card {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
+.product-row__text {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
 }
 
-/* —— Pillars —— */
+.product-row__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.product-row__cta:hover {
+  border-bottom-color: var(--ink);
+  transform: translateX(2px);
+}
+
 .pillar-grid {
   display: grid;
-  gap: 16px;
-  margin-top: 40px;
+  gap: 32px;
+  margin-top: 44px;
   text-align: left;
 }
 
 @media (min-width: 720px) {
   .pillar-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 40px;
   }
 }
 
-.pillar-card {
-  padding: 28px 24px;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px);
-  transition:
-    transform 0.35s ease,
-    border-color 0.3s ease,
-    background 0.3s ease;
-}
-
-.pillar-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.07);
-}
-
-.pillar-card__num {
+.pillar__num {
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   font-family: var(--font-mono);
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--m-teal);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
 }
 
-.pillar-card__title {
+.pillar__title {
   margin: 0 0 8px;
   font-family: var(--font-display);
   font-size: 1.15rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--ink);
 }
 
-.pillar-card__text {
+.pillar__text {
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--ink-muted);
 }
 
-/* —— Partners —— */
-.partner-card {
+.partner {
   display: block;
-  max-width: 420px;
-  margin: 8px auto 0;
+  max-width: 380px;
+  margin: 28px auto 0;
+  padding: 8px 0;
   text-decoration: none;
   color: inherit;
-  border-radius: calc(var(--radius-xl) + 2px);
-  padding: 2px;
-  background: linear-gradient(135deg, rgba(26, 74, 158, 0.55), rgba(60, 192, 180, 0.45));
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.partner-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
-}
-
-.partner-card__inner {
-  padding: 36px 30px;
-  border-radius: var(--radius-xl);
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
+  transition: opacity 0.2s ease;
 }
 
-.partner-card__logo {
-  width: min(152px, 58vw);
+.partner:hover {
+  opacity: 0.85;
+}
+
+.partner__logo {
+  width: min(140px, 50vw);
   height: auto;
   margin: 0 auto 18px;
+  filter: grayscale(1) contrast(1.1);
+  opacity: 0.85;
 }
 
-.partner-card__name {
-  margin: 0 0 10px;
+.partner__name {
+  margin: 0 0 8px;
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--ink);
 }
 
-.partner-card__text {
+.partner__text {
   margin: 0;
-  font-size: 0.98rem;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
 }
 
-/* —— Team —— */
-.slide__head {
-  max-width: 560px;
-}
-
-.team-card {
+.team-person {
   display: grid;
   gap: 28px;
   align-items: center;
-  padding: 28px;
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+  padding: 8px 0;
 }
 
 @media (min-width: 720px) {
-  .team-card {
-    grid-template-columns: 220px 1fr;
+  .team-person {
+    grid-template-columns: 200px 1fr;
     gap: 40px;
-    padding: 32px 36px;
+  }
+
+  .team-person--compact {
+    grid-template-columns: 1fr;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
   }
 }
 
-.team-card__photo {
+.team-person__photo {
   aspect-ratio: 1;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  background: linear-gradient(160deg, rgba(26, 74, 158, 0.12), rgba(60, 192, 180, 0.1));
+  background: var(--paper-deep);
 }
 
-.team-card__photo img {
+.team-person__photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 35%;
 }
 
-.team-card__role {
+.team-person__role {
   margin: 0 0 6px;
   font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--m-teal);
+  color: var(--ink-faint);
 }
 
-.team-card__name {
-  margin: 0 0 14px;
+.team-person__name {
+  margin: 0 0 12px;
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 800;
+  font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+  font-weight: 750;
   letter-spacing: -0.03em;
-  color: #fff;
+  color: var(--ink);
 }
 
-.team-card__bio {
-  margin: 0 0 10px;
+.team-person__bio {
+  margin: 0 0 8px;
   font-size: 0.97rem;
-  line-height: 1.58;
-  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.55;
+  color: var(--ink-muted);
 }
 
-.team-card__bio a {
-  color: #b8ddf0;
+.team-person__bio a {
+  color: var(--accent);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-.team-card__social {
+.team-person__social {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
 }
 
 .team-social {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
   text-decoration: none;
   transition:
-    background 0.2s,
     border-color 0.2s,
-    transform 0.15s;
+    background 0.2s;
 }
 
 .team-social:hover {
-  border-color: rgba(255, 255, 255, 0.28);
-  background: rgba(255, 255, 255, 0.14);
-  transform: translateY(-2px);
+  border-color: var(--line-strong);
+  background: rgba(20, 20, 19, 0.03);
 }
 
-/* —— Contact —— */
 .contact-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 12px;
   justify-content: center;
   margin-bottom: 48px;
 }
 
 .deck-footer {
-  padding-top: 32px;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
 }
 
 .deck-footer__legal {
-  margin: 0 0 16px;
+  margin: 0 0 14px;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--ink-faint);
   max-width: 48ch;
   margin-inline: auto;
 }
@@ -964,7 +842,7 @@ const slideLabels = computed(() => [
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .deck-footer__links a {
@@ -973,32 +851,25 @@ const slideLabels = computed(() => [
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--ink-muted);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .deck-footer__links a:hover {
-  color: #fff;
+  color: var(--ink);
 }
 
 .deck-footer__copy {
   margin: 0;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--ink-faint);
 }
 
-.gradient-text--bright {
-  background: linear-gradient(120deg, #fff 0%, #7ee8dc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-/* —— Responsive —— */
 @media (max-width: 768px) {
   .deck-nav {
-    right: 12px;
-    gap: 10px;
+    right: 10px;
+    gap: 8px;
   }
 
   .deck-nav__num {
@@ -1006,19 +877,42 @@ const slideLabels = computed(() => [
   }
 
   .deck-nav__bar {
-    height: 20px;
+    height: 16px;
   }
 
   .deck-nav__dot--active .deck-nav__bar {
-    height: 32px;
+    height: 28px;
   }
 
   .slide {
-    padding: calc(var(--header-h) + 20px) 20px 40px;
+    padding: calc(var(--header-h) + 18px) 20px 40px;
   }
 
   .slide__content--hero {
     text-align: center;
+  }
+
+  .hero-title__word {
+    left: 50%;
+    transform: translate(-50%, 100%);
+  }
+
+  @keyframes word-cycle {
+    0%,
+    5% {
+      opacity: 0;
+      transform: translate(-50%, 100%);
+    }
+    8%,
+    28% {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+    33%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -100%);
+    }
   }
 
   .hero-pitch {
@@ -1031,20 +925,22 @@ const slideLabels = computed(() => [
 
   .hero-actions .btn {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
   }
 
-  .product-showcase__frame--offset {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    width: 100%;
-    margin-top: -40px;
+  .product-row {
+    grid-template-columns: 36px 1fr;
+    gap: 8px 14px;
+  }
+
+  .product-row__cta {
+    grid-column: 2;
+    justify-self: start;
   }
 
   .contact-actions .btn {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
   }
 
   .slide-scroll-hint {
@@ -1055,8 +951,8 @@ const slideLabels = computed(() => [
 @media (prefers-reduced-motion: reduce) {
   .hero-title__brand,
   .hero-title__word,
-  .slide__glow,
-  .product-showcase__frame,
+  .hero-pitch,
+  .hero-actions,
   .slide-scroll-hint__line {
     animation: none;
   }
@@ -1075,9 +971,7 @@ const slideLabels = computed(() => [
     display: none;
   }
 
-  .pillar-card:hover,
-  .team-social:hover,
-  .partner-card:hover {
+  .product-row__cta:hover {
     transform: none;
   }
 

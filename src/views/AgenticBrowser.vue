@@ -30,7 +30,6 @@ const screenshots = [
 
 <template>
   <main class="browser-page">
-    <div class="browser-page__mesh" aria-hidden="true" />
     <div class="browser-page__inner">
       <RouterLink class="browser-page__back" to="/">{{ t.browserBack }}</RouterLink>
 
@@ -39,7 +38,7 @@ const screenshots = [
         <h1 class="browser-page__title">{{ t.browserHeroTitle }}</h1>
         <p class="browser-page__intro">{{ t.browserIntro }}</p>
         <a
-          class="btn btn--primary btn--lg browser-page__github"
+          class="btn btn--primary btn--lg"
           :href="githubUrl"
           target="_blank"
           rel="noopener noreferrer"
@@ -48,7 +47,7 @@ const screenshots = [
         </a>
       </header>
 
-      <section class="browser-page__catch" aria-labelledby="catch-heading">
+      <section class="browser-page__block" aria-labelledby="catch-heading">
         <h2 id="catch-heading" class="browser-page__h2">{{ t.browserCatchTitle }}</h2>
         <p class="browser-page__body">{{ t.browserCatchText }}</p>
       </section>
@@ -70,19 +69,16 @@ const screenshots = [
       </section>
 
       <section class="browser-page__features" aria-labelledby="features-heading">
-        <h2 id="features-heading" class="browser-page__h2 browser-page__h2--center">
-          {{ t.browserFeaturesTitle }}
-        </h2>
+        <h2 id="features-heading" class="browser-page__h2">{{ t.browserFeaturesTitle }}</h2>
         <div class="browser-page__grid">
-          <article v-for="(f, i) in features" :key="i" class="browser-page__card">
-            <div class="browser-page__card-dot" aria-hidden="true" />
+          <article v-for="(f, i) in features" :key="i" class="browser-page__feature">
             <h3 class="browser-page__h3">{{ t[f.titleKey] }}</h3>
             <p class="browser-page__card-text">{{ t[f.textKey] }}</p>
           </article>
         </div>
       </section>
 
-      <section class="browser-page__how" aria-labelledby="how-heading">
+      <section class="browser-page__block" aria-labelledby="how-heading">
         <h2 id="how-heading" class="browser-page__h2">{{ t.browserHowTitle }}</h2>
         <ol class="browser-page__steps">
           <li v-for="(step, i) in steps" :key="i">{{ t[step.textKey] }}</li>
@@ -90,7 +86,7 @@ const screenshots = [
         <p class="browser-page__summary">{{ t.browserHowSummary }}</p>
       </section>
 
-      <section class="browser-page__license" aria-labelledby="license-heading">
+      <section class="browser-page__block" aria-labelledby="license-heading">
         <h2 id="license-heading" class="browser-page__h2">{{ t.browserLicenseTitle }}</h2>
         <p class="browser-page__body">{{ t.browserLicenseText }}</p>
         <a
@@ -114,128 +110,90 @@ const screenshots = [
   padding: 32px 24px 96px;
 }
 
-.browser-page__mesh {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 0.55;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(42, 142, 181, 0.22), transparent 55%),
-    radial-gradient(ellipse 60% 50% at 90% 30%, rgba(60, 192, 180, 0.14), transparent 50%),
-    var(--gradient-deck);
-  mask-image: radial-gradient(ellipse 70% 70% at 50% 25%, #000 0%, transparent 75%);
-}
-
 .browser-page__inner {
   position: relative;
   z-index: 1;
-  max-width: 960px;
+  max-width: 880px;
   margin: 0 auto;
 }
 
 .browser-page__back {
   display: inline-block;
   margin-bottom: 36px;
-  font-size: 15px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  font-weight: 550;
+  color: var(--ink-muted);
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 1px solid transparent;
   transition:
-    color 0.22s ease,
-    border-color 0.22s ease,
-    transform 0.22s ease;
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .browser-page__back:hover {
-  color: #fff;
-  border-bottom-color: var(--m-teal);
-  transform: translateX(-3px);
+  color: var(--ink);
+  border-bottom-color: var(--ink);
 }
 
 .browser-page__hero {
-  margin-bottom: 48px;
+  margin-bottom: 56px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--line);
 }
 
 .browser-page__eyebrow {
   margin: 0 0 12px;
-  font-size: 12px;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--m-teal);
+  color: var(--ink-faint);
 }
 
 .browser-page__title {
-  margin: 0 0 20px;
+  margin: 0 0 18px;
   font-family: var(--font-display);
-  font-size: clamp(1.85rem, 4.5vw, 2.55rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.12;
-  color: #fff;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: var(--ink);
 }
 
 .browser-page__intro {
   margin: 0 0 28px;
-  font-size: clamp(1.02rem, 2.2vw, 1.15rem);
-  line-height: 1.6;
-  color: var(--text-muted);
-  max-width: 720px;
+  font-size: clamp(1.02rem, 2vw, 1.15rem);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: 640px;
 }
 
-.browser-page__github {
-  text-decoration: none;
-}
-
-.browser-page__catch,
-.browser-page__how,
-.browser-page__license {
+.browser-page__block {
   margin-bottom: 48px;
-  padding: 28px 26px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  transition:
-    box-shadow 0.35s ease,
-    border-color 0.3s ease;
-}
-
-.browser-page__catch:hover,
-.browser-page__how:hover,
-.browser-page__license:hover {
-  box-shadow: var(--shadow-sm);
-  border-color: var(--border-strong);
 }
 
 .browser-page__h2 {
   margin: 0 0 14px;
   font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 800;
+  font-size: 1.35rem;
+  font-weight: 700;
   letter-spacing: -0.02em;
-  color: #fff;
-}
-
-.browser-page__h2--center {
-  text-align: center;
-  margin-bottom: 28px;
+  color: var(--ink);
 }
 
 .browser-page__body,
 .browser-page__summary {
   margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: var(--text-muted);
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
 }
 
 .browser-page__summary {
   margin-top: 16px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.88);
+  font-weight: 550;
+  color: var(--ink-soft);
 }
 
 .browser-page__shots {
@@ -244,7 +202,7 @@ const screenshots = [
 
 .browser-page__shots-grid {
   display: grid;
-  gap: 20px;
+  gap: 16px;
 }
 
 @media (min-width: 720px) {
@@ -255,19 +213,10 @@ const screenshots = [
 
 .browser-page__shot {
   margin: 0;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: var(--shadow-sm);
-  transition:
-    transform 0.34s cubic-bezier(0.33, 1, 0.68, 1),
-    box-shadow 0.34s ease;
-}
-
-.browser-page__shot:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  background: var(--surface);
 }
 
 .browser-page__shot img {
@@ -280,13 +229,11 @@ const screenshots = [
 }
 
 .browser-page__shot figcaption {
-  padding: 12px 16px;
-  font-size: 14px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  border-top: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  border-top: 1px solid var(--line);
 }
 
 .browser-page__features {
@@ -295,7 +242,8 @@ const screenshots = [
 
 .browser-page__grid {
   display: grid;
-  gap: 18px;
+  gap: 28px 32px;
+  margin-top: 8px;
 }
 
 @media (min-width: 640px) {
@@ -304,79 +252,43 @@ const screenshots = [
   }
 }
 
-@media (min-width: 900px) {
-  .browser-page__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .browser-page__card:last-child {
-    grid-column: span 1;
-  }
-}
-
-.browser-page__card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-lg);
-  padding: 24px 22px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(10px);
-  transition:
-    transform 0.34s cubic-bezier(0.33, 1, 0.68, 1),
-    box-shadow 0.34s ease,
-    border-color 0.28s ease;
-}
-
-.browser-page__card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-  border-color: var(--border-strong);
-}
-
-.browser-page__card-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--gradient);
-  margin-bottom: 14px;
+.browser-page__feature {
+  padding: 0;
 }
 
 .browser-page__h3 {
-  margin: 0 0 10px;
-  font-size: 1.08rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #fff;
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  color: var(--ink);
 }
 
 .browser-page__card-text {
   margin: 0;
   font-size: 15px;
-  line-height: 1.55;
-  color: var(--text-muted);
+  line-height: 1.5;
+  color: var(--ink-muted);
 }
 
 .browser-page__steps {
   margin: 0;
-  padding-left: 1.35rem;
-  font-size: 1.05rem;
-  line-height: 1.65;
-  color: var(--text-muted);
+  padding-left: 1.25rem;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
 }
 
 .browser-page__steps li {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .browser-page__steps li:last-child {
   margin-bottom: 0;
 }
 
-.browser-page__license .browser-page__body {
-  margin-bottom: 24px;
-}
-
 .browser-page__github-secondary {
+  margin-top: 20px;
   text-decoration: none;
 }
 
@@ -387,37 +299,15 @@ const screenshots = [
 
   .browser-page__back {
     margin-bottom: 24px;
-    font-size: 14px;
   }
 
   .browser-page__hero {
-    margin-bottom: 34px;
-  }
-
-  .browser-page__catch,
-  .browser-page__how,
-  .browser-page__license {
-    margin-bottom: 32px;
-    padding: 22px 16px;
-    border-radius: 20px;
-  }
-
-  .browser-page__shots {
     margin-bottom: 40px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .browser-page__back,
-  .browser-page__shot,
-  .browser-page__card {
-    transition-duration: 0.01ms;
+    padding-bottom: 28px;
   }
 
-  .browser-page__back:hover,
-  .browser-page__shot:hover,
-  .browser-page__card:hover {
-    transform: none;
+  .browser-page__block {
+    margin-bottom: 36px;
   }
 }
 </style>

@@ -16,6 +16,9 @@ watch(
     if (route.name === 'browser') {
       document.title = m.browserMetaTitle
       meta?.setAttribute('content', m.browserMetaDescription)
+    } else if (route.name === 'mixa') {
+      document.title = m.mixaMetaTitle
+      meta?.setAttribute('content', m.mixaMetaDescription)
     } else {
       document.title = m.metaTitle
       meta?.setAttribute('content', m.metaDescription)
@@ -59,8 +62,6 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 
 <template>
   <div class="page" :class="{ 'page--deck': route.name === 'home' }">
-    <div v-if="route.name !== 'home'" class="mesh mesh--bg" aria-hidden="true" />
-
     <header
       class="header"
       :class="{
@@ -71,7 +72,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
     >
       <div class="header__inner">
         <RouterLink class="brand" to="/" @click="closeMenu">
-          <img class="brand__logo" src="/logo-matrixon.png" width="44" height="44" alt="MATRIXON" />
+          <img class="brand__logo" src="/logo-matrixon.png" width="40" height="40" alt="MATRIXON" />
           <span class="brand__name">MATRIXON</span>
         </RouterLink>
 
@@ -126,12 +127,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
             </button>
           </div>
           <div class="nav__cta">
-            <a
-              class="btn"
-              :class="heroHeader ? 'btn--ghost' : 'btn--ghost-dark'"
-              :href="`mailto:${mail}`"
-              @click="closeMenu"
-            >{{ t.navWrite }}</a>
+            <a class="btn btn--ghost-dark" :href="`mailto:${mail}`" @click="closeMenu">{{ t.navWrite }}</a>
             <a class="btn btn--primary" :href="phoneHref" @click="closeMenu">{{ t.navCall }}</a>
           </div>
         </nav>
@@ -147,7 +143,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
     <footer v-if="route.name !== 'home'" class="footer">
       <div class="footer__inner">
         <div class="footer__brand">
-          <img class="footer__logo" src="/logo-matrixon.png" width="40" height="40" alt="MATRIXON" />
+          <img class="footer__logo" src="/logo-matrixon.png" width="36" height="36" alt="MATRIXON" />
           <span class="footer__name">MATRIXON</span>
         </div>
         <div class="footer__cols">
@@ -223,20 +219,12 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   border-bottom-color: transparent;
 }
 
-.header--deck.header--scrolled {
-  background: transparent;
-  box-shadow: none;
-  border-bottom-color: transparent;
-}
-
 .page {
   position: relative;
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: clip;
-  background: var(--m-ink);
-  background-image: var(--gradient-deck);
-  background-attachment: fixed;
+  background: transparent;
 }
 
 .page-shell {
@@ -247,18 +235,18 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 .page-crossfade-enter-active,
 .page-crossfade-leave-active {
   transition:
-    opacity 0.38s cubic-bezier(0.33, 1, 0.68, 1),
-    transform 0.38s cubic-bezier(0.33, 1, 0.68, 1);
+    opacity 0.32s var(--ease),
+    transform 0.32s var(--ease);
 }
 
 .page-crossfade-enter-from {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(8px);
 }
 
 .page-crossfade-leave-to {
   opacity: 0;
-  transform: translateY(-6px);
+  transform: translateY(-4px);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -273,123 +261,22 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   }
 }
 
-.mesh {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  opacity: 0.45;
-  background-image:
-    radial-gradient(circle at 18% 22%, rgba(26, 74, 158, 0.14) 0, transparent 42%),
-    radial-gradient(circle at 82% 8%, rgba(60, 192, 180, 0.12) 0, transparent 38%),
-    linear-gradient(120deg, rgba(42, 142, 181, 0.06) 0%, transparent 55%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
-}
-
-.mesh--bg {
-  position: fixed;
-  z-index: 0;
-  opacity: 0.22;
-}
-
-.header--deck.header--deck-light {
-  display: none;
-}
-
-.header--hero .nav-toggle {
-  border-color: rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.header--hero .nav-toggle__bar {
-  background: #fff;
-}
-
-.header--hero.header--scrolled .nav-toggle {
-  border-color: rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.header--hero.header--scrolled .nav-toggle__bar {
-  background: #fff;
-}
-
 .header {
   position: sticky;
   top: 0;
   z-index: 50;
   height: var(--header-h);
   transition:
-    background 0.28s ease,
-    box-shadow 0.28s ease,
-    border-color 0.28s ease,
-    color 0.28s ease;
+    background 0.25s ease,
+    border-color 0.25s ease;
   border-bottom: 1px solid transparent;
-}
-
-.header--hero {
-  color: #fff;
-}
-
-.header--hero .brand,
-.header--hero .nav__link,
-.header--hero .lang__btn {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.header--hero .brand:hover,
-.header--hero .nav__link:hover,
-.header--hero .lang__btn:hover {
-  color: #fff;
-}
-
-.header--hero .lang {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.14);
-}
-
-.header--hero .lang__pill {
-  background: rgba(255, 255, 255, 0.14);
-}
-
-.header--hero .lang__btn--active {
-  color: #fff;
+  color: var(--ink);
 }
 
 .header--scrolled {
-  background: rgba(4, 10, 20, 0.82);
-  backdrop-filter: blur(16px);
-  border-bottom-color: var(--border);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
-  color: var(--text);
-}
-
-.header--hero.header--scrolled {
-  color: #fff;
-}
-
-.header--hero.header--scrolled .brand,
-.header--hero.header--scrolled .nav__link,
-.header--hero.header--scrolled .lang__btn {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.header--hero.header--scrolled .brand:hover,
-.header--hero.header--scrolled .nav__link:hover,
-.header--hero.header--scrolled .lang__btn:hover {
-  color: #fff;
-}
-
-.header--hero.header--scrolled .lang {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.14);
-}
-
-.header--hero.header--scrolled .lang__pill {
-  background: rgba(255, 255, 255, 0.14);
-}
-
-.header--hero.header--scrolled .lang__btn--active {
-  color: #fff;
+  background: rgba(244, 244, 241, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom-color: var(--line);
 }
 
 .header__inner {
@@ -406,23 +293,17 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  font-size: 15px;
-  color: var(--text);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
   z-index: 2;
-  transition: transform 0.22s ease, opacity 0.22s ease;
+  transition: opacity 0.2s ease;
 }
 
 .brand:hover {
-  transform: translateY(-1px);
-  opacity: 0.92;
-}
-
-.brand:active {
-  transform: translateY(0);
+  opacity: 0.75;
 }
 
 .brand__name {
@@ -431,16 +312,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 }
 
 .brand__logo {
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(26, 74, 158, 0.2);
-  transition:
-    box-shadow 0.28s ease,
-    transform 0.28s ease;
-}
-
-.brand:hover .brand__logo {
-  box-shadow: 0 12px 32px rgba(26, 74, 158, 0.22);
-  transform: scale(1.04);
+  border-radius: 10px;
 }
 
 .nav-toggle {
@@ -448,49 +320,33 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   flex-direction: column;
   justify-content: center;
   gap: 7px;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: transparent;
   cursor: pointer;
   z-index: 2;
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.nav-toggle:hover {
-  border-color: var(--border-strong);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
 }
 
 .nav-toggle__bar {
   display: block;
-  height: 2px;
-  width: 20px;
+  height: 1.5px;
+  width: 18px;
   margin: 0 auto;
-  background: #fff;
+  background: var(--ink);
   border-radius: 2px;
   transition:
-    transform 0.32s cubic-bezier(0.34, 1.3, 0.64, 1),
-    opacity 0.22s ease;
+    transform 0.28s var(--ease),
+    opacity 0.2s ease;
 }
 
 .nav-toggle--open .nav-toggle__bar:nth-child(2) {
-  transform: translateY(4.5px) rotate(45deg);
+  transform: translateY(4.25px) rotate(45deg);
 }
 
 .nav-toggle--open .nav-toggle__bar:nth-child(3) {
-  transform: translateY(-4.5px) rotate(-45deg);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nav-toggle--open .nav-toggle__bar:nth-child(2),
-  .nav-toggle--open .nav-toggle__bar:nth-child(3) {
-    transform: none;
-  }
+  transform: translateY(-4.25px) rotate(-45deg);
 }
 
 .nav {
@@ -503,67 +359,38 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 
 .nav__link {
   text-decoration: none;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
-  color: var(--text-muted);
-  position: relative;
-  transition:
-    color 0.25s ease,
-    transform 0.2s ease;
-}
-
-.nav__link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 2px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--m-navy), var(--m-teal));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.28s cubic-bezier(0.34, 1.3, 0.64, 1);
-  opacity: 0.85;
+  color: var(--ink-muted);
+  transition: color 0.2s ease;
 }
 
 .nav__link:hover {
-  color: #fff;
-}
-
-.nav__link:hover::after {
-  transform: scaleX(1);
-}
-
-.nav__link--active {
-  color: #fff;
-  font-weight: 600;
+  color: var(--ink);
 }
 
 .lang {
   position: relative;
   display: inline-flex;
   align-items: stretch;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.06);
-  padding: 3px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: transparent;
+  padding: 2px;
   gap: 2px;
 }
 
 .lang__pill {
   position: absolute;
-  top: 3px;
-  left: 3px;
-  width: calc(50% - 4px);
-  height: calc(100% - 6px);
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  top: 2px;
+  left: 2px;
+  width: calc(50% - 3px);
+  height: calc(100% - 4px);
+  border-radius: 6px;
+  background: rgba(20, 20, 19, 0.06);
   pointer-events: none;
   z-index: 0;
-  transition: transform 0.42s cubic-bezier(0.34, 1.25, 0.64, 1);
-  will-change: transform;
+  transition: transform 0.35s var(--ease);
 }
 
 .lang__pill--en {
@@ -574,141 +401,115 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   position: relative;
   z-index: 1;
   flex: 1;
-  min-width: 44px;
+  min-width: 40px;
   border: none;
   background: transparent;
   font: inherit;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 650;
   letter-spacing: 0.06em;
-  color: var(--text-muted);
-  padding: 7px 12px;
-  border-radius: var(--radius-pill);
+  color: var(--ink-muted);
+  padding: 6px 10px;
+  border-radius: 6px;
   cursor: pointer;
-  transition:
-    color 0.28s ease,
-    transform 0.22s ease;
+  transition: color 0.2s ease;
 }
 
 .lang__btn:hover {
-  color: #fff;
-}
-
-.lang__btn:active {
-  transform: scale(0.96);
+  color: var(--ink);
 }
 
 .lang__btn--active {
-  color: #fff;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .lang__pill {
-    transition-duration: 0.15s;
-  }
-
-  .lang__btn:active {
-    transform: none;
-  }
+  color: var(--ink);
 }
 
 .nav__cta {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   margin-left: 4px;
 }
 
 .footer {
   position: relative;
   z-index: 1;
-  border-top: 1px solid var(--border);
-  background: var(--m-ink);
-  color: rgba(255, 255, 255, 0.88);
-  padding: 56px 24px 28px;
+  border-top: 1px solid var(--line);
+  background: var(--paper-deep);
+  color: var(--ink);
+  padding: 48px 24px 24px;
 }
 
 .footer__inner {
   max-width: var(--max);
   margin: 0 auto;
   display: grid;
-  gap: 36px;
+  gap: 32px;
 }
 
 @media (min-width: 720px) {
   .footer__inner {
     grid-template-columns: auto minmax(0, 1fr);
     align-items: start;
-    column-gap: clamp(56px, 8vw, 96px);
+    column-gap: clamp(48px, 7vw, 88px);
   }
-}
-
-.footer__brand {
-  max-width: 280px;
 }
 
 .footer__logo {
   display: inline-block;
-  border-radius: 12px;
-  margin-bottom: 10px;
+  border-radius: 10px;
+  margin-bottom: 8px;
 }
 
 .footer__name {
   display: block;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  font-size: 14px;
-  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 13px;
+  margin-bottom: 4px;
 }
 
 .footer__cols {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   gap: 28px;
 }
 
 .footer__cols-leading {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 28px;
 }
 
 @media (min-width: 640px) {
   .footer__cols-leading {
     flex-direction: row;
-    align-items: flex-start;
-    gap: clamp(40px, 5vw, 56px);
+    gap: clamp(36px, 5vw, 52px);
   }
 
   .footer__cols {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-end;
-    align-items: flex-start;
-    /* Больше воздуха до Company — Sections и Media чуть левее */
-    gap: clamp(48px, 7vw, 80px);
+    gap: clamp(40px, 6vw, 72px);
   }
 }
 
-/* Рядом с логотипом: блок колонок у правого края */
 @media (min-width: 720px) {
   .footer__cols {
     justify-self: end;
     width: max-content;
     max-width: 100%;
-    margin-left: 0;
   }
 }
 
 .footer__h {
   margin: 0 0 12px;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 650;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.48);
+  color: var(--ink-faint);
 }
 
 .footer__col {
@@ -717,122 +518,73 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   gap: 8px;
 }
 
-@media (min-width: 640px) {
-  .footer__cols-leading > .footer__col:first-child {
-    margin-left: -8px;
-  }
-}
-
 .footer__col a {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.86);
+  font-size: 14px;
+  color: var(--ink-muted);
   text-decoration: none;
   font-weight: 500;
-  transition:
-    color 0.22s ease,
-    transform 0.22s ease;
+  transition: color 0.2s ease;
 }
 
 .footer__col a:hover {
-  color: #fff;
-  transform: translateX(3px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .footer__col a:hover {
-    transform: none;
-  }
-
-  .brand:hover,
-  .brand:hover .brand__logo {
-    transform: none;
-  }
-
-  .nav__link::after {
-    transition: none;
-  }
+  color: var(--ink);
 }
 
 .footer__matrixon-tg {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  margin-top: 2px;
-  max-width: 100%;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
-  font-size: 15px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 550;
+  color: var(--ink-muted);
   text-decoration: none;
-  transition:
-    border-color 0.2s,
-    background 0.2s,
-    color 0.2s,
-    box-shadow 0.2s;
+  transition: color 0.2s;
 }
 
 .footer__matrixon-tg:hover {
-  border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  color: var(--ink);
 }
 
 .footer__matrixon-tg-icon {
   display: flex;
   flex-shrink: 0;
-  color: var(--m-blue);
-}
-
-.footer__matrixon-tg-label {
-  line-height: 1.3;
+  color: var(--accent);
 }
 
 .footer__bottom {
   max-width: var(--max);
-  margin: 36px auto 0;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 32px auto 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-align: center;
 }
 
 .footer__legal {
   margin: 0;
   font-size: 13px;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.5;
+  color: var(--ink-faint);
   max-width: 52ch;
 }
 
 .footer__copy {
   margin: 0;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.42);
+  font-size: 12px;
+  color: var(--ink-faint);
 }
 
 @media (max-width: 1040px) {
   .header__inner {
     padding: 12px 20px;
-    gap: 14px;
   }
 
   .nav {
     gap: 14px;
-  }
-
-  .footer {
-    padding: 40px 20px 22px;
-  }
-
-  .footer__inner {
-    gap: 28px;
   }
 }
 
@@ -845,13 +597,13 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
     position: fixed;
     inset: 0 0 auto;
     top: 0;
-    padding: 88px 24px 28px;
+    padding: 84px 24px 28px;
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
-    background: rgba(4, 10, 20, 0.97);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
+    gap: 4px;
+    background: rgba(244, 244, 241, 0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
@@ -869,7 +621,7 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
 
   .nav__link {
     padding: 12px 4px;
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .lang {
@@ -886,66 +638,25 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
   .nav__cta .btn {
     width: 100%;
   }
-
-  .footer__cols,
-  .footer__cols-leading {
-    width: 100%;
-  }
-
-  .footer__col {
-    width: 100%;
-  }
-
-  .footer__matrixon-tg {
-    width: fit-content;
-  }
 }
 
 @media (max-width: 560px) {
   .header__inner {
     padding: 10px 14px;
-    gap: 10px;
   }
 
   .brand {
     gap: 8px;
     font-size: 13px;
-    letter-spacing: 0.04em;
   }
 
   .brand__logo {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-  }
-
-  .nav {
-    padding: 80px 16px 20px;
+    width: 34px;
+    height: 34px;
   }
 
   .footer {
-    padding: 34px 14px 18px;
-  }
-
-  .footer__h {
-    margin-bottom: 10px;
-    font-size: 12px;
-  }
-
-  .footer__col a,
-  .footer__matrixon-tg {
-    font-size: 14px;
-  }
-
-  .footer__bottom {
-    margin-top: 28px;
-    padding-top: 16px;
-    gap: 8px;
-  }
-
-  .footer__legal,
-  .footer__copy {
-    font-size: 12px;
+    padding: 36px 16px 18px;
   }
 }
 </style>
