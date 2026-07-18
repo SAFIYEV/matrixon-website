@@ -19,6 +19,9 @@ watch(
     } else if (route.name === 'mixa') {
       document.title = m.mixaMetaTitle
       meta?.setAttribute('content', m.mixaMetaDescription)
+    } else if (route.name === 'web3-fren') {
+      document.title = m.web3FrenMetaTitle
+      meta?.setAttribute('content', m.web3FrenMetaDescription)
     } else {
       document.title = m.metaTitle
       meta?.setAttribute('content', m.metaDescription)

@@ -55,8 +55,8 @@ const products = computed(() => [
     name: t.value.productWeb3FrenName,
     text: t.value.productWeb3FrenText,
     cta: t.value.productWeb3FrenCta,
-    href: linkWeb3Frens,
-    external: true,
+    to: '/web3-fren',
+    external: false,
     cover: '/web3-fren/cover.png',
   },
 ])
@@ -239,12 +239,6 @@ const slideLabels = computed(() => [
                   <SocialIcon :network="item.network" />
                 </a>
               </div>
-            </div>
-          </article>
-          <article class="team-person team-person--compact" aria-labelledby="person-aygun">
-            <div class="team-person__body">
-              <p class="team-person__role">{{ t.founderAygunBadge }}</p>
-              <h3 id="person-aygun" class="team-person__name">{{ t.founderAygunName }}</h3>
             </div>
           </article>
         </div>
@@ -762,12 +756,6 @@ const slideLabels = computed(() => [
   .team-person {
     grid-template-columns: 200px 1fr;
     gap: 40px;
-  }
-
-  .team-person--compact {
-    grid-template-columns: 1fr;
-    padding-top: 8px;
-    border-top: 1px solid var(--line);
   }
 }
 

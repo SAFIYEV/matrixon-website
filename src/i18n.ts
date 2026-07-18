@@ -7,6 +7,8 @@ export type Messages = {
   browserMetaDescription: string
   mixaMetaTitle: string
   mixaMetaDescription: string
+  web3FrenMetaTitle: string
+  web3FrenMetaDescription: string
   navProduct: string
   navApproach: string
   navPartners: string
@@ -40,6 +42,32 @@ export type Messages = {
   productWeb3FrenName: string
   productWeb3FrenText: string
   productWeb3FrenCta: string
+  web3FrenBack: string
+  web3FrenEyebrow: string
+  web3FrenHeroTitle: string
+  web3FrenHeroTagline: string
+  web3FrenIntro: string
+  web3FrenCtaChannel: string
+  web3FrenAboutTitle: string
+  web3FrenAboutText: string
+  web3FrenAboutText2: string
+  web3FrenFeaturesTitle: string
+  web3FrenF1Title: string
+  web3FrenF1Text: string
+  web3FrenF2Title: string
+  web3FrenF2Text: string
+  web3FrenF3Title: string
+  web3FrenF3Text: string
+  web3FrenF4Title: string
+  web3FrenF4Text: string
+  web3FrenHowTitle: string
+  web3FrenHowStep1: string
+  web3FrenHowStep2: string
+  web3FrenHowStep3: string
+  web3FrenChannelTitle: string
+  web3FrenChannelText: string
+  web3FrenFinalTitle: string
+  web3FrenFinalText: string
   mixaBack: string
   mixaEyebrow: string
   mixaHeroTitle: string
@@ -132,8 +160,6 @@ export type Messages = {
   socialX: string
   socialInstagram: string
   socialYoutube: string
-  founderAygunName: string
-  founderAygunBadge: string
   founderLegal: string
   qualityTitle: string
   qualityLead: string
@@ -173,6 +199,9 @@ export const messages: Record<Locale, Messages> = {
     mixaMetaTitle: 'MIXA AI — AI-студия идентичности: аватары, образы и видео | MATRIXON',
     mixaMetaDescription:
       'Превращай фото в новые образы с сохранением лица. Машина времени, AI-аватары, beauty-стилист и короткие видео в одной студии.',
+    web3FrenMetaTitle: 'web3 fren — персональный ИИ-агент новостей Web3 | MATRIXON',
+    web3FrenMetaDescription:
+      'ИИ-агент парсит новости из мира Web3 и публикует только самое новое и актуальное в канале web3 frens Central Asia.',
     navProduct: 'Продукты',
     navApproach: 'Подход',
     navPartners: 'Партнёры',
@@ -208,7 +237,37 @@ export const messages: Record<Locale, Messages> = {
     productWeb3FrenName: 'web3 fren',
     productWeb3FrenText:
       'ИИ-агент парсит новости из мира Web3 и публикует только самое новое и актуальное — в канале web3 frens Central Asia.',
-    productWeb3FrenCta: 'Telegram',
+    productWeb3FrenCta: 'Подробнее',
+    web3FrenBack: '← К MATRIXON',
+    web3FrenEyebrow: 'MATRIXON · Central Asia',
+    web3FrenHeroTitle: 'web3 fren',
+    web3FrenHeroTagline: 'Ваш персональный ИИ-френ',
+    web3FrenIntro:
+      'Держит вас в курсе последних событий в Web3-индустрии: парсит новости, отбирает только новое и актуальное и публикует в Telegram.',
+    web3FrenCtaChannel: 'Открыть канал',
+    web3FrenAboutTitle: 'О продукте',
+    web3FrenAboutText:
+      'web3 fren — ИИ-агент для автоматической публикации новостей. Он следит за источниками в мире Web3, фильтрует шум и оставляет то, что действительно важно прямо сейчас.',
+    web3FrenAboutText2:
+      'Результат выходит в канале web3 frens Central Asia — свежие посты без ручной рутины, с фокусом на аудиторию Центральной Азии.',
+    web3FrenFeaturesTitle: 'Что делает',
+    web3FrenF1Title: 'Свежие новости',
+    web3FrenF1Text: 'Собирает обновления из Web3-экосистемы и отсекает устаревшее.',
+    web3FrenF2Title: 'Быстрые сводки',
+    web3FrenF2Text: 'Короткие и понятные посты — суть события без лишней воды.',
+    web3FrenF3Title: 'Умный ИИ-агент',
+    web3FrenF3Text: 'Сам парсит, отбирает и готовит материалы к публикации.',
+    web3FrenF4Title: 'Web3-экосистема',
+    web3FrenF4Text: 'Фокус на индустрии: протоколы, рынки, комьюнити и события региона.',
+    web3FrenHowTitle: 'Как это работает',
+    web3FrenHowStep1: 'Агент мониторит источники новостей Web3',
+    web3FrenHowStep2: 'Отбирает только свежее и релевантное',
+    web3FrenHowStep3: 'Публикует посты в Telegram-канале web3 frens Central Asia',
+    web3FrenChannelTitle: 'Где читать',
+    web3FrenChannelText:
+      'Все публикации — в открытом канале. Подпишитесь, чтобы получать актуальные сводки по Web3.',
+    web3FrenFinalTitle: 'Следите за Web3 без шума',
+    web3FrenFinalText: 'Откройте канал и читайте то, что агент уже отобрал для вас.',
     mixaBack: '← К MATRIXON',
     mixaEyebrow: 'MATRIXON · MIXA AI Studio',
     mixaHeroTitle: 'MIXA AI',
@@ -312,8 +371,6 @@ export const messages: Record<Locale, Messages> = {
     socialX: 'X',
     socialInstagram: 'Instagram',
     socialYoutube: 'YouTube',
-    founderAygunName: 'Айгюн Сафиева',
-    founderAygunBadge: 'Основатель · Финансовый директор',
     founderLegal: 'Компания инкорпорирована в Азербайджане как MMC MATRIXON.',
     qualityTitle: 'Как мы выпускаем',
     qualityLead: 'Стабильность важнее громких формулировок: мониторинг, поэтапные выкладки, понятные инструкции.',
@@ -351,6 +408,9 @@ export const messages: Record<Locale, Messages> = {
     mixaMetaTitle: 'MIXA AI — identity studio: avatars, looks & video | MATRIXON',
     mixaMetaDescription:
       'Turn a photo into new looks while keeping your face. Time machine, AI avatars, beauty stylist, and short videos in one studio.',
+    web3FrenMetaTitle: 'web3 fren — personal AI agent for Web3 news | MATRIXON',
+    web3FrenMetaDescription:
+      'An AI agent that parses Web3 news and publishes only what’s new and relevant in the web3 frens Central Asia channel.',
     navProduct: 'Products',
     navApproach: 'Approach',
     navPartners: 'Partners',
@@ -386,7 +446,37 @@ export const messages: Record<Locale, Messages> = {
     productWeb3FrenName: 'web3 fren',
     productWeb3FrenText:
       'An AI agent that parses Web3 news and publishes only what’s new and relevant — in the web3 frens Central Asia channel.',
-    productWeb3FrenCta: 'Telegram',
+    productWeb3FrenCta: 'Learn more',
+    web3FrenBack: '← Back to MATRIXON',
+    web3FrenEyebrow: 'MATRIXON · Central Asia',
+    web3FrenHeroTitle: 'web3 fren',
+    web3FrenHeroTagline: 'Your personal AI fren',
+    web3FrenIntro:
+      'Keeps you up to date on Web3: parses industry news, keeps only what’s new and relevant, and publishes to Telegram.',
+    web3FrenCtaChannel: 'Open channel',
+    web3FrenAboutTitle: 'About',
+    web3FrenAboutText:
+      'web3 fren is an AI agent for automatic news publishing. It watches Web3 sources, filters the noise, and keeps what matters right now.',
+    web3FrenAboutText2:
+      'Posts go live in the web3 frens Central Asia channel — fresh updates without manual busywork, focused on Central Asia’s audience.',
+    web3FrenFeaturesTitle: 'What it does',
+    web3FrenF1Title: 'Fresh news',
+    web3FrenF1Text: 'Pulls updates from the Web3 ecosystem and drops what’s stale.',
+    web3FrenF2Title: 'Quick summaries',
+    web3FrenF2Text: 'Short, clear posts — the point of the story without the fluff.',
+    web3FrenF3Title: 'Smart AI agent',
+    web3FrenF3Text: 'Parses, selects, and prepares materials for publishing on its own.',
+    web3FrenF4Title: 'Web3 ecosystem',
+    web3FrenF4Text: 'Focused on the industry: protocols, markets, communities, and regional events.',
+    web3FrenHowTitle: 'How it works',
+    web3FrenHowStep1: 'The agent monitors Web3 news sources',
+    web3FrenHowStep2: 'It keeps only what’s fresh and relevant',
+    web3FrenHowStep3: 'It publishes posts to the web3 frens Central Asia Telegram channel',
+    web3FrenChannelTitle: 'Where to read',
+    web3FrenChannelText:
+      'Everything goes to the public channel. Subscribe to get current Web3 briefings.',
+    web3FrenFinalTitle: 'Follow Web3 without the noise',
+    web3FrenFinalText: 'Open the channel and read what the agent already filtered for you.',
     mixaBack: '← Back to MATRIXON',
     mixaEyebrow: 'MATRIXON · MIXA AI Studio',
     mixaHeroTitle: 'MIXA AI',
@@ -490,8 +580,6 @@ export const messages: Record<Locale, Messages> = {
     socialX: 'X',
     socialInstagram: 'Instagram',
     socialYoutube: 'YouTube',
-    founderAygunName: 'Aygun Safiyeva',
-    founderAygunBadge: 'Founder · Financial Director',
     founderLegal: 'The company is incorporated in Azerbaijan as MMC MATRIXON.',
     qualityTitle: 'How we ship',
     qualityLead: 'Stability over slogans: observability, staged rollouts, and clear runbooks.',
