@@ -207,8 +207,8 @@ export const messages: Record<Locale, Messages> = {
     productMixaCta: 'Подробнее',
     productWeb3FrenName: 'web3 fren',
     productWeb3FrenText:
-      'ИИ-агент для автоматической публикации новостей: сбор, подготовка и выход материалов по расписанию.',
-    productWeb3FrenCta: 'Обсудить',
+      'ИИ-агент парсит новости из мира Web3 и публикует только самое новое и актуальное — в канале web3 frens Central Asia.',
+    productWeb3FrenCta: 'Telegram',
     mixaBack: '← К MATRIXON',
     mixaEyebrow: 'MATRIXON · MIXA AI Studio',
     mixaHeroTitle: 'MIXA AI',
@@ -234,7 +234,7 @@ export const messages: Record<Locale, Messages> = {
       'Виртуальная beauty-студия: макияж, причёска, цветовые палитры и fashion-образ под лицо и настроение.',
     mixaS4Title: 'Video Studio',
     mixaS4Text:
-      'Короткие ролики через Amazon Nova Reel: текст → видео или анимация фото. 6 секунд, 1280×720. Без шаблонов — ваш сценарий.',
+      'Короткие ролики: текст → видео или анимация фото. 6 секунд, 1280×720. Без шаблонов — ваш сценарий.',
     mixaFeaturesTitle: 'Возможности',
     mixaF1: 'Сохранение лица при трансформации',
     mixaF2: 'Готовые шаблоны и свободный промпт',
@@ -385,8 +385,8 @@ export const messages: Record<Locale, Messages> = {
     productMixaCta: 'Learn more',
     productWeb3FrenName: 'web3 fren',
     productWeb3FrenText:
-      'An AI agent for automatic news publishing: gather, prepare, and ship stories on a schedule.',
-    productWeb3FrenCta: 'Talk to us',
+      'An AI agent that parses Web3 news and publishes only what’s new and relevant — in the web3 frens Central Asia channel.',
+    productWeb3FrenCta: 'Telegram',
     mixaBack: '← Back to MATRIXON',
     mixaEyebrow: 'MATRIXON · MIXA AI Studio',
     mixaHeroTitle: 'MIXA AI',
@@ -412,7 +412,7 @@ export const messages: Record<Locale, Messages> = {
       'A virtual beauty studio: makeup, hair, color palettes, and fashion looks matched to your face and mood.',
     mixaS4Title: 'Video Studio',
     mixaS4Text:
-      'Short clips via Amazon Nova Reel: text → video or photo animation. 6 seconds, 1280×720. No templates — your script.',
+      'Short clips: text → video or photo animation. 6 seconds, 1280×720. No templates — your script.',
     mixaFeaturesTitle: 'Features',
     mixaF1: 'Face preserved through transforms',
     mixaF2: 'Ready templates and free-form prompts',

@@ -39,6 +39,7 @@ const products = computed(() => [
     cta: t.value.productBrowserCta,
     to: '/browser',
     external: false,
+    cover: null as string | null,
   },
   {
     num: '02',
@@ -47,14 +48,16 @@ const products = computed(() => [
     cta: t.value.productMixaCta,
     to: '/mixa',
     external: false,
+    cover: null as string | null,
   },
   {
     num: '03',
     name: t.value.productWeb3FrenName,
     text: t.value.productWeb3FrenText,
     cta: t.value.productWeb3FrenCta,
-    href: `mailto:${mail}?subject=web3%20fren`,
+    href: linkWeb3Frens,
     external: true,
+    cover: '/web3-fren/cover.png',
   },
 ])
 
@@ -123,11 +126,21 @@ const slideLabels = computed(() => [
             <p class="slide__lead">{{ t.productsLead }}</p>
           </header>
           <ul class="product-list">
-            <li v-for="item in products" :key="item.num" class="product-row">
+            <li v-for="item in products" :key="item.num" class="product-row" :class="{ 'product-row--cover': item.cover }">
               <span class="product-row__num">{{ item.num }}</span>
               <div class="product-row__body">
                 <h3 class="product-row__name">{{ item.name }}</h3>
                 <p class="product-row__text">{{ item.text }}</p>
+                <figure v-if="item.cover" class="product-row__cover">
+                  <img
+                    :src="item.cover"
+                    :alt="item.name"
+                    width="1200"
+                    height="630"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
               </div>
               <RouterLink
                 v-if="!item.external && item.to"
@@ -620,6 +633,25 @@ const slideLabels = computed(() => [
   font-size: 0.98rem;
   line-height: 1.5;
   color: var(--ink-muted);
+}
+
+.product-row--cover {
+  align-items: start;
+}
+
+.product-row__cover {
+  margin: 16px 0 0;
+  max-width: 520px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0a1628;
+}
+
+.product-row__cover img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .product-row__cta {
