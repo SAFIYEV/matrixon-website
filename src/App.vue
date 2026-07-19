@@ -61,6 +61,7 @@ const phoneDisplay = '+994 (010) 736 57 73'
 const phoneHref = 'tel:+994107365773'
 const whatsappHref = 'https://wa.me/994107365773'
 const matrixonTelegramHref = 'https://t.me/matrixonAI'
+const matrixonInstagramHref = 'https://www.instagram.com/realmatrixon/'
 </script>
 
 <template>
@@ -170,6 +171,17 @@ const matrixonTelegramHref = 'https://t.me/matrixonAI'
                   <SocialIcon network="telegram" />
                 </span>
                 <span class="footer__matrixon-tg-label">{{ t.footerTelegramMatrixon }}</span>
+              </a>
+              <a
+                class="footer__matrixon-tg"
+                :href="matrixonInstagramHref"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="footer__matrixon-tg-icon" aria-hidden="true">
+                  <SocialIcon network="instagram" />
+                </span>
+                <span class="footer__matrixon-tg-label">{{ t.footerInstagramMatrixon }}</span>
               </a>
             </div>
           </div>

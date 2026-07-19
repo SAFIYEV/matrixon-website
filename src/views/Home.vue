@@ -15,6 +15,7 @@ const mail = 'info@matrixon.org'
 const phoneHref = 'tel:+994107365773'
 const linkWeb3Frens = 'https://t.me/web3frensCA'
 const matrixonTelegramHref = 'https://t.me/matrixonAI'
+const matrixonInstagramHref = 'https://www.instagram.com/realmatrixon/'
 
 const maratLinks = [
   { href: 'https://www.linkedin.com/in/safiyevmarat/', labelKey: 'socialLinkedIn' as const, network: 'linkedin' as const },
@@ -259,6 +260,10 @@ const slideLabels = computed(() => [
               <a :href="matrixonTelegramHref" target="_blank" rel="noopener noreferrer">
                 <SocialIcon network="telegram" />
                 {{ t.footerTelegramMatrixon }}
+              </a>
+              <a :href="matrixonInstagramHref" target="_blank" rel="noopener noreferrer">
+                <SocialIcon network="instagram" />
+                {{ t.footerInstagramMatrixon }}
               </a>
               <a :href="`mailto:${mail}`">{{ mail }}</a>
             </div>

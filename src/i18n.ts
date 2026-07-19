@@ -183,6 +183,7 @@ export type Messages = {
   footerWhatsApp: string
   footerMediaH: string
   footerTelegramMatrixon: string
+  footerInstagramMatrixon: string
   partnersTitle: string
   partnersLead: string
   partnerAwsName: string
@@ -394,6 +395,7 @@ export const messages: Record<Locale, Messages> = {
     footerWhatsApp: 'WhatsApp',
     footerMediaH: 'Медиа',
     footerTelegramMatrixon: 'Telegram — MATRIXON',
+    footerInstagramMatrixon: 'Instagram — @realmatrixon',
     partnersTitle: 'Партнёры',
     partnersLead: 'Инфраструктура, на которой опираемся при разработке и масштабировании.',
     partnerAwsName: 'Amazon Web Services',
@@ -603,6 +605,7 @@ export const messages: Record<Locale, Messages> = {
     footerWhatsApp: 'WhatsApp',
     footerMediaH: 'Media',
     footerTelegramMatrixon: 'Telegram — MATRIXON',
+    footerInstagramMatrixon: 'Instagram — @realmatrixon',
     partnersTitle: 'Partners',
     partnersLead: 'Infrastructure we rely on to build and scale.',
     partnerAwsName: 'Amazon Web Services',
