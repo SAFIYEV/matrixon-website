@@ -35,6 +35,15 @@ const buildPillars = computed(() => [
 const products = computed(() => [
   {
     num: '01',
+    name: t.value.productHeyAgentName,
+    text: t.value.productHeyAgentText,
+    cta: t.value.productHeyAgentCta,
+    href: 'https://github.com/SAFIYEV/HeyAgent',
+    external: true,
+    cover: null as string | null,
+  },
+  {
+    num: '02',
     name: t.value.productBrowserName,
     text: t.value.productBrowserText,
     cta: t.value.productBrowserCta,
@@ -43,7 +52,7 @@ const products = computed(() => [
     cover: null as string | null,
   },
   {
-    num: '02',
+    num: '03',
     name: t.value.productMixaName,
     text: t.value.productMixaText,
     cta: t.value.productMixaCta,
@@ -52,7 +61,7 @@ const products = computed(() => [
     cover: null as string | null,
   },
   {
-    num: '03',
+    num: '04',
     name: t.value.productWeb3FrenName,
     text: t.value.productWeb3FrenText,
     cta: t.value.productWeb3FrenCta,

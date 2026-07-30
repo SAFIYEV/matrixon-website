@@ -33,6 +33,9 @@ export type Messages = {
   slideNavContact: string
   productsTitle: string
   productsLead: string
+  productHeyAgentName: string
+  productHeyAgentText: string
+  productHeyAgentCta: string
   productBrowserName: string
   productBrowserText: string
   productBrowserCta: string
@@ -227,6 +230,10 @@ export const messages: Record<Locale, Messages> = {
     slideNavContact: 'Контакты',
     productsTitle: 'Продукты',
     productsLead: 'То, что уже в работе. Список будет расти.',
+    productHeyAgentName: 'HeyAgent',
+    productHeyAgentText:
+      'Open-source автономный компьютерный ИИ-агент, который выполняет задачи на вашем компьютере.',
+    productHeyAgentCta: 'Открыть GitHub',
     productBrowserName: 'Agentic Browser',
     productBrowserText:
       'Open-source браузер с локальным ИИ: модель, чат, агентный режим и пароли остаются на устройстве.',
@@ -437,6 +444,10 @@ export const messages: Record<Locale, Messages> = {
     slideNavContact: 'Contact',
     productsTitle: 'Products',
     productsLead: 'What we are shipping now. More will follow.',
+    productHeyAgentName: 'HeyAgent',
+    productHeyAgentText:
+      'An open-source autonomous AI agent that carries out tasks on your computer.',
+    productHeyAgentCta: 'View on GitHub',
     productBrowserName: 'Agentic Browser',
     productBrowserText:
       'Open-source browser with local AI — model, chat, agent mode, and passwords stay on your device.',
