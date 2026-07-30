@@ -209,6 +209,10 @@ npx hey ask "${task}"`
   border-bottom: 1px solid var(--line);
 }
 
+.heyagent__hero-copy {
+  min-width: 0;
+}
+
 .heyagent__eyebrow,
 .heyagent__section-index,
 .heyagent__meta,
@@ -227,8 +231,9 @@ npx hey ask "${task}"`
 
 .heyagent__title {
   margin: 0 0 10px;
+  max-width: 100%;
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 5.6rem);
+  font-size: clamp(3rem, 6vw, 4.35rem);
   font-weight: 800;
   letter-spacing: -0.055em;
   line-height: 0.95;
@@ -267,17 +272,73 @@ npx hey ask "${task}"`
 }
 
 .heyagent__visual {
+  position: relative;
+  isolation: isolate;
   margin: 0;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  overflow: hidden;
   background: #fff;
+  box-shadow:
+    0 24px 70px rgba(16, 20, 32, 0.1),
+    0 5px 18px rgba(16, 20, 32, 0.06);
+  transition:
+    transform 0.45s var(--ease),
+    box-shadow 0.45s var(--ease);
+}
+
+.heyagent__visual::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 18% 10% 2%;
+  border-radius: 40%;
+  background:
+    radial-gradient(circle at 30% 55%, rgba(113, 88, 224, 0.48), transparent 56%),
+    radial-gradient(circle at 72% 52%, rgba(59, 190, 112, 0.38), transparent 58%);
+  filter: blur(34px);
+  opacity: 0.62;
+  transform: translateY(32px) scale(0.9);
+  transition:
+    opacity 0.45s ease,
+    transform 0.55s var(--ease),
+    filter 0.45s ease;
 }
 
 .heyagent__visual img {
   display: block;
   width: 100%;
   height: auto;
+  border-radius: inherit;
+  animation: heyagent-logo-float 6s ease-in-out infinite;
+  transition: transform 0.45s var(--ease);
+}
+
+.heyagent__visual:hover {
+  transform: translateY(-9px) rotate(0.7deg);
+  box-shadow:
+    -14px 34px 86px rgba(88, 68, 185, 0.18),
+    18px 18px 42px rgba(51, 164, 98, 0.1);
+}
+
+.heyagent__visual:hover::before {
+  opacity: 0.88;
+  filter: blur(42px);
+  transform: translate(-12px, 42px) scale(1.02);
+}
+
+.heyagent__visual:hover img {
+  animation: none;
+  transform: translate(5px, -4px) scale(1.015);
+}
+
+@keyframes heyagent-logo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 .heyagent__positioning {
@@ -565,6 +626,10 @@ npx hey ask "${task}"`
 }
 
 @media (max-width: 560px) {
+  .heyagent__title {
+    font-size: 2.6rem;
+  }
+
   .heyagent__actions .btn {
     width: 100%;
   }
@@ -586,6 +651,15 @@ npx hey ask "${task}"`
   .heyagent__safety {
     margin-inline: -4px;
     padding: 48px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heyagent__visual,
+  .heyagent__visual::before,
+  .heyagent__visual img {
+    animation: none;
+    transition-duration: 0.01ms;
   }
 }
 </style>

@@ -28,41 +28,42 @@ const howSteps = computed(() => [
       <RouterLink class="w3f__back" to="/">{{ t.web3FrenBack }}</RouterLink>
 
       <header class="w3f__hero">
-        <p class="w3f__eyebrow">{{ t.web3FrenEyebrow }}</p>
-        <h1 class="w3f__brand">{{ t.web3FrenHeroTitle }}</h1>
-        <p class="w3f__tagline">{{ t.web3FrenHeroTagline }}</p>
-        <p class="w3f__intro">{{ t.web3FrenIntro }}</p>
-        <div class="w3f__actions">
-          <a
-            class="btn btn--primary btn--lg"
-            :href="channelUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <SocialIcon network="telegram" />
-            {{ t.web3FrenCtaChannel }}
-          </a>
+        <div class="w3f__hero-copy">
+          <p class="w3f__eyebrow">{{ t.web3FrenEyebrow }}</p>
+          <h1 class="w3f__brand">{{ t.web3FrenHeroTitle }}</h1>
+          <p class="w3f__tagline">{{ t.web3FrenHeroTagline }}</p>
+          <p class="w3f__intro">{{ t.web3FrenIntro }}</p>
+          <div class="w3f__actions">
+            <a
+              class="btn btn--primary btn--lg"
+              :href="channelUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <SocialIcon network="telegram" />
+              {{ t.web3FrenCtaChannel }}
+            </a>
+          </div>
         </div>
+        <figure class="w3f__cover">
+          <img
+            src="/web3-fren/cover.png"
+            :alt="t.web3FrenHeroTitle"
+            width="1200"
+            height="630"
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
       </header>
 
-      <figure class="w3f__cover">
-        <img
-          src="/web3-fren/cover.png"
-          :alt="t.web3FrenHeroTitle"
-          width="1200"
-          height="630"
-          loading="eager"
-          decoding="async"
-        />
-      </figure>
-
-      <section class="w3f__block" aria-labelledby="w3f-about">
+      <section class="w3f__block w3f__block--about" aria-labelledby="w3f-about">
         <h2 id="w3f-about" class="w3f__h2">{{ t.web3FrenAboutTitle }}</h2>
         <p class="w3f__body">{{ t.web3FrenAboutText }}</p>
         <p class="w3f__body">{{ t.web3FrenAboutText2 }}</p>
       </section>
 
-      <section class="w3f__block" aria-labelledby="w3f-features">
+      <section class="w3f__block w3f__block--features" aria-labelledby="w3f-features">
         <h2 id="w3f-features" class="w3f__h2">{{ t.web3FrenFeaturesTitle }}</h2>
         <ul class="w3f__features">
           <li v-for="(f, i) in features" :key="f.title" class="w3f__feature">
@@ -75,7 +76,7 @@ const howSteps = computed(() => [
         </ul>
       </section>
 
-      <section class="w3f__block" aria-labelledby="w3f-how">
+      <section class="w3f__block w3f__block--how" aria-labelledby="w3f-how">
         <h2 id="w3f-how" class="w3f__h2">{{ t.web3FrenHowTitle }}</h2>
         <ol class="w3f__steps">
           <li v-for="(step, i) in howSteps" :key="i">
@@ -85,7 +86,7 @@ const howSteps = computed(() => [
         </ol>
       </section>
 
-      <section class="w3f__block" aria-labelledby="w3f-channel">
+      <section class="w3f__block w3f__block--channel" aria-labelledby="w3f-channel">
         <h2 id="w3f-channel" class="w3f__h2">{{ t.web3FrenChannelTitle }}</h2>
         <p class="w3f__body">{{ t.web3FrenChannelText }}</p>
         <a
@@ -345,6 +346,213 @@ const howSteps = computed(() => [
 
   .w3f__feature {
     grid-template-columns: 36px 1fr;
+  }
+}
+
+/* Product detail visual system */
+.w3f__inner {
+  max-width: 1040px;
+}
+
+.w3f__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(400px, 1.15fr);
+  gap: clamp(38px, 7vw, 76px);
+  align-items: center;
+  margin-bottom: 72px;
+  padding: 28px 0 64px;
+  border-bottom: 1px solid var(--line);
+}
+
+.w3f__hero-copy {
+  min-width: 0;
+}
+
+.w3f__brand {
+  font-size: clamp(3rem, 7vw, 5.2rem);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.w3f__cover {
+  position: relative;
+  isolation: isolate;
+  margin: 0;
+  overflow: hidden;
+  border-color: rgba(30, 112, 129, 0.26);
+  border-radius: 22px;
+  box-shadow:
+    0 32px 86px rgba(13, 81, 94, 0.2),
+    0 8px 24px rgba(13, 81, 94, 0.09);
+  transition:
+    transform 0.45s var(--ease),
+    box-shadow 0.45s var(--ease);
+}
+
+.w3f__cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(125deg, rgba(96, 238, 227, 0.1), transparent 45%);
+  pointer-events: none;
+}
+
+.w3f__cover:hover {
+  transform: translateY(-8px) rotate(0.6deg);
+  box-shadow:
+    -10px 42px 96px rgba(13, 81, 94, 0.26),
+    18px 10px 32px rgba(39, 184, 178, 0.12);
+}
+
+.w3f__cover img {
+  transition: transform 0.55s var(--ease);
+}
+
+.w3f__cover:hover img {
+  transform: scale(1.025);
+}
+
+.w3f__block {
+  margin: 0;
+  padding: 64px 0;
+  border-top: 1px solid var(--line);
+}
+
+.w3f__h2 {
+  margin-bottom: 22px;
+  font-size: clamp(1.7rem, 4vw, 2.45rem);
+  letter-spacing: -0.035em;
+}
+
+.w3f__block--about .w3f__body {
+  max-width: 58ch;
+  font-size: 1.08rem;
+}
+
+.w3f__features {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  border-top: 0;
+}
+
+.w3f__feature {
+  min-height: 220px;
+  display: block;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.42);
+  transition:
+    transform 0.36s var(--ease),
+    border-color 0.36s ease,
+    box-shadow 0.36s ease;
+}
+
+.w3f__feature:hover {
+  transform: translateY(-6px);
+  border-color: rgba(22, 128, 140, 0.34);
+  box-shadow: 0 22px 52px rgba(15, 105, 118, 0.12);
+}
+
+.w3f__feature-num {
+  display: block;
+  margin-bottom: 40px;
+}
+
+.w3f__block--how {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(36px, 8vw, 92px);
+}
+
+.w3f__steps {
+  gap: 0;
+}
+
+.w3f__steps li {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.w3f__block--channel {
+  margin: 36px 0;
+  padding: clamp(40px, 6vw, 64px);
+  overflow: hidden;
+  border: none;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(52, 214, 204, 0.25), transparent 34%),
+    #0b2830;
+}
+
+.w3f__block--channel .w3f__h2 {
+  color: #eefcfb;
+}
+
+.w3f__block--channel .w3f__body {
+  max-width: 48ch;
+  color: rgba(238, 252, 251, 0.67);
+}
+
+.w3f__block--channel .w3f__channel-link {
+  margin-top: 26px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  color: #eefcfb;
+  transition:
+    transform 0.3s var(--ease),
+    background 0.3s ease;
+}
+
+.w3f__block--channel .w3f__channel-link:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-3px);
+}
+
+.w3f__final {
+  margin-top: 36px;
+  padding: 64px 0 8px;
+}
+
+@media (max-width: 840px) {
+  .w3f__hero {
+    grid-template-columns: 1fr;
+  }
+
+  .w3f__cover {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 620px) {
+  .w3f__hero {
+    padding-top: 12px;
+  }
+
+  .w3f__features,
+  .w3f__block--how {
+    grid-template-columns: 1fr;
+  }
+
+  .w3f__block {
+    padding: 48px 0;
+  }
+
+  .w3f__block--channel {
+    margin-inline: -4px;
+    padding: 38px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .w3f__cover,
+  .w3f__cover img,
+  .w3f__feature,
+  .w3f__channel-link {
+    transition-duration: 0.01ms;
   }
 }
 </style>
