@@ -3,6 +3,8 @@ export type Locale = 'ru' | 'en'
 export type Messages = {
   metaTitle: string
   metaDescription: string
+  heyAgentMetaTitle: string
+  heyAgentMetaDescription: string
   browserMetaTitle: string
   browserMetaDescription: string
   mixaMetaTitle: string
@@ -36,6 +38,54 @@ export type Messages = {
   productHeyAgentName: string
   productHeyAgentText: string
   productHeyAgentCta: string
+  heyAgentBack: string
+  heyAgentEyebrow: string
+  heyAgentHeroTitle: string
+  heyAgentHeroTagline: string
+  heyAgentIntro: string
+  heyAgentCtaGithub: string
+  heyAgentCtaQuickStart: string
+  heyAgentPositioning: string
+  heyAgentCapabilitiesTitle: string
+  heyAgentF1Title: string
+  heyAgentF1Text: string
+  heyAgentF2Title: string
+  heyAgentF2Text: string
+  heyAgentF3Title: string
+  heyAgentF3Text: string
+  heyAgentF4Title: string
+  heyAgentF4Text: string
+  heyAgentF5Title: string
+  heyAgentF5Text: string
+  heyAgentF6Title: string
+  heyAgentF6Text: string
+  heyAgentInterfacesTitle: string
+  heyAgentCliTitle: string
+  heyAgentCliText: string
+  heyAgentDesktopTitle: string
+  heyAgentDesktopText: string
+  heyAgentTelegramTitle: string
+  heyAgentTelegramText: string
+  heyAgentHowTitle: string
+  heyAgentHowStep1: string
+  heyAgentHowStep2: string
+  heyAgentHowStep3: string
+  heyAgentHowStep4: string
+  heyAgentModelsTitle: string
+  heyAgentModelsText: string
+  heyAgentModelsList: string
+  heyAgentSafetyTitle: string
+  heyAgentSafetyText: string
+  heyAgentSafetyAsk: string
+  heyAgentSafetyRisky: string
+  heyAgentSafetyAllowlist: string
+  heyAgentSafetyFull: string
+  heyAgentQuickTitle: string
+  heyAgentQuickText: string
+  heyAgentRequirements: string
+  heyAgentFinalTitle: string
+  heyAgentFinalText: string
+  heyAgentLicense: string
   productBrowserName: string
   productBrowserText: string
   productBrowserCta: string
@@ -197,6 +247,9 @@ export const messages: Record<Locale, Messages> = {
   ru: {
     metaTitle: 'MATRIXON',
     metaDescription: 'MATRIXON — продукты на основе локального ИИ и автоматизации.',
+    heyAgentMetaTitle: 'HeyAgent — автономный компьютерный ИИ-агент | MATRIXON',
+    heyAgentMetaDescription:
+      'Локальный open-source ИИ-агент, который видит экран, управляет компьютером и браузером и принимает задачи через терминал, desktop-приложение и Telegram.',
     browserMetaTitle: 'Agentic Browser — локальный ИИ-браузер | MATRIXON',
     browserMetaDescription:
       'Open-source браузер с локальным ИИ на llama.cpp: приватность, агентный режим, чат и менеджер паролей на устройстве.',
@@ -233,7 +286,70 @@ export const messages: Record<Locale, Messages> = {
     productHeyAgentName: 'HeyAgent',
     productHeyAgentText:
       'Open-source автономный компьютерный ИИ-агент, который выполняет задачи на вашем компьютере.',
-    productHeyAgentCta: 'Открыть GitHub',
+    productHeyAgentCta: 'Подробнее',
+    heyAgentBack: '← К MATRIXON',
+    heyAgentEyebrow: 'MATRIXON · Local-first · Open Source',
+    heyAgentHeroTitle: 'HeyAgent',
+    heyAgentHeroTagline: 'Ваш собственный автономный компьютерный агент',
+    heyAgentIntro:
+      'Локальный ИИ-агент, который видит экран, понимает задачу и работает с вашим компьютером: открывает приложения, управляет браузером, читает файлы и выполняет действия.',
+    heyAgentCtaGithub: 'Открыть GitHub',
+    heyAgentCtaQuickStart: 'Быстрый старт',
+    heyAgentPositioning:
+      'Не просто чат — агент, который подключает интеллект модели к компьютеру, которым вы уже пользуетесь.',
+    heyAgentCapabilitiesTitle: 'Что умеет HeyAgent',
+    heyAgentF1Title: 'Управление компьютером',
+    heyAgentF1Text:
+      'Работает с мышью, клавиатурой, окнами, скриншотами, приложениями и системными настройками.',
+    heyAgentF2Title: 'Автоматизация браузера',
+    heyAgentF2Text:
+      'Управляет открытыми вкладками и может использовать ваш реальный профиль Chrome, Edge или Yandex Browser.',
+    heyAgentF3Title: 'Удалённые задачи через Telegram',
+    heyAgentF3Text:
+      'Получает команды с телефона через персонального Telegram-бота и выполняет их на вашем компьютере.',
+    heyAgentF4Title: 'Google Workspace',
+    heyAgentF4Text:
+      'Создаёт и читает Docs, работает с Drive, Sheets, Slides и событиями Google Calendar.',
+    heyAgentF5Title: 'Память и идентичность',
+    heyAgentF5Text:
+      'Хранит имя, аватар, персону, сессии, историю миссий и память рабочего пространства.',
+    heyAgentF6Title: 'Интеграции и расписание',
+    heyAgentF6Text:
+      'Подключается к Gmail, Notion и GitHub, а фоновые миссии и cron-задачи запускает через локальный gateway.',
+    heyAgentInterfacesTitle: 'Три способа управления',
+    heyAgentCliTitle: 'Терминал',
+    heyAgentCliText:
+      'Разовая команда через hey ask или продолжительный диалог через hey chat.',
+    heyAgentDesktopTitle: 'Desktop-приложение',
+    heyAgentDesktopText:
+      'Чат, миссии, модели, интеграции, запросы разрешений и управление через системный трей.',
+    heyAgentTelegramTitle: 'Telegram',
+    heyAgentTelegramText:
+      'Отправьте задачу своему боту с телефона, пока локальный gateway выполняет её на ПК.',
+    heyAgentHowTitle: 'Как агент выполняет задачу',
+    heyAgentHowStep1: 'Понимает запрос и выбирает подходящий маршрут выполнения.',
+    heyAgentHowStep2: 'Строит план и помещает миссию в управляемую очередь.',
+    heyAgentHowStep3: 'Использует браузер, рабочий стол, файлы, интеграции и системные инструменты.',
+    heyAgentHowStep4: 'Проверяет результат по фактам и повторяет шаг, если действие можно исправить.',
+    heyAgentModelsTitle: 'Вы выбираете модель',
+    heyAgentModelsText:
+      'HeyAgent поддерживает облачных провайдеров, AWS Bedrock, OpenRouter-совместимые сервисы и локальные модели Ollama. Можно настроить резервное переключение между моделями.',
+    heyAgentModelsList: 'Cloud providers · AWS Bedrock · OpenRouter · Ollama · failover',
+    heyAgentSafetyTitle: 'Контроль остаётся у вас',
+    heyAgentSafetyText:
+      'HeyAgent взаимодействует с реальным рабочим столом, файлами и подключёнными сервисами. Для чувствительных действий предусмотрены режимы доступа и запросы подтверждения.',
+    heyAgentSafetyAsk: 'ask — подтверждение чувствительных инструментов',
+    heyAgentSafetyRisky: 'risky — подтверждение необратимых и рискованных действий',
+    heyAgentSafetyAllowlist: 'allowlist — только явно разрешённые возможности',
+    heyAgentSafetyFull: 'full — широкий доступ для контролируемой среды',
+    heyAgentQuickTitle: 'Запустите первую задачу',
+    heyAgentQuickText:
+      'Нужны Node.js 22+, npm и Git. Наиболее полное управление рабочим столом доступно в Windows 10 и 11.',
+    heyAgentRequirements: 'Node.js 22+ · npm · Git · Windows 10/11 рекомендуется',
+    heyAgentFinalTitle: 'Дайте задачу. HeyAgent займётся компьютером.',
+    heyAgentFinalText:
+      'Изучите исходный код, настройте модель и запустите своего локального агента.',
+    heyAgentLicense: 'Open source · AGPL-3.0 · TypeScript',
     productBrowserName: 'Agentic Browser',
     productBrowserText:
       'Open-source браузер с локальным ИИ: модель, чат, агентный режим и пароли остаются на устройстве.',
@@ -411,6 +527,9 @@ export const messages: Record<Locale, Messages> = {
   en: {
     metaTitle: 'MATRIXON',
     metaDescription: 'MATRIXON — products built around local AI and automation.',
+    heyAgentMetaTitle: 'HeyAgent — autonomous computer AI agent | MATRIXON',
+    heyAgentMetaDescription:
+      'A local-first open-source AI agent that sees the screen, operates your computer and browser, and accepts tasks through the terminal, desktop app, and Telegram.',
     browserMetaTitle: 'Agentic Browser — fully local AI browser | MATRIXON',
     browserMetaDescription:
       'Open-source browser with on-device AI via llama.cpp: privacy, agent mode, chat, and a local password manager.',
@@ -447,7 +566,70 @@ export const messages: Record<Locale, Messages> = {
     productHeyAgentName: 'HeyAgent',
     productHeyAgentText:
       'An open-source autonomous AI agent that carries out tasks on your computer.',
-    productHeyAgentCta: 'View on GitHub',
+    productHeyAgentCta: 'Learn more',
+    heyAgentBack: '← Back to MATRIXON',
+    heyAgentEyebrow: 'MATRIXON · Local-first · Open Source',
+    heyAgentHeroTitle: 'HeyAgent',
+    heyAgentHeroTagline: 'Your own autonomous computer agent',
+    heyAgentIntro:
+      'A local AI agent that sees the screen, understands the task, and works with your computer: opening apps, controlling the browser, reading files, and taking action.',
+    heyAgentCtaGithub: 'Open GitHub',
+    heyAgentCtaQuickStart: 'Quick start',
+    heyAgentPositioning:
+      'Not just a chat — an agent that connects model intelligence to the computer you already use.',
+    heyAgentCapabilitiesTitle: 'What HeyAgent can do',
+    heyAgentF1Title: 'Computer control',
+    heyAgentF1Text:
+      'Works with the mouse, keyboard, windows, screenshots, applications, and system settings.',
+    heyAgentF2Title: 'Browser automation',
+    heyAgentF2Text:
+      'Controls open tabs and can use your real Chrome, Edge, or Yandex Browser profile.',
+    heyAgentF3Title: 'Remote tasks through Telegram',
+    heyAgentF3Text:
+      'Receives commands from your phone through a personal Telegram bot and performs them on your computer.',
+    heyAgentF4Title: 'Google Workspace',
+    heyAgentF4Text:
+      'Creates and reads Docs and works with Drive, Sheets, Slides, and Google Calendar events.',
+    heyAgentF5Title: 'Memory and identity',
+    heyAgentF5Text:
+      'Keeps an agent name, avatar, persona, sessions, mission history, and workspace memory.',
+    heyAgentF6Title: 'Integrations and scheduling',
+    heyAgentF6Text:
+      'Connects to Gmail, Notion, and GitHub, while a local gateway runs background missions and cron jobs.',
+    heyAgentInterfacesTitle: 'Three ways to control it',
+    heyAgentCliTitle: 'Terminal',
+    heyAgentCliText:
+      'Run a single task with hey ask or keep an ongoing conversation with hey chat.',
+    heyAgentDesktopTitle: 'Desktop app',
+    heyAgentDesktopText:
+      'Chat, missions, model status, integrations, approval requests, and controls in the system tray.',
+    heyAgentTelegramTitle: 'Telegram',
+    heyAgentTelegramText:
+      'Send a task to your bot from your phone while the local gateway carries it out on the PC.',
+    heyAgentHowTitle: 'How the agent completes a task',
+    heyAgentHowStep1: 'Understands the request and selects the right execution route.',
+    heyAgentHowStep2: 'Builds a plan and places the mission in a managed queue.',
+    heyAgentHowStep3: 'Uses the browser, desktop, files, integrations, and system tools.',
+    heyAgentHowStep4: 'Verifies the result with evidence and retries when an action can be corrected.',
+    heyAgentModelsTitle: 'You choose the model',
+    heyAgentModelsText:
+      'HeyAgent supports cloud providers, AWS Bedrock, OpenRouter-compatible services, and local Ollama models. Model failover can be configured as well.',
+    heyAgentModelsList: 'Cloud providers · AWS Bedrock · OpenRouter · Ollama · failover',
+    heyAgentSafetyTitle: 'You stay in control',
+    heyAgentSafetyText:
+      'HeyAgent interacts with your real desktop, files, and connected services. Permission modes and approval prompts protect sensitive actions.',
+    heyAgentSafetyAsk: 'ask — confirm sensitive tools',
+    heyAgentSafetyRisky: 'risky — confirm irreversible or high-risk actions',
+    heyAgentSafetyAllowlist: 'allowlist — only explicitly permitted capabilities',
+    heyAgentSafetyFull: 'full — broad access for a controlled environment',
+    heyAgentQuickTitle: 'Run your first task',
+    heyAgentQuickText:
+      'You need Node.js 22+, npm, and Git. Windows 10 and 11 provide the most complete desktop-control experience.',
+    heyAgentRequirements: 'Node.js 22+ · npm · Git · Windows 10/11 recommended',
+    heyAgentFinalTitle: 'Give it a task. HeyAgent handles the computer.',
+    heyAgentFinalText:
+      'Explore the source, connect a model, and launch your own local agent.',
+    heyAgentLicense: 'Open source · AGPL-3.0 · TypeScript',
     productBrowserName: 'Agentic Browser',
     productBrowserText:
       'Open-source browser with local AI — model, chat, agent mode, and passwords stay on your device.',

@@ -16,6 +16,9 @@ watch(
     if (route.name === 'browser') {
       document.title = m.browserMetaTitle
       meta?.setAttribute('content', m.browserMetaDescription)
+    } else if (route.name === 'heyagent') {
+      document.title = m.heyAgentMetaTitle
+      meta?.setAttribute('content', m.heyAgentMetaDescription)
     } else if (route.name === 'mixa') {
       document.title = m.mixaMetaTitle
       meta?.setAttribute('content', m.mixaMetaDescription)

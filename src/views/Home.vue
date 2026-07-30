@@ -38,8 +38,7 @@ const products = computed(() => [
     name: t.value.productHeyAgentName,
     text: t.value.productHeyAgentText,
     cta: t.value.productHeyAgentCta,
-    href: 'https://github.com/SAFIYEV/HeyAgent',
-    external: true,
+    to: '/heyagent',
     cover: null as string | null,
   },
   {
@@ -48,7 +47,6 @@ const products = computed(() => [
     text: t.value.productBrowserText,
     cta: t.value.productBrowserCta,
     to: '/browser',
-    external: false,
     cover: null as string | null,
   },
   {
@@ -57,7 +55,6 @@ const products = computed(() => [
     text: t.value.productMixaText,
     cta: t.value.productMixaCta,
     to: '/mixa',
-    external: false,
     cover: null as string | null,
   },
   {
@@ -66,7 +63,6 @@ const products = computed(() => [
     text: t.value.productWeb3FrenText,
     cta: t.value.productWeb3FrenCta,
     to: '/web3-fren',
-    external: false,
     cover: null as string | null,
   },
 ])
@@ -153,23 +149,12 @@ const slideLabels = computed(() => [
                 </figure>
               </div>
               <RouterLink
-                v-if="!item.external && item.to"
                 class="product-row__cta"
                 :to="item.to"
               >
                 {{ item.cta }}
                 <span aria-hidden="true">→</span>
               </RouterLink>
-              <a
-                v-else
-                class="product-row__cta"
-                :href="item.href"
-                :target="item.href?.startsWith('http') ? '_blank' : undefined"
-                :rel="item.href?.startsWith('http') ? 'noopener noreferrer' : undefined"
-              >
-                {{ item.cta }}
-                <span aria-hidden="true">→</span>
-              </a>
             </li>
           </ul>
         </div>
