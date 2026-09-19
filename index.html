@@ -2,21 +2,31 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo-matrixon.png" />
+    <link rel="icon" type="image/svg+xml" href="/heyagent-icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="MATRIXON" />
-    <title>MATRIXON</title>
+    <meta
+      name="description"
+      content="HeyAgent — локальный ИИ-агент для вашего компьютера. Работает с приложениями, браузером и файлами. Открытый код, выбор модели и контроль действий."
+    />
+    <meta name="theme-color" content="#f6f7f2" />
+    <meta property="og:title" content="HeyAgent — ваш компьютер умеет больше" />
+    <meta
+      property="og:description"
+      content="Скажите, что нужно сделать. HeyAgent займётся приложениями, браузером и файлами."
+    />
+    <meta property="og:type" content="website" />
+    <title>HeyAgent — ваш компьютер умеет больше</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@500&family=Syne:wght@600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Geist:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
     <!--deploy-hint-start-->
     <script>
-      ;(function () {
+      (function () {
         function showDeployHint() {
           document.body.innerHTML =
             '<main style="font-family:system-ui,sans-serif;padding:2rem;max-width:38rem;line-height:1.55;color:#0f172a">' +
@@ -24,28 +34,29 @@
             '<p style="margin:0 0 0.75rem">Браузер не может подключить <code>vue</code> из npm без сборки — это не баг Vue, а то, что на сервер попали <strong>исходники</strong>, а не результат <code>npm run build</code>.</p>' +
             '<p style="margin:0 0 0.75rem">Сделайте локально:</p>' +
             '<pre style="background:#f1f5f9;padding:12px 14px;border-radius:10px;overflow:auto;font-size:13px">' +
-            'npm ci\nnpm run build</pre>' +
+            "npm ci\nnpm run build</pre>" +
             '<p style="margin:1rem 0 0">На хостинг залейте <strong>всё из папки dist</strong> (включая <code>assets/</code>).</p>' +
             '<p style="margin:1rem 0 0">Без сборки на ПК: GitHub → Actions → последний зелёный запуск → внизу артефакт <strong>matrixon-org-dist</strong> (zip) → распаковать и залить файлы в корень сайта.</p>' +
             '<p style="margin:1rem 0 0">Если хостинг — <strong>GitHub Pages</strong>: в репозитории <strong>Settings → Pages</strong> выберите источник <strong>Deploy from a branch</strong> → ветка <strong>gh-pages</strong>, папка <strong>/ (root)</strong>. Публикация из корня ветки <code>main</code> всегда даёт эту ошибку. Другой вариант — источник <strong>GitHub Actions</strong>.</p>' +
-            '</main>'
+            "</main>";
         }
         window.addEventListener(
-          'error',
+          "error",
           function (e) {
-            var m = String((e && e.message) || '')
-            if (m.indexOf('Failed to resolve module specifier') !== -1) showDeployHint()
+            var m = String((e && e.message) || "");
+            if (m.indexOf("Failed to resolve module specifier") !== -1)
+              showDeployHint();
           },
           true,
-        )
-        window.addEventListener('unhandledrejection', function (e) {
-          var r = String((e.reason && e.reason.message) || e.reason || '')
-          if (r.indexOf('Failed to resolve module specifier') !== -1) {
-            e.preventDefault()
-            showDeployHint()
+        );
+        window.addEventListener("unhandledrejection", function (e) {
+          var r = String((e.reason && e.reason.message) || e.reason || "");
+          if (r.indexOf("Failed to resolve module specifier") !== -1) {
+            e.preventDefault();
+            showDeployHint();
           }
-        })
-      })()
+        });
+      })();
     </script>
     <!--deploy-hint-end-->
     <div id="app"></div>

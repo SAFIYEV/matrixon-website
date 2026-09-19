@@ -1,16 +1,16 @@
 :root {
-  --ink: #141413;
-  --ink-soft: #2a2a28;
-  --ink-muted: #5c5c58;
-  --ink-faint: #8a8a84;
-  --paper: #f4f4f1;
-  --paper-deep: #ebebe6;
-  --surface: #ffffff;
-  --line: rgba(20, 20, 19, 0.1);
-  --line-strong: rgba(20, 20, 19, 0.18);
-  --accent: #1a3d7a;
-  --accent-hover: #143266;
-  --accent-soft: rgba(26, 61, 122, 0.08);
+  --ink: #f2f5e9;
+  --ink-soft: #d9dfcc;
+  --ink-muted: #9ca691;
+  --ink-faint: #66705f;
+  --paper: #090b09;
+  --paper-deep: #0d100d;
+  --surface: #121612;
+  --line: rgba(85, 247, 204, 0.13);
+  --line-strong: rgba(85, 247, 204, 0.32);
+  --accent: #55f7cc;
+  --accent-hover: #8cffe1;
+  --accent-soft: rgba(85, 247, 204, 0.1);
   --text: var(--ink);
   --text-muted: var(--ink-muted);
   --text-faint: var(--ink-faint);
@@ -43,9 +43,12 @@ body {
   color: var(--ink);
   background: var(--paper);
   background-image:
-    radial-gradient(ellipse 90% 55% at 10% -10%, rgba(26, 61, 122, 0.07), transparent 55%),
-    radial-gradient(ellipse 70% 45% at 95% 5%, rgba(20, 20, 19, 0.04), transparent 50%),
-    linear-gradient(180deg, #f7f7f4 0%, var(--paper) 40%, #f0f0ec 100%);
+    linear-gradient(rgba(85, 247, 204, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(85, 247, 204, 0.03) 1px, transparent 1px),
+    radial-gradient(ellipse 70% 55% at 12% -8%, rgba(85, 247, 204, 0.1), transparent 58%),
+    radial-gradient(ellipse 60% 45% at 92% 12%, rgba(64, 169, 255, 0.14), transparent 55%),
+    linear-gradient(180deg, #0b0e0b 0%, var(--paper) 45%, #070907 100%);
+  background-size: 72px 72px, 72px 72px, auto, auto, auto;
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -57,7 +60,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  opacity: 0.035;
+  opacity: 0.055;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -126,7 +129,7 @@ button {
   justify-content: center;
   gap: 8px;
   padding: 12px 22px;
-  border-radius: var(--radius-sm);
+  border-radius: 999px;
   font-weight: 600;
   font-size: 15px;
   text-decoration: none;
@@ -144,12 +147,14 @@ button {
 }
 
 .btn--primary {
-  background: var(--ink);
-  color: #fff;
+  background: var(--accent);
+  color: #0a0d09;
+  box-shadow: 0 0 0 1px rgba(210,255,79,.2), 0 10px 35px rgba(210,255,79,.12);
 }
 
 .btn--primary:hover {
-  background: var(--ink-soft);
+  background: var(--accent-hover);
+  transform: translateY(-2px);
 }
 
 .btn--ghost {

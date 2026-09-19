@@ -6,14 +6,14 @@ export function useFullPageSlides(
 ) {
   const activeSlide = ref(0)
   let observer: IntersectionObserver | null = null
-  let wheelLocked = false
 
   function scrollToSlide(index: number) {
     const container = containerRef.value
     if (!container) return
     const clamped = Math.max(0, Math.min(slideCount - 1, index))
     const slide = container.querySelector<HTMLElement>(`[data-slide="${clamped}"]`)
-    slide?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    slide?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' })
     activeSlide.value = clamped
   }
 
@@ -33,20 +33,6 @@ export function useFullPageSlides(
     }
   }
 
-  function onWheel(e: WheelEvent) {
-    if (wheelLocked) return
-    const delta = Math.abs(e.deltaY)
-    if (delta < 30) return
-
-    wheelLocked = true
-    if (e.deltaY > 0) scrollToSlide(activeSlide.value + 1)
-    else scrollToSlide(activeSlide.value - 1)
-
-    window.setTimeout(() => {
-      wheelLocked = false
-    }, 900)
-  }
-
   onMounted(() => {
     const container = containerRef.value
     if (!container) return
@@ -54,7 +40,6 @@ export function useFullPageSlides(
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (!reduced && window.matchMedia('(pointer: fine)').matches) {
-      container.addEventListener('wheel', onWheel, { passive: false })
       window.addEventListener('keydown', onKeydown)
     }
 
@@ -88,7 +73,6 @@ export function useFullPageSlides(
   })
 
   onUnmounted(() => {
-    containerRef.value?.removeEventListener('wheel', onWheel)
     window.removeEventListener('keydown', onKeydown)
     observer?.disconnect()
   })
